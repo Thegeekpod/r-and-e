@@ -98,7 +98,7 @@
                 <label class="form-label fw-semibold small text-secondary">Email Address</label>
                 <div class="input-group">
                     <span class="input-group-text bg-light border-end-0 text-muted"><i class="fa-regular fa-envelope"></i></span>
-                    <input type="email" name="email" class="form-control border-start-0" placeholder="admin@admin.com" value="{{ old('email', 'admin@admin.com') }}" required autofocus>
+                    <input type="email" name="email" class="form-control border-start-0" placeholder="admin@admin.com" value="{{ old('email') }}" required autofocus>
                 </div>
             </div>
 
@@ -106,7 +106,7 @@
                 <label class="form-label fw-semibold small text-secondary">Password</label>
                 <div class="input-group">
                     <span class="input-group-text bg-light border-end-0 text-muted"><i class="fa-solid fa-lock"></i></span>
-                    <input type="password" name="password" class="form-control border-start-0" placeholder="••••••••" value="password" required>
+                    <input type="password" name="password" class="form-control border-start-0" placeholder="••••••••" required>
                 </div>
             </div>
 
