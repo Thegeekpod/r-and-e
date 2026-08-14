@@ -1,0 +1,534 @@
+@extends('layouts.app')
+
+@section('title', 'Education Consultancy | Roy Infinity Edge Consulting')
+@section('main-class', 'education')
+
+@section('content')
+<section class="education-feature-section bg-light">
+    <div class="container">
+        <div class="edu-feature-card" data-aos="zoom-in-up">
+            <div class="edu-feature-card-image">
+                <img src="{{ asset('images/woment-graphics.webp') }}" class="animate" alt="Choose the right college" />
+                <img src="{{ asset('images/woment.webp') }}" alt="Choose the right college" />
+            </div>
+            <div class="edu-feature-card-content" data-aos="fade-left" data-aos-delay="300"
+                data-aos-anchor-placement="center-bottom">
+                <h2>Choose the right college with us.</h2>
+                <p>Choose smart. Choose the right college.</p>
+                <a href="#business-model" class="btn-learn-more btn-dark-outline">Learn More</a>
+            </div>
+
+            <div class="brochure-card" data-aos="flip-right" data-aos-delay="800">
+                <p>To Know More<br />Download<br />Our Brochure</p>
+                <img src="{{ asset('images/qr-code.png') }}" alt="QR Code" />
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Business Model Section -->
+<section class="business-model-section" id="business-model">
+    <!-- Full Width Top Category Bar -->
+    <div class="biz-category-bar-full" data-aos="fade-down">
+        <div class="container">
+            <span class="cat-item">Nursing</span>
+            <span class="divider">|</span>
+            <span class="cat-item">Pharmacy</span>
+            <span class="divider">|</span>
+            <span class="cat-item">Management</span>
+            <span class="divider">|</span>
+            <span class="cat-item">Medical</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Section Header -->
+        <div class="biz-header" data-aos="fade-up">
+            <h2>Our Business Model</h2>
+            <p>Because every rupee saved is a step toward growth.</p>
+        </div>
+
+        <!-- Tree Diagram Container -->
+        <div class="biz-diagram-container" data-aos="zoom-in" data-aos-delay="200">
+
+            <!-- Top Node: Siksha Pathik Logo Card -->
+            <div class="biz-main-node">
+                <img src="{{ asset('images/sikshapathik.webp') }}"
+                    alt="Siksha Pathik - An initiative by Roy Infinity Edge Consulting"
+                    class="siksha-logo-img" />
+            </div>
+
+            <!-- SVG Tree Connector Top (Desktop): Exact SVGs provided by user -->
+            <div class="biz-connector-top-desktop">
+                <div class="connector-svg-wrapper">
+                    <!-- Left connector SVG -->
+                    <svg width="483" height="143" viewBox="0 0 483 143" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M479 0V43.3071C479 70.0286 463.339 82.56 443.557 84.7714C423.775 86.9829 172.653 85.6929 49.5641 84.7714C36.3761 84.7714 10 93.6171 10 129"
+                            stroke="#11473E" stroke-width="8" />
+                        <circle cx="9.5" cy="133.5" r="9.5" fill="#13433B" />
+                    </svg>
+
+                    <!-- Middle connector SVG -->
+                    <svg width="19" height="174" viewBox="0 0 19 174" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="9.5" cy="164" r="9.5" fill="#15433B" />
+                        <path d="M10 0V164.5" stroke="#14433B" stroke-width="8" />
+                    </svg>
+
+                    <svg width="496" height="138" viewBox="0 0 496 138" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M4 0V43.3071C4 70.0286 20.1283 82.56 40.5009 84.7714C60.8735 86.9829 319.492 85.6929 446.255 84.7714C459.837 84.7714 487 93.6171 487 129"
+                            stroke="#13443C" stroke-width="8" />
+                        <circle cx="486.5" cy="128.5" r="9.5" fill="#14423B" />
+                    </svg>
+
+                </div>
+            </div>
+
+            <!-- Middle 3 Cards Row -->
+            <div class="biz-sub-cards-row">
+                <!-- Card 1: For Students -->
+                <div class="biz-sub-card-col">
+                    <div class="biz-sub-card">
+                        <div class="biz-card-head">
+                            <svg width="66" height="66" viewBox="0 0 66 66" fill="none"
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <rect y="23.4667" width="48.225" height="48.225"
+                                    transform="rotate(-29.1179 0 23.4667)" fill="url(#pattern0_3804_92)" />
+                                <defs>
+                                    <pattern id="pattern0_3804_92" patternContentUnits="objectBoundingBox"
+                                        width="1" height="1">
+                                        <use xlink:href="#image0_3804_92" transform="scale(0.0078125)" />
+                                    </pattern>
+                                    <image id="image0_3804_92" width="128" height="128"
+                                        preserveAspectRatio="none"
+                                        xlink:href="data:image/png;base64,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" />
+                                </defs>
+                            </svg>
+
+                            <h3>For Students</h3>
+                        </div>
+                        <span class="biz-click-text">Click Here</span>
+                    </div>
+                    <span class="biz-sub-caption">Click Here To Know More</span>
+                </div>
+
+                <!-- Card 2: For Institutions -->
+                <div class="biz-sub-card-col">
+                    <div class="biz-sub-card">
+                        <div class="biz-card-head">
+                            <svg width="66" height="66" viewBox="0 0 66 66" fill="none"
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <rect y="23.4667" width="48.225" height="48.225"
+                                    transform="rotate(-29.1179 0 23.4667)" fill="url(#pattern0_3804_92)" />
+                                <defs>
+                                    <pattern id="pattern0_3804_92" patternContentUnits="objectBoundingBox"
+                                        width="1" height="1">
+                                        <use xlink:href="#image0_3804_92" transform="scale(0.0078125)" />
+                                    </pattern>
+                                    <image id="image0_3804_92" width="128" height="128"
+                                        preserveAspectRatio="none"
+                                        xlink:href="data:image/png;base64,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" />
+                                </defs>
+                            </svg>
+
+                            <h3>For Institutions</h3>
+                        </div>
+                        <span class="biz-click-text">Click Here</span>
+                    </div>
+                    <span class="biz-sub-caption">Click Here To Know More</span>
+                </div>
+
+                <!-- Card 3: Sikha pratik App -->
+                <div class="biz-sub-card-col">
+                    <div class="biz-sub-card biz-card-app">
+                        <h3>Sikha pratik App</h3>
+                    </div>
+                    <span class="biz-sub-caption">Coming Soon</span>
+                </div>
+            </div>
+
+            <!-- SVG Tree Connector Bottom (Desktop): Exact SVGs provided by user -->
+            <div class="biz-connector-bottom-desktop">
+                <div class="connector-bottom-svg-wrapper">
+                    <!-- For Student SVG -->
+                    <svg width="19" height="140" viewBox="0 0 19 140" fill="none"
+                        xmlns="http://www.w3.org/2000/svg" class="conn-bottom-student">
+                        <circle cx="9.5" cy="9.5" r="9.5" fill="#15433B" />
+                        <circle cx="9.5" cy="130.5" r="9.5" fill="#15433B" />
+                        <path d="M9.21191 6.00378L9.60283 68.5019L9.99375 131" stroke="#14433B"
+                            stroke-width="8" />
+                    </svg>
+
+                    <!-- For Institution SVG -->
+                    <svg width="355" height="150" viewBox="0 0 355 150" fill="none"
+                        xmlns="http://www.w3.org/2000/svg" class="conn-bottom-institution">
+                        <path
+                            d="M346 141V99.0357C346 73.1429 334.78 61 320.608 58.8571C306.436 56.7143 126.527 57.9643 38.3445 58.8571C28.8963 58.8571 10 50.2857 10 16"
+                            stroke="#13443C" stroke-width="8" />
+                        <circle cx="345.5" cy="140.5" r="9.5" fill="#14423B" />
+                        <circle cx="9.5" cy="9.5" r="9.5" fill="#15433B" />
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Bottom Level: 2 Detail Cards -->
+            <div class="biz-detail-cards-row">
+                <!-- Left Detail Card -->
+                <div class="biz-detail-card student-trigger-card selected" id="student-card-trigger"
+                    data-aos="fade-right" style="cursor: pointer;">
+                    <div class="biz-detail-header">
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                        <h4>What You Will Cover</h4>
+                    </div>
+                    <ul class="biz-detail-list">
+                        <li>Career Counselling</li>
+                        <li>Course Selection</li>
+                        <li>Admission Guidance</li>
+                        <li>Documentation/Loan Assistance</li>
+                        <li>Registration Guidance</li>
+                        <li>Post-Passout Guidance</li>
+                        <li>Placement via Edge Hire</li>
+                    </ul>
+                </div>
+
+                <!-- Right Detail Card -->
+                <div class="biz-detail-card" data-aos="fade-left">
+                    <div class="biz-detail-header">
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                        <h4>What You Will Cover</h4>
+                    </div>
+                    <ul class="biz-detail-list">
+                        <li>Academic Consultancy</li>
+                        <li>Faculty Assistance</li>
+                        <li>Faculty Recruitment</li>
+                        <li>WBNC / INC / WBUHS Support</li>
+                        <li>Reciprocal / NRTS / NUID</li>
+                        <li>Inspection Preparation</li>
+                        <li>Inspection Coordination & Liaison</li>
+                        <li>Long-term Institutional Support</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Connection Wrapper & Student Section -->
+    <div class="student-connection-wrapper active" id="student-connection">
+        <div class="student-connector-svg-container container">
+            <svg width="388" height="150" viewBox="0 0 388 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M380 141V99.0357C380 73.1429 367.645 61 352.039 58.8571C336.432 56.7143 138.319 57.9643 41.2127 58.8571C30.8084 58.8571 10 50.2857 10 16"
+                    stroke="#13443C" stroke-width="8" />
+                <circle cx="378.5" cy="140.5" r="9.5" fill="#14423B" />
+                <circle cx="9.5" cy="9.5" r="9.5" fill="#14423B" />
+            </svg>
+        </div>
+
+        <!-- For Students Section -->
+        <div class="for-students-section">
+            <div class="for-students-banner">
+                <h2>For Students</h2>
+            </div>
+            <div class="container">
+                <div class="student-support-container">
+                    <h3 class="student-support-title">Student Admission Support</h3>
+                    <div class="student-support-card">
+                        <div class="student-support-image">
+                            <img src="{{ asset('images/education-student.png') }}" alt="Student Admission Support" />
+                        </div>
+                        <div class="student-support-content">
+                            <p>At Siksha Pathik, we believe that choosing the right course and institution
+                                is one of the most important decisions in a student's life. Our admission
+                                support is designed to provide students and parents with transparent,
+                                personalized, and end-to-end guidance throughout the admission journey. From
+                                identifying the right career path to completing admission formalities, our
+                                experienced counselling team assists students at every stage, ensuring
+                                informed decisions and a smooth admission experience.</p>
+                        </div>
+                    </div>
+
+                    <!-- Our Admission Journey Section -->
+                    <div class="admission-journey-section" data-aos="fade-up">
+                        <div class="admission-journey-header">
+                            <h2>Our Admission Journey</h2>
+                            <p>Because every rupee saved is a step toward growth.</p>
+                        </div>
+                        <div class="admission-journey-diagram">
+                            <img src="{{ asset('images/education-01.webp') }}" alt="Our Admission Journey" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Academic Programmes We Facilitate Section -->
+            <div class="academic-prog-section" data-aos="fade-up">
+                <div class="container">
+                    <h2 class="academic-prog-title">Academic Programmes We Facilitate</h2>
+                    <div class="academic-prog-grid">
+                        <div class="academic-prog-content">
+                            <p>Career Counselling & Academic Planning Personalised Course selection based on
+                                academic background and career goals Higher education planning Professional
+                                career
+                                guidance Parent counselling College & University Selection Identifying suitable
+                                colleges and universities Guidance on Government, Government-Aided, Private, and
+                                Deemed Institutions State and national-level admission options Guidance on
+                                institution recognition and approvals Course comparison and institution
+                                evaluation
+                                Admission Assistance Admission eligibility assessment Application form guidance
+                                Online and offline application support Document verification Admission
+                                documentation
+                                Merit-based and</p>
+                            <a href="#" class="btn-read-more">Read More</a>
+                        </div>
+                        <div class="academic-prog-image">
+                            <img src="{{ asset('images/education-02.webp') }}" alt="Academic Programmes We Facilitate" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Programme Cards Grid Section -->
+            <div class="programme-cards-section" data-aos="fade-up">
+                <div class="container">
+                    <div class="programme-cards-grid">
+                        <!-- Card 1 -->
+                        <div class="prog-card">
+                            <div class="prog-card-top">
+                                <span class="prog-dot dot-blue"></span>
+                                <span class="prog-read-time">5 min read</span>
+                            </div>
+                            <h3 class="prog-card-title">Admission follow-up</h3>
+                            <div class="prog-card-body">
+                                <p>Documentation Support<br>Educational document verification Identity and
+                                    address proof documentation Migration Certificate guidance</p>
+                            </div>
+                            <div class="prog-card-bottom">
+                                <button class="prog-arrow-btn" aria-label="Open">
+                                    <i class="fa-solid fa-arrow-down"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div class="prog-card">
+                            <div class="prog-card-top">
+                                <span class="prog-dot dot-orange"></span>
+                                <span class="prog-read-time">5 min read</span>
+                            </div>
+                            <h3 class="prog-card-title">Academic Programmes We Facilitate</h3>
+                            <div class="prog-card-body">
+                                <p>Nursing<br>General Nursing & Midwifery (GNM) B.Sc. Nursing Post Basic B.Sc.
+                                    Nursing M.Sc. Nursing</p>
+                            </div>
+                            <div class="prog-card-bottom">
+                                <button class="prog-arrow-btn" aria-label="Open">
+                                    <i class="fa-solid fa-arrow-down"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="prog-card">
+                            <div class="prog-card-top">
+                                <span class="prog-dot dot-purple"></span>
+                                <span class="prog-read-time">5 min read</span>
+                            </div>
+                            <h3 class="prog-card-title">Pharmacy</h3>
+                            <div class="prog-card-body">
+                                <p>Diploma in Pharmacy (D.Pharm.)<br>Bachelor of Pharmacy (B. Pharm.)<br>Doctor
+                                    of Pharmacy (Pharm.D)<br>Master of Pharmacy (M. Pharm.)</p>
+                            </div>
+                            <div class="prog-card-bottom">
+                                <button class="prog-arrow-btn" aria-label="Open">
+                                    <i class="fa-solid fa-arrow-down"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Card 4 -->
+                        <div class="prog-card">
+                            <div class="prog-card-top">
+                                <span class="prog-dot dot-blue"></span>
+                                <span class="prog-read-time">5 min read</span>
+                            </div>
+                            <h3 class="prog-card-title">Engineering & Technology</h3>
+                            <div class="prog-card-body">
+                                <p>Polytechnic Diploma B.Tech<br>M.Tech Computer Applications & Information
+                                    Technology BCA</p>
+                            </div>
+                            <div class="prog-card-bottom">
+                                <button class="prog-arrow-btn btn-filled" aria-label="Open">
+                                    <i class="fa-solid fa-arrow-down"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Card 5 -->
+                        <div class="prog-card">
+                            <div class="prog-card-top">
+                                <span class="prog-dot dot-orange"></span>
+                                <span class="prog-read-time">5 min read</span>
+                            </div>
+                            <h3 class="prog-card-title">Education</h3>
+                            <div class="prog-card-body">
+                                <p>D.El.Ed.<br>B.Ed.<br>M.Ed.</p>
+                            </div>
+                            <div class="prog-card-bottom">
+                                <button class="prog-arrow-btn" aria-label="Open">
+                                    <i class="fa-solid fa-arrow-down"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Card 6 -->
+                        <div class="prog-card">
+                            <div class="prog-card-top">
+                                <span class="prog-dot dot-purple"></span>
+                                <span class="prog-read-time">5 min read</span>
+                            </div>
+                            <h3 class="prog-card-title">Law</h3>
+                            <div class="prog-card-body">
+                                <p>LL. B.<br>B.A.<br>B.B.<br>LL. B. A.<br>LL. B. L<br>L.M.</p>
+                            </div>
+                            <div class="prog-card-bottom">
+                                <button class="prog-arrow-btn" aria-label="Open">
+                                    <i class="fa-solid fa-arrow-down"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="prog-see-more-wrap">
+                        <a href="#" class="btn-see-more">See more</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Why Our Admission Support is Different Banner Section -->
+            <div class="why-admission-different-section" data-aos="fade-up">
+                <div class="container">
+                    <div class="why-diff-content">
+                        <h2>Why Our Admission Support<br>is Different</h2>
+                        <p>Unlike conventional admission consultancies, Siksha Pathik provides continuous support before, during, and after admission. Our objective is not only to help students secure admission but <strong>also to support their academic journey, professional registration, career development, and employment opportunities through our integrated education ecosystem.</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Our Commitment Section -->
+            <div class="our-commitment-section" data-aos="fade-up">
+                <div class="container">
+                    <div class="commitment-card">
+                        <div class="commitment-content">
+                            <h2>Our Commitment</h2>
+                            <p>Our commitment continues throughout your academic journey by providing guidance for registrations, internships, professional development, higher education, and employment opportunities. Through our integrated ecosystem, students receive continuous support until they begin their professional careers.</p>
+                        </div>
+                        <div class="commitment-image-wrap">
+                            <img src="{{ asset('images/education-03.png') }}" alt="Our Commitment" class="commitment-img" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Why Students Trust Us Section -->
+            <div class="why-trust-us-section" data-aos="fade-up">
+                <div class="container">
+                    <h2 class="why-trust-title">Why Students Trust Us</h2>
+                    <div class="why-trust-grid">
+                        <div class="trust-pill-item">
+                            <span class="trust-check-icon"><i class="fa-solid fa-check"></i></span>
+                            <span class="trust-pill-text">Personalized counselling</span>
+                        </div>
+                        <div class="trust-pill-item">
+                            <span class="trust-check-icon"><i class="fa-solid fa-check"></i></span>
+                            <span class="trust-pill-text">Transparent admission process</span>
+                        </div>
+                        <div class="trust-pill-item">
+                            <span class="trust-check-icon"><i class="fa-solid fa-check"></i></span>
+                            <span class="trust-pill-text">Experienced education consultants</span>
+                        </div>
+                        <div class="trust-pill-item">
+                            <span class="trust-check-icon"><i class="fa-solid fa-check"></i></span>
+                            <span class="trust-pill-text">Complete documentation support</span>
+                        </div>
+                        <div class="trust-pill-item">
+                            <span class="trust-check-icon"><i class="fa-solid fa-check"></i></span>
+                            <span class="trust-pill-text">End-to-end academic guidance</span>
+                        </div>
+                        <div class="trust-pill-item">
+                            <span class="trust-check-icon"><i class="fa-solid fa-check"></i></span>
+                            <span class="trust-pill-text">Professional registration support</span>
+                        </div>
+                        <div class="trust-pill-item">
+                            <span class="trust-check-icon"><i class="fa-solid fa-check"></i></span>
+                            <span class="trust-pill-text">Career development assistance</span>
+                        </div>
+                        <div class="trust-pill-item">
+                            <span class="trust-check-icon"><i class="fa-solid fa-check"></i></span>
+                            <span class="trust-pill-text">Placement support through Edge Hire</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section class="queries-final-section">
+    <div class="container queries-flex">
+        <div class="queries-left">
+            <h2>
+                If You Have any Queries
+                <span class="text-green">Feel Free To Ask !</span>
+            </h2>
+        </div>
+        <div class="queries-right">
+            <div class="ask-card">
+                <h3>Ask Question</h3>
+                <p>If you have Any Queries Feel Free To ask !</p>
+                <div class="input-wrapper">
+                    <input type="text" placeholder="Type............" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-banner-section" data-aos="zoom-in">
+    <div class="container">
+        <div class="cta-banner-card">
+            <h2>Ready to Contact with us ?</h2>
+            <a href="#contact" class="btn-get-started-white">Get Started <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+    </div>
+</section>
+@endsection
+
+@push('scripts')
+<script>
+    // Toggle "For Students" section when "What You Will Cover" (Student Card) is clicked
+    const studentTrigger = document.getElementById('student-card-trigger');
+    const studentSection = document.getElementById('student-connection');
+
+    if (studentTrigger && studentSection) {
+        studentTrigger.addEventListener('click', function () {
+            const isActive = studentSection.classList.contains('active');
+            if (isActive) {
+                studentSection.classList.remove('active');
+                studentTrigger.classList.remove('selected');
+            } else {
+                studentSection.classList.add('active');
+                studentTrigger.classList.add('selected');
+                // Smooth scroll down to the banner
+                setTimeout(() => {
+                    studentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 300);
+            }
+        });
+    }
+</script>
+@endpush

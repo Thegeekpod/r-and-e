@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 40" width="110" height="40" fill="#0C2924">
+  <circle cx="15" cy="20" r="10" fill="#03594A" opacity="0.8"/>
+  <circle cx="23" cy="20" r="10" fill="#B9FF66" opacity="0.8"/>
+  <text x="42" y="27" font-family="'Plus Jakarta Sans', sans-serif" font-size="22" font-weight="900" letter-spacing="1">ERM</text>
+</svg>
