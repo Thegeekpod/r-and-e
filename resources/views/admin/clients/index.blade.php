@@ -85,7 +85,7 @@
                                                 <input type="number" name="order" class="form-control" value="{{ $client->order }}">
                                             </div>
                                             <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" name="is_active" id="active{{ $client->id }}" {{ $client->is_active ? 'checked' : '' }}>
+                                                <input class="form-check-input" type="checkbox" name="is_active" id="active{{ $client->id }}" value="1" {{ $client->is_active ? 'checked' : '' }}>
                                                 <label class="form-check-label" for="active{{ $client->id }}">Active</label>
                                             </div>
                                         </div>
@@ -134,7 +134,7 @@
                         <input type="number" name="order" class="form-control" value="0">
                     </div>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" name="is_active" id="activeNew" checked>
+                        <input class="form-check-input" type="checkbox" name="is_active" id="activeNew" value="1" checked>
                         <label class="form-check-label" for="activeNew">Active</label>
                     </div>
                 </div>

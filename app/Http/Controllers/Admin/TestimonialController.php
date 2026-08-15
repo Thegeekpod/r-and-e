@@ -28,7 +28,6 @@ class TestimonialController extends Controller
             'rating'    => 'required|integer|min:1|max:5',
             'theme'     => 'required|in:dark,lime',
             'order'     => 'nullable|integer',
-            'is_active' => 'nullable|boolean',
             'avatar'    => 'nullable|image|max:2048',
         ]);
 
@@ -61,7 +60,6 @@ class TestimonialController extends Controller
             'rating'    => 'required|integer|min:1|max:5',
             'theme'     => 'required|in:dark,lime',
             'order'     => 'nullable|integer',
-            'is_active' => 'nullable|boolean',
             'avatar'    => 'nullable|image|max:2048',
         ]);
 

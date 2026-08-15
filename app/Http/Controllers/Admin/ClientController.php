@@ -19,7 +19,6 @@ class ClientController extends Controller
         $validated = $request->validate([
             'name'      => 'required|string|max:255',
             'order'     => 'nullable|integer',
-            'is_active' => 'nullable|boolean',
             'logo'      => 'nullable|image|max:2048',
         ]);
 
@@ -43,7 +42,6 @@ class ClientController extends Controller
         $validated = $request->validate([
             'name'      => 'required|string|max:255',
             'order'     => 'nullable|integer',
-            'is_active' => 'nullable|boolean',
             'logo'      => 'nullable|image|max:2048',
         ]);
 

@@ -64,7 +64,7 @@
 
                 <div class="col-md-6 d-flex align-items-center mt-4 pt-3">
                     <div class="form-check form-switch fs-5">
-                        <input class="form-check-input" type="checkbox" name="is_active" id="isActive" checked>
+                        <input class="form-check-input" type="checkbox" name="is_active" id="isActive" value="1" checked>
                         <label class="form-check-label fs-6 fw-semibold text-dark" for="isActive">Show on Home Page (Active)</label>
                     </div>
                 </div>
