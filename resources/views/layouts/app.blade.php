@@ -17,9 +17,11 @@
     <link href="https://fonts.googleapis.com/css?family=Manrope&display=swap" rel="stylesheet" />
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}?v={{ time() }}" />
+    <link rel="stylesheet" href="{{ asset('css/responsive.css') }}?v={{ time() }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     @stack('styles')
 </head>
 
@@ -41,6 +43,8 @@
             offset: 100,
         });
     </script>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     @stack('scripts')
 </body>
 

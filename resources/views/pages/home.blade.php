@@ -260,28 +260,35 @@
             </p>
         </div>
 
-        <div class="testimonials-grid">
-            @foreach($testimonials as $index => $testimonial)
-                <div class="testimonial-card {{ $testimonial->theme == 'lime' ? 'lime-card' : 'dark-card' }}" data-aos="{{ $index % 2 == 0 ? 'fade-right' : 'fade-left' }}" data-aos-delay="{{ $index * 200 }}">
-                    <div class="testimonial-avatar">
-                        <img src="{{ $testimonial->avatar_url }}" alt="{{ $testimonial->name }}" />
-                    </div>
-                    <div class="testimonial-stars" data-aos="fade-left" data-aos-delay="200">
-                        @for($i=0; $i<$testimonial->rating; $i++) ★ @endfor
-                    </div>
-                    <p class="testimonial-text">
-                        {{ $testimonial->review }}
-                    </p>
-                    <a href="#" class="read-more">Read More</a>
-                    <div class="testimonial-footer">
-                        <div class="user-info">
-                            <h4>{{ $testimonial->name }}</h4>
-                            <span>{{ $testimonial->role ?? 'Client' }}</span>
+        <div class="testimonials-slider-wrapper" style="overflow: hidden; width: 100%; position: relative;">
+            <div class="swiper testimonials-swiper">
+                <div class="swiper-wrapper">
+                    @foreach($testimonials as $index => $testimonial)
+                        <div class="swiper-slide">
+                            <div class="testimonial-card {{ $testimonial->theme == 'lime' ? 'lime-card' : 'dark-card' }}" style="height: 100%; display: flex; flex-direction: column;">
+                                <div class="testimonial-avatar">
+                                    <img src="{{ $testimonial->avatar_url }}" alt="{{ $testimonial->name }}" />
+                                </div>
+                                <div class="testimonial-stars">
+                                    @for($i=0; $i<$testimonial->rating; $i++) ★ @endfor
+                                </div>
+                                <p class="testimonial-text" style="flex-grow: 1;">
+                                    {{ $testimonial->review }}
+                                </p>
+                                <a href="#" class="read-more">Read More</a>
+                                <div class="testimonial-footer">
+                                    <div class="user-info">
+                                        <h4>{{ $testimonial->name }}</h4>
+                                        <span>{{ $testimonial->role ?? 'Client' }}</span>
+                                    </div>
+                                    <div class="testimonial-badge">Testimonial</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="testimonial-badge">Testimonial</div>
-                    </div>
+                    @endforeach
                 </div>
-            @endforeach
+                <div class="swiper-pagination testimonials-pagination"></div>
+            </div>
         </div>
     </div>
 </section>
@@ -312,4 +319,29 @@
         </div>
     </div>
 </section>
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        new Swiper('.testimonials-swiper', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.testimonials-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                769: {
+                    slidesPerView: 2,
+                    spaceBetween: 30
+                }
+            }
+        });
+    });
+</script>
+@endpush
 @endsection

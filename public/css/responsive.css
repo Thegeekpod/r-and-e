@@ -1,0 +1,830 @@
+/* Global Swiper styles for Testimonials */
+html, body {
+    overflow-x: hidden !important;
+    position: relative;
+    width: 100%;
+}
+
+.testimonials-slider-wrapper {
+    overflow: hidden !important;
+    width: 100%;
+    position: relative;
+}
+
+.testimonials-swiper {
+    width: 100%;
+    overflow: visible !important;
+    /* Allow avatar display top: -40px */
+    padding-top: 50px !important;
+    padding-bottom: 20px !important;
+}
+
+.testimonials-swiper .swiper-slide {
+    height: auto !important;
+    display: flex;
+}
+
+.testimonials-swiper .swiper-slide .testimonial-card {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    margin-top: 0 !important;
+}
+
+.testimonials-pagination {
+    position: relative !important;
+    bottom: auto !important;
+    margin-top: 20px !important;
+    text-align: center;
+}
+
+.testimonials-pagination .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.4);
+    opacity: 1;
+    border-radius: 50%;
+    margin: 0 5px !important;
+    display: inline-block;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.testimonials-pagination .swiper-pagination-bullet-active {
+    background: #8bab1d !important;
+    width: 22px;
+    border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+
+    /* ==========================================
+       1. HEADER & HAMBURGER MENU
+       ========================================== */
+    .main-header {
+        height: 70px;
+    }
+
+    .header-container {
+        padding: 0 20px;
+    }
+
+    .logo-wrapper {
+        left: 20px;
+        height: 72px;
+        width: 110px;
+        border-radius: 0 0 14px 14px;
+    }
+
+    .brand-logo {
+        max-width: 85px;
+    }
+
+    .main-nav {
+        margin-left: auto;
+        position: relative;
+        z-index: 1001;
+    }
+
+    .main-nav::before {
+        content: "\f0c9";
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        font-size: 22px;
+        color: #ffffff;
+        display: block;
+        cursor: pointer;
+        padding: 10px;
+        transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .main-nav.active::before {
+        content: "\f00d";
+        transform: rotate(90deg);
+        color: var(--btn-gold);
+    }
+
+    .main-nav ul {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 50px;
+        right: 0;
+        background: #0C2924;
+        border: 1.5px solid #03594A;
+        width: 250px;
+        border-radius: 14px;
+        padding: 20px;
+        gap: 12px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        transform: translateY(-10px);
+        pointer-events: none;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        z-index: 1000;
+    }
+
+    .main-nav.active ul {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+
+    .main-nav ul li {
+        margin: 0;
+        text-align: center;
+        width: 100%;
+        font-size: 15px;
+    }
+
+    .main-nav ul li a {
+        display: block;
+        padding: 10px;
+        width: 100%;
+        border-radius: 8px;
+        transition: background-color 0.2s ease;
+    }
+
+    .main-nav ul li a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .main-nav ul li a.btn-contact {
+        margin-top: 5px;
+        padding: 10px 20px;
+    }
+
+    /* ==========================================
+       2. GLOBAL CONTAINER
+       ========================================== */
+    .container {
+        padding: 0 18px;
+    }
+
+    /* ==========================================
+       3. TYPOGRAPHY SYSTEM
+       ========================================== */
+    h1,
+    .hero-title {
+        font-size: 28px;
+        line-height: 1.15;
+    }
+
+    h2 {
+        font-size: 22px;
+        line-height: 1.25;
+        margin-bottom: 12px;
+    }
+
+    h3 {
+        font-size: 20px;
+    }
+
+    p {
+        font-size: 15px;
+        line-height: 1.5;
+    }
+
+    li {
+        font-size: 15px;
+        line-height: 1.5;
+        margin-bottom: 8px;
+    }
+
+    /* ==========================================
+       4. HERO SECTION
+       ========================================== */
+    .hero-section {
+        padding: 30px 0 20px;
+    }
+
+    .hero-container {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        gap: 24px;
+    }
+
+    .hero-content {
+        padding-top: 10px;
+        max-width: 100%;
+    }
+
+    .hero-subtitle {
+        font-size: 15px;
+        margin-top: 8px;
+        line-height: 1.5;
+        opacity: 0.85;
+    }
+
+    .hero-actions-wrapper {
+        margin: 16px 0 0;
+        justify-content: flex-start;
+    }
+
+    .hero-actions {
+        flex-direction: row;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .hero-actions .btn {
+        width: auto;
+        min-width: unset;
+        max-width: unset;
+        padding: 10px 16px;
+        font-size: 13px;
+        border-radius: 10px;
+    }
+
+    .hero-arrow {
+        display: none;
+    }
+
+    .hero-stats {
+        display: flex;
+        justify-content: flex-start;
+        gap: 24px;
+        margin-top: 16px;
+        flex-wrap: wrap;
+    }
+
+    .stat-label {
+        font-size: 11px;
+        opacity: 0.65;
+    }
+
+    .stat-value {
+        font-size: 22px;
+        font-weight: 800;
+    }
+
+    .hero-visuals {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .circle-arrow-img {
+        display: none;
+    }
+
+    .stats-card {
+        width: 100%;
+        height: auto;
+        padding: 20px 18px;
+        border-radius: 20px;
+    }
+
+    .stats-card h2 {
+        font-size: 32px;
+        margin-bottom: 6px;
+    }
+
+    .stats-card p {
+        font-size: 13px;
+        margin-bottom: 12px;
+        line-height: 1.4;
+    }
+
+    .analysis-card {
+        width: 100%;
+        border-radius: 16px;
+        overflow: hidden;
+    }
+
+    /* ==========================================
+       5. BOTTOM BANNER
+       ========================================== */
+    .bottom-banner {
+        padding: 16px 0;
+        text-align: left;
+    }
+
+    .bottom-banner p {
+        font-size: 16px;
+        line-height: 1.4;
+        text-align: left;
+    }
+
+    /* ==========================================
+       6. ABOUT SERVICES SECTION
+       ========================================== */
+    .about-services-section {
+        padding: 40px 0;
+    }
+
+    .section-header {
+        margin-bottom: 24px;
+        text-align: left;
+    }
+
+    .section-header h2 {
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+
+    .section-header p {
+        font-size: 15px;
+        opacity: 0.8;
+    }
+
+    .services-cards {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .service-card {
+        border-radius: 20px;
+        overflow: hidden;
+    }
+
+    .card-image {
+        height: 200px;
+    }
+
+    .card-image img {
+        border-radius: 0;
+    }
+
+    .card-content {
+        padding: 20px 18px 22px;
+    }
+
+    .card-content h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .card-content ul {
+        margin-bottom: 14px;
+        padding-left: 18px;
+    }
+
+    .card-content ul li {
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
+
+    .service-card .btn {
+        padding: 10px 16px;
+        font-size: 14px;
+        border-radius: 10px;
+        width: 100%;
+        text-align: center;
+    }
+
+    /* ==========================================
+       7. TAXATION FEATURE SECTION
+       ========================================== */
+    .taxation-feature-section {
+        padding: 40px 0 40px;
+        text-align: left;
+    }
+
+    .taxation-header {
+        margin-bottom: 0;
+    }
+
+    .taxation-header h2 {
+        font-size: 20px;
+        margin-bottom: 8px;
+    }
+
+    .taxation-header p {
+        font-size: 14px;
+        margin-bottom: 20px;
+        opacity: 0.8;
+    }
+
+    .taxation-card {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 28px 20px 0;
+        border-radius: 22px;
+        min-height: auto;
+        text-align: left;
+        overflow: hidden;
+    }
+
+    .taxation-card-content {
+        padding-right: 0;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+
+    .taxation-card-content h2 {
+        font-size: 20px;
+        line-height: 1.25;
+        margin-bottom: 12px;
+        color: white;
+    }
+
+    .taxation-card-content p {
+        font-size: 14px;
+        max-width: 100%;
+        margin-bottom: 20px;
+        opacity: 0.9;
+    }
+
+    .btn-learn-more {
+        padding: 11px 26px;
+        font-size: 14px;
+        border-radius: 10px;
+        display: inline-block;
+    }
+
+    .taxation-card-image {
+        width: 100%;
+        height: 220px;
+        position: relative;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        overflow: hidden;
+    }
+
+    .taxation-card-image img {
+        position: relative;
+        height: 220px;
+        right: auto;
+        bottom: auto;
+        margin: 0;
+        object-fit: contain;
+    }
+
+    .taxation-card-image img.animate {
+        display: none;
+    }
+
+    /* ==========================================
+       8. QUERIES / ASK SECTION
+       ========================================== */
+    .queries-final-section {
+        padding: 0 0 40px;
+    }
+
+    .queries-flex {
+        flex-direction: column;
+        width: 100%;
+        gap: 20px;
+        text-align: left;
+    }
+
+    .queries-left h2 {
+        font-size: 20px;
+        line-height: 1.25;
+        margin-bottom: 0;
+    }
+
+    .queries-right {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .ask-card {
+        padding: 24px 18px;
+        border-radius: 20px;
+        max-width: 100%;
+        text-align: left;
+    }
+
+    .ask-card h3 {
+        font-size: 18px;
+        margin-bottom: 8px;
+    }
+
+    .ask-card p {
+        font-size: 14px;
+        margin-bottom: 16px;
+        opacity: 0.8;
+    }
+
+    .input-wrapper input {
+        padding: 14px 18px;
+        border-radius: 12px;
+        font-size: 14px;
+    }
+
+    /* ==========================================
+       9. EDUCATION FEATURE SECTION
+       ========================================== */
+    .education-feature-section {
+        padding: 40px 0;
+        margin-bottom: 0;
+    }
+
+    .education-header {
+        margin-bottom: 0;
+    }
+
+    .education-header h2 {
+        font-size: 20px;
+        margin-bottom: 8px;
+    }
+
+    .education-header p {
+        font-size: 14px;
+        margin-bottom: 20px;
+        opacity: 0.8;
+    }
+
+    .edu-feature-card {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 24px 20px 0;
+        border-radius: 22px;
+        min-height: auto;
+        margin-top: 20px;
+        text-align: left;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .edu-feature-card-content {
+        padding-left: 0;
+        text-align: left;
+        width: 100%;
+        order: 1;
+    }
+
+    .edu-feature-card-content h2 {
+        font-size: 20px;
+        line-height: 1.25;
+        margin-bottom: 10px;
+    }
+
+    .edu-feature-card-content p {
+        font-size: 14px;
+        margin-bottom: 18px;
+    }
+
+    .btn-dark-outline {
+        padding: 11px 26px;
+        font-size: 14px;
+        border-radius: 10px;
+        display: inline-block;
+        margin-bottom: 20px;
+    }
+
+    /* Reset absolute positioning from desktop and make image full-width */
+    .edu-feature-card-image {
+        position: relative;
+        width: 100%;
+        height: 240px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        order: 3;
+        overflow: hidden;
+    }
+
+    .edu-feature-card-image img {
+        position: relative !important;
+        left: auto !important;
+        bottom: auto !important;
+        right: auto !important;
+        height: 240px;
+        width: auto;
+        object-fit: contain;
+        display: block;
+    }
+
+    .edu-feature-card-image img.animate {
+        display: none;
+    }
+
+    /* Brochure card sits below image inline */
+    .brochure-card {
+        position: relative;
+        top: auto;
+        right: auto;
+        margin: 16px 0 0 0;
+        width: 140px;
+        border-radius: 14px;
+        padding: 12px;
+        order: 2;
+        text-align: center;
+    }
+
+    .brochure-card p {
+        font-size: 11px;
+        line-height: 1.4;
+        margin-bottom: 8px;
+        text-align: center;
+    }
+
+    .brochure-card img {
+        height: 85px;
+        width: auto;
+        display: block;
+        margin: 0 auto;
+    }
+
+    /* ==========================================
+       10. CTA BANNER SECTION
+       ========================================== */
+    .cta-banner-section {
+        padding: 10px 0 40px;
+    }
+
+    .cta-card {
+        flex-direction: column;
+        padding: 28px 20px;
+        border-radius: 22px;
+        text-align: left;
+        gap: 16px;
+        align-items: flex-start;
+    }
+
+    .cta-title {
+        font-size: 20px;
+        line-height: 1.25;
+    }
+
+    .btn-get-started {
+        padding: 12px 26px;
+        border-radius: 30px;
+        font-size: 14px;
+    }
+
+    .cta-banner-card {
+        flex-direction: column;
+        padding: 30px 20px;
+        border-radius: 22px;
+        text-align: left;
+        gap: 16px;
+        background-size: cover;
+        align-items: flex-start;
+    }
+
+    .cta-banner-card h2 {
+        font-size: 20px;
+        line-height: 1.25;
+    }
+
+    .btn-get-started-white {
+        padding: 12px 26px;
+        border-radius: 30px;
+        font-size: 14px;
+    }
+
+    /* ==========================================
+       11. TESTIMONIALS SECTION
+       ========================================== */
+    .testimonials-section {
+        padding: 40px 0;
+    }
+
+    .testimonials-slider-wrapper {
+        padding: 0 10px;
+    }
+
+    .testimonial-card {
+        padding: 55px 18px 22px;
+        border-radius: 20px;
+    }
+
+    .testimonial-avatar {
+        width: 75px;
+        height: 75px;
+        top: -38px;
+        left: 18px;
+        border-width: 3px;
+    }
+
+    .testimonial-stars {
+        text-align: left;
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+
+    .testimonial-text {
+        font-size: 14px;
+        line-height: 1.55;
+        margin-bottom: 12px;
+    }
+
+    .read-more {
+        font-size: 13px;
+        margin-bottom: 16px;
+    }
+
+    .testimonial-footer {
+        padding-top: 14px;
+    }
+
+    .user-info h4 {
+        font-size: 15px;
+    }
+
+    .user-info span {
+        font-size: 12px;
+    }
+
+    .testimonial-badge {
+        padding: 4px 10px;
+        font-size: 11px;
+        border-radius: 16px;
+    }
+
+    /* ==========================================
+       12. CLIENTS SECTION
+       ========================================== */
+    .clients-section {
+        padding: 40px 0;
+        text-align: left;
+    }
+
+    .clients-header {
+        padding: 0 18px;
+    }
+
+    .clients-header h2 {
+        font-size: 20px;
+    }
+
+    .clients-header p {
+        font-size: 13px;
+        margin-bottom: 20px;
+        opacity: 0.75;
+    }
+
+    .client-logo-item {
+        min-width: 100px;
+    }
+
+    .client-logo-item img {
+        max-height: 36px;
+        padding: 5px;
+        border-radius: 6px;
+    }
+
+    .clients-marquee-wrapper {
+        padding: 10px 0;
+    }
+
+    /* ==========================================
+       13. FOOTER SECTION
+       ========================================== */
+    .main-footer {
+        padding: 40px 0 24px;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        text-align: left;
+    }
+
+    .footer-col {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .brand-col .footer-logo {
+        font-size: 18px;
+        margin-bottom: 12px;
+    }
+
+    .brand-col p {
+        font-size: 13px;
+        margin-bottom: 16px;
+        opacity: 0.7;
+        line-height: 1.6;
+    }
+
+    .social-links {
+        justify-content: flex-start;
+        gap: 10px;
+    }
+
+    .social-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 15px;
+    }
+
+    .footer-col h4 {
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+
+    .footer-col ul li {
+        font-size: 13px;
+        margin-bottom: 8px;
+    }
+
+    .contact-col .contact-item {
+        justify-content: flex-start;
+        align-items: flex-start;
+        text-align: left;
+        margin-bottom: 12px;
+        font-size: 13px;
+        width: 100%;
+        gap: 10px;
+    }
+}

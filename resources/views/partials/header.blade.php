@@ -19,3 +19,22 @@
         </nav>
     </div>
 </header>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const nav = document.querySelector('.main-nav');
+        if (nav) {
+            nav.addEventListener('click', function(e) {
+                if (e.target === nav) {
+                    nav.classList.toggle('active');
+                }
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!nav.contains(e.target)) {
+                    nav.classList.remove('active');
+                }
+            });
+        }
+    });
+</script>
