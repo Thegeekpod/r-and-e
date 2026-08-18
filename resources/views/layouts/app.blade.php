@@ -7,14 +7,7 @@
     <title>@yield('title', 'Roy Infinity Edge Consulting | Finance, Education, Placement')</title>
     
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Soliden+Trial&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Arial&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Plus+Jakarta+Sans&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Figtree&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Manrope&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="{{ asset('css/main.css') }}?v={{ time() }}" />

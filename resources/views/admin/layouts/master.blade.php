@@ -245,6 +245,11 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="{{ route('admin.finance.index') }}" class="nav-link {{ request()->routeIs('admin.finance.*') ? 'active' : '' }}">
+                    <i class="fa-solid fa-coins"></i> Finance Page Content
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="{{ route('admin.testimonials.index') }}" class="nav-link {{ request()->routeIs('admin.testimonials.*') ? 'active' : '' }}">
                     <i class="fa-solid fa-comment-dots"></i> Testimonials
                 </a>

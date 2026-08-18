@@ -35,7 +35,8 @@ class PageController extends Controller
             ]);
         }
 
-        return view('pages.finance');
+        $settings = SiteSetting::all()->pluck('value', 'key');
+        return view('pages.finance', compact('settings'));
     }
 
     public function education()

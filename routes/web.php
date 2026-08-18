@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\ClientController as AdminClientController;
 use App\Http\Controllers\Admin\ContactMessageController as AdminContactMessageController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\FinanceController as AdminFinanceController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\PageStatusController as AdminPageStatusController;
 use App\Http\Controllers\Admin\SettingController as AdminSettingController;
@@ -43,6 +44,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Home Page Content Editor
         Route::get('/home-content', [AdminHomeController::class, 'index'])->name('home.index');
         Route::post('/home-content', [AdminHomeController::class, 'update'])->name('home.update');
+
+        // Finance Page Content Editor
+        Route::get('/finance-content', [AdminFinanceController::class, 'index'])->name('finance.index');
+        Route::post('/finance-content', [AdminFinanceController::class, 'update'])->name('finance.update');
 
         // Testimonials Management
         Route::resource('testimonials', AdminTestimonialController::class)->except(['show']);
