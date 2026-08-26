@@ -337,5 +337,8 @@ class DatabaseSeeder extends Seeder
         foreach ($clients as $c) {
             ClientPartner::updateOrCreate(['name' => $c['name']], $c);
         }
+
+        // Education Page Settings
+        $this->call(EducationSettingsSeeder::class);
     }
 }

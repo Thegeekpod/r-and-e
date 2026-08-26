@@ -8,19 +8,19 @@
     <div class="container">
         <div class="edu-feature-card" data-aos="zoom-in-up">
             <div class="edu-feature-card-image">
-                <img src="{{ asset('images/woment-graphics.webp') }}" class="animate" alt="Choose the right college" />
-                <img src="{{ asset('images/woment.webp') }}" alt="Choose the right college" />
+                <img src="{{ \App\Models\SiteSetting::getImageUrl('edu_hero_img_graphics', 'images/woment-graphics.webp') }}" class="animate" alt="{{ $settings['edu_hero_heading'] ?? 'Choose the right college' }}" />
+                <img src="{{ \App\Models\SiteSetting::getImageUrl('edu_hero_img_person', 'images/woment.webp') }}" alt="{{ $settings['edu_hero_heading'] ?? 'Choose the right college' }}" />
             </div>
             <div class="edu-feature-card-content" data-aos="fade-left" data-aos-delay="300"
                 data-aos-anchor-placement="center-bottom">
-                <h2>Choose the right college with us.</h2>
-                <p>Choose smart. Choose the right college.</p>
-                <a href="#business-model" class="btn-learn-more btn-dark-outline">Learn More</a>
+                <h2>{{ $settings['edu_hero_heading'] ?? 'Choose the right college with us.' }}</h2>
+                <p>{{ $settings['edu_hero_subtitle'] ?? 'Choose smart. Choose the right college.' }}</p>
+                <a href="{{ $settings['edu_hero_btn_url'] ?? '#business-model' }}" class="btn-learn-more btn-dark-outline">{{ $settings['edu_hero_btn_text'] ?? 'Learn More' }}</a>
             </div>
 
             <div class="brochure-card" data-aos="flip-right" data-aos-delay="800">
-                <p>To Know More<br />Download<br />Our Brochure</p>
-                <img src="{{ asset('images/qr-code.png') }}" alt="QR Code" />
+                <p>{{ $settings['edu_hero_brochure_text'] ?? 'To Know More Download Our Brochure' }}</p>
+                <img src="{{ \App\Models\SiteSetting::getImageUrl('edu_hero_qr_img', 'images/qr-code.png') }}" alt="QR Code" />
             </div>
         </div>
     </div>
@@ -31,21 +31,23 @@
     <!-- Full Width Top Category Bar -->
     <div class="biz-category-bar-full" data-aos="fade-down">
         <div class="container">
-            <span class="cat-item">Nursing</span>
-            <span class="divider">|</span>
-            <span class="cat-item">Pharmacy</span>
-            <span class="divider">|</span>
-            <span class="cat-item">Management</span>
-            <span class="divider">|</span>
-            <span class="cat-item">Medical</span>
+            @php
+                $catItems = explode('|', $settings['edu_biz_category_items'] ?? 'Nursing|Pharmacy|Management|Medical');
+            @endphp
+            @foreach($catItems as $i => $cat)
+                <span class="cat-item">{{ trim($cat) }}</span>
+                @if($i < count($catItems) - 1)
+                    <span class="divider">|</span>
+                @endif
+            @endforeach
         </div>
     </div>
 
     <div class="container">
         <!-- Section Header -->
         <div class="biz-header" data-aos="fade-up">
-            <h2>Our Business Model</h2>
-            <p>Because every rupee saved is a step toward growth.</p>
+            <h2>{{ $settings['edu_biz_section_title'] ?? 'Our Business Model' }}</h2>
+            <p>{{ $settings['edu_biz_section_subtitle'] ?? 'Because every rupee saved is a step toward growth.' }}</p>
         </div>
 
         <!-- Tree Diagram Container -->
@@ -53,7 +55,7 @@
 
             <!-- Top Node: Siksha Pathik Logo Card -->
             <div class="biz-main-node">
-                <img src="{{ asset('images/sikshapathik.webp') }}"
+                <img src="{{ \App\Models\SiteSetting::getImageUrl('edu_siksha_logo', 'images/sikshapathik.webp') }}"
                     alt="Siksha Pathik - An initiative by Roy Infinity Edge Consulting"
                     class="siksha-logo-img" />
             </div>
@@ -91,25 +93,21 @@
             <!-- Middle 3 Cards Row -->
             <div class="biz-sub-cards-row">
                 <!-- Card 1: For Students -->
-                <div class="biz-sub-card-col">
+                <div class="biz-sub-card-col" id="student-sub-card" style="cursor: pointer;">
                     <div class="biz-sub-card">
                         <div class="biz-card-head">
-                            <svg width="66" height="66" viewBox="0 0 66 66" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                <rect y="23.4667" width="48.225" height="48.225"
-                                    transform="rotate(-29.1179 0 23.4667)" fill="url(#pattern0_3804_92)" />
-                                <defs>
-                                    <pattern id="pattern0_3804_92" patternContentUnits="objectBoundingBox"
-                                        width="1" height="1">
-                                        <use xlink:href="#image0_3804_92" transform="scale(0.0078125)" />
-                                    </pattern>
-                                    <image id="image0_3804_92" width="128" height="128"
-                                        preserveAspectRatio="none"
-                                        xlink:href="data:image/png;base64,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" />
-                                </defs>
-                            </svg>
+                            <svg width="66" height="66" viewBox="0 0 66 66" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<rect y="23.4667" width="48.225" height="48.225" transform="rotate(-29.1179 0 23.4667)" fill="url(#pattern0_3840_625)"/>
+<defs>
+<pattern id="pattern0_3840_625" patternContentUnits="objectBoundingBox" width="1" height="1">
+<use xlink:href="#image0_3840_625" transform="scale(0.0078125)"/>
+</pattern>
+<image id="image0_3840_625" width="128" height="128" preserveAspectRatio="none" xlink:href="data:image/png;base64,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"/>
+</defs>
+</svg>
 
-                            <h3>For Students</h3>
+
+                            <h3>{{ $settings['edu_student_card_title'] ?? 'For Students' }}</h3>
                         </div>
                         <span class="biz-click-text">Click Here</span>
                     </div>
@@ -117,25 +115,21 @@
                 </div>
 
                 <!-- Card 2: For Institutions -->
-                <div class="biz-sub-card-col">
+                <div class="biz-sub-card-col" id="institution-sub-card" style="cursor: pointer;">
                     <div class="biz-sub-card">
                         <div class="biz-card-head">
-                            <svg width="66" height="66" viewBox="0 0 66 66" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                <rect y="23.4667" width="48.225" height="48.225"
-                                    transform="rotate(-29.1179 0 23.4667)" fill="url(#pattern0_3804_92)" />
-                                <defs>
-                                    <pattern id="pattern0_3804_92" patternContentUnits="objectBoundingBox"
-                                        width="1" height="1">
-                                        <use xlink:href="#image0_3804_92" transform="scale(0.0078125)" />
-                                    </pattern>
-                                    <image id="image0_3804_92" width="128" height="128"
-                                        preserveAspectRatio="none"
-                                        xlink:href="data:image/png;base64,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" />
-                                </defs>
-                            </svg>
+                           <svg width="66" height="66" viewBox="0 0 66 66" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<rect y="23.4667" width="48.225" height="48.225" transform="rotate(-29.1179 0 23.4667)" fill="url(#pattern0_3840_626)"/>
+<defs>
+<pattern id="pattern0_3840_626" patternContentUnits="objectBoundingBox" width="1" height="1">
+<use xlink:href="#image0_3840_626" transform="scale(0.0078125)"/>
+</pattern>
+<image id="image0_3840_626" width="128" height="128" preserveAspectRatio="none" xlink:href="data:image/png;base64,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"/>
+</defs>
+</svg>
 
-                            <h3>For Institutions</h3>
+
+                            <h3>{{ $settings['edu_inst_card_title'] ?? 'For Institutions' }}</h3>
                         </div>
                         <span class="biz-click-text">Click Here</span>
                     </div>
@@ -145,9 +139,9 @@
                 <!-- Card 3: Sikha pratik App -->
                 <div class="biz-sub-card-col">
                     <div class="biz-sub-card biz-card-app">
-                        <h3>Sikha pratik App</h3>
+                        <h3>{{ $settings['edu_app_card_title'] ?? 'Sikha pratik App' }}</h3>
                     </div>
-                    <span class="biz-sub-caption">Coming Soon</span>
+                    <span class="biz-sub-caption">{{ $settings['edu_app_card_caption'] ?? 'Coming Soon' }}</span>
                 </div>
             </div>
 
@@ -182,34 +176,25 @@
                     data-aos="fade-right" style="cursor: pointer;">
                     <div class="biz-detail-header">
                         <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                        <h4>What You Will Cover</h4>
+                        <h4>{{ $settings['edu_student_cover_title'] ?? 'What You Will Cover' }}</h4>
                     </div>
                     <ul class="biz-detail-list">
-                        <li>Career Counselling</li>
-                        <li>Course Selection</li>
-                        <li>Admission Guidance</li>
-                        <li>Documentation/Loan Assistance</li>
-                        <li>Registration Guidance</li>
-                        <li>Post-Passout Guidance</li>
-                        <li>Placement via Edge Hire</li>
+                        @foreach(array_filter(array_map('trim', explode("\n", $settings['edu_student_cover_items'] ?? "Career Counselling\nCourse Selection\nAdmission Guidance\nDocumentation/Loan Assistance\nRegistration Guidance\nPost-Passout Guidance\nPlacement via Edge Hire"))) as $item)
+                            <li>{{ $item }}</li>
+                        @endforeach
                     </ul>
                 </div>
 
                 <!-- Right Detail Card -->
-                <div class="biz-detail-card" data-aos="fade-left">
+                <div class="biz-detail-card institution-trigger-card" id="institution-card-trigger" data-aos="fade-left" style="cursor: pointer;">
                     <div class="biz-detail-header">
                         <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                        <h4>What You Will Cover</h4>
+                        <h4>{{ $settings['edu_inst_cover_title'] ?? 'What You Will Cover' }}</h4>
                     </div>
                     <ul class="biz-detail-list">
-                        <li>Academic Consultancy</li>
-                        <li>Faculty Assistance</li>
-                        <li>Faculty Recruitment</li>
-                        <li>WBNC / INC / WBUHS Support</li>
-                        <li>Reciprocal / NRTS / NUID</li>
-                        <li>Inspection Preparation</li>
-                        <li>Inspection Coordination & Liaison</li>
-                        <li>Long-term Institutional Support</li>
+                        @foreach(array_filter(array_map('trim', explode("\n", $settings['edu_inst_cover_items'] ?? "Academic Consultancy\nFaculty Assistance\nFaculty Recruitment\nWBNC / INC / WBUHS Support\nReciprocal / NRTS / NUID\nInspection Preparation\nInspection Coordination & Liaison\nLong-term Institutional Support"))) as $item)
+                            <li>{{ $item }}</li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
@@ -231,34 +216,28 @@
         <!-- For Students Section -->
         <div class="for-students-section">
             <div class="for-students-banner">
-                <h2>For Students</h2>
+                <h2>{{ $settings['edu_student_section_banner'] ?? 'For Students' }}</h2>
             </div>
             <div class="container">
                 <div class="student-support-container">
-                    <h3 class="student-support-title">Student Admission Support</h3>
+                    <h3 class="student-support-title">{{ $settings['edu_student_support_title'] ?? 'Student Admission Support' }}</h3>
                     <div class="student-support-card">
                         <div class="student-support-image">
-                            <img src="{{ asset('images/education-student.png') }}" alt="Student Admission Support" />
+                            <img src="{{ \App\Models\SiteSetting::getImageUrl('edu_student_support_img', 'images/education-student.png') }}" alt="{{ $settings['edu_student_support_title'] ?? 'Student Admission Support' }}" />
                         </div>
                         <div class="student-support-content">
-                            <p>At Siksha Pathik, we believe that choosing the right course and institution
-                                is one of the most important decisions in a student's life. Our admission
-                                support is designed to provide students and parents with transparent,
-                                personalized, and end-to-end guidance throughout the admission journey. From
-                                identifying the right career path to completing admission formalities, our
-                                experienced counselling team assists students at every stage, ensuring
-                                informed decisions and a smooth admission experience.</p>
+                            <p>{{ $settings['edu_student_support_desc'] ?? 'At Siksha Pathik, we believe that choosing the right course and institution is one of the most important decisions in a student\'s life.' }}</p>
                         </div>
                     </div>
 
                     <!-- Our Admission Journey Section -->
                     <div class="admission-journey-section" data-aos="fade-up">
                         <div class="admission-journey-header">
-                            <h2>Our Admission Journey</h2>
-                            <p>Because every rupee saved is a step toward growth.</p>
+                            <h2>{{ $settings['edu_admission_journey_title'] ?? 'Our Admission Journey' }}</h2>
+                            <p>{{ $settings['edu_admission_journey_subtitle'] ?? 'Because every rupee saved is a step toward growth.' }}</p>
                         </div>
                         <div class="admission-journey-diagram">
-                            <img src="{{ asset('images/education-01.webp') }}" alt="Our Admission Journey" />
+                            <img src="{{ \App\Models\SiteSetting::getImageUrl('edu_admission_journey_img', 'images/education-01.webp') }}" alt="{{ $settings['edu_admission_journey_title'] ?? 'Our Admission Journey' }}" />
                         </div>
                     </div>
                 </div>
@@ -267,25 +246,14 @@
             <!-- Academic Programmes We Facilitate Section -->
             <div class="academic-prog-section" data-aos="fade-up">
                 <div class="container">
-                    <h2 class="academic-prog-title">Academic Programmes We Facilitate</h2>
+                    <h2 class="academic-prog-title">{{ $settings['edu_academic_prog_title'] ?? 'Academic Programmes We Facilitate' }}</h2>
                     <div class="academic-prog-grid">
                         <div class="academic-prog-content">
-                            <p>Career Counselling & Academic Planning Personalised Course selection based on
-                                academic background and career goals Higher education planning Professional
-                                career
-                                guidance Parent counselling College & University Selection Identifying suitable
-                                colleges and universities Guidance on Government, Government-Aided, Private, and
-                                Deemed Institutions State and national-level admission options Guidance on
-                                institution recognition and approvals Course comparison and institution
-                                evaluation
-                                Admission Assistance Admission eligibility assessment Application form guidance
-                                Online and offline application support Document verification Admission
-                                documentation
-                                Merit-based and</p>
+                            <p>{{ $settings['edu_academic_prog_content'] ?? '' }}</p>
                             <a href="#" class="btn-read-more">Read More</a>
                         </div>
                         <div class="academic-prog-image">
-                            <img src="{{ asset('images/education-02.webp') }}" alt="Academic Programmes We Facilitate" />
+                            <img src="{{ \App\Models\SiteSetting::getImageUrl('edu_academic_prog_img', 'images/education-02.webp') }}" alt="{{ $settings['edu_academic_prog_title'] ?? 'Academic Programmes We Facilitate' }}" />
                         </div>
                     </div>
                 </div>
@@ -295,111 +263,29 @@
             <div class="programme-cards-section" data-aos="fade-up">
                 <div class="container">
                     <div class="programme-cards-grid">
-                        <!-- Card 1 -->
+                        @for($i = 1; $i <= 6; $i++)
+                        @php
+                            $dot      = $settings["edu_prog_card_{$i}_dot"]     ?? ['dot-blue','dot-orange','dot-purple','dot-blue','dot-orange','dot-purple'][$i-1];
+                            $title    = $settings["edu_prog_card_{$i}_title"]   ?? '';
+                            $content  = $settings["edu_prog_card_{$i}_content"] ?? '';
+                            $isFilled = ($i === 4) ? 'btn-filled' : '';
+                        @endphp
                         <div class="prog-card">
                             <div class="prog-card-top">
-                                <span class="prog-dot dot-blue"></span>
+                                <span class="prog-dot {{ $dot }}"></span>
                                 <span class="prog-read-time">5 min read</span>
                             </div>
-                            <h3 class="prog-card-title">Admission follow-up</h3>
+                            <h3 class="prog-card-title">{{ $title }}</h3>
                             <div class="prog-card-body">
-                                <p>Documentation Support<br>Educational document verification Identity and
-                                    address proof documentation Migration Certificate guidance</p>
+                                <p>{!! nl2br(e($content)) !!}</p>
                             </div>
                             <div class="prog-card-bottom">
-                                <button class="prog-arrow-btn" aria-label="Open">
+                                <button class="prog-arrow-btn {{ $isFilled }}" aria-label="Open">
                                     <i class="fa-solid fa-arrow-down"></i>
                                 </button>
                             </div>
                         </div>
-
-                        <!-- Card 2 -->
-                        <div class="prog-card">
-                            <div class="prog-card-top">
-                                <span class="prog-dot dot-orange"></span>
-                                <span class="prog-read-time">5 min read</span>
-                            </div>
-                            <h3 class="prog-card-title">Academic Programmes We Facilitate</h3>
-                            <div class="prog-card-body">
-                                <p>Nursing<br>General Nursing & Midwifery (GNM) B.Sc. Nursing Post Basic B.Sc.
-                                    Nursing M.Sc. Nursing</p>
-                            </div>
-                            <div class="prog-card-bottom">
-                                <button class="prog-arrow-btn" aria-label="Open">
-                                    <i class="fa-solid fa-arrow-down"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Card 3 -->
-                        <div class="prog-card">
-                            <div class="prog-card-top">
-                                <span class="prog-dot dot-purple"></span>
-                                <span class="prog-read-time">5 min read</span>
-                            </div>
-                            <h3 class="prog-card-title">Pharmacy</h3>
-                            <div class="prog-card-body">
-                                <p>Diploma in Pharmacy (D.Pharm.)<br>Bachelor of Pharmacy (B. Pharm.)<br>Doctor
-                                    of Pharmacy (Pharm.D)<br>Master of Pharmacy (M. Pharm.)</p>
-                            </div>
-                            <div class="prog-card-bottom">
-                                <button class="prog-arrow-btn" aria-label="Open">
-                                    <i class="fa-solid fa-arrow-down"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Card 4 -->
-                        <div class="prog-card">
-                            <div class="prog-card-top">
-                                <span class="prog-dot dot-blue"></span>
-                                <span class="prog-read-time">5 min read</span>
-                            </div>
-                            <h3 class="prog-card-title">Engineering & Technology</h3>
-                            <div class="prog-card-body">
-                                <p>Polytechnic Diploma B.Tech<br>M.Tech Computer Applications & Information
-                                    Technology BCA</p>
-                            </div>
-                            <div class="prog-card-bottom">
-                                <button class="prog-arrow-btn btn-filled" aria-label="Open">
-                                    <i class="fa-solid fa-arrow-down"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Card 5 -->
-                        <div class="prog-card">
-                            <div class="prog-card-top">
-                                <span class="prog-dot dot-orange"></span>
-                                <span class="prog-read-time">5 min read</span>
-                            </div>
-                            <h3 class="prog-card-title">Education</h3>
-                            <div class="prog-card-body">
-                                <p>D.El.Ed.<br>B.Ed.<br>M.Ed.</p>
-                            </div>
-                            <div class="prog-card-bottom">
-                                <button class="prog-arrow-btn" aria-label="Open">
-                                    <i class="fa-solid fa-arrow-down"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Card 6 -->
-                        <div class="prog-card">
-                            <div class="prog-card-top">
-                                <span class="prog-dot dot-purple"></span>
-                                <span class="prog-read-time">5 min read</span>
-                            </div>
-                            <h3 class="prog-card-title">Law</h3>
-                            <div class="prog-card-body">
-                                <p>LL. B.<br>B.A.<br>B.B.<br>LL. B. A.<br>LL. B. L<br>L.M.</p>
-                            </div>
-                            <div class="prog-card-bottom">
-                                <button class="prog-arrow-btn" aria-label="Open">
-                                    <i class="fa-solid fa-arrow-down"></i>
-                                </button>
-                            </div>
-                        </div>
+                        @endfor
                     </div>
 
                     <div class="prog-see-more-wrap">
@@ -412,8 +298,8 @@
             <div class="why-admission-different-section" data-aos="fade-up">
                 <div class="container">
                     <div class="why-diff-content">
-                        <h2>Why Our Admission Support<br>is Different</h2>
-                        <p>Unlike conventional admission consultancies, Siksha Pathik provides continuous support before, during, and after admission. Our objective is not only to help students secure admission but <strong>also to support their academic journey, professional registration, career development, and employment opportunities through our integrated education ecosystem.</strong></p>
+                        <h2>{!! nl2br(e($settings['edu_why_diff_title'] ?? "Why Our Admission Support\nis Different")) !!}</h2>
+                        <p>{{ $settings['edu_why_diff_content'] ?? '' }}</p>
                     </div>
                 </div>
             </div>
@@ -423,11 +309,11 @@
                 <div class="container">
                     <div class="commitment-card">
                         <div class="commitment-content">
-                            <h2>Our Commitment</h2>
-                            <p>Our commitment continues throughout your academic journey by providing guidance for registrations, internships, professional development, higher education, and employment opportunities. Through our integrated ecosystem, students receive continuous support until they begin their professional careers.</p>
+                            <h2>{{ $settings['edu_commitment_title'] ?? 'Our Commitment' }}</h2>
+                            <p>{{ $settings['edu_commitment_desc'] ?? '' }}</p>
                         </div>
                         <div class="commitment-image-wrap">
-                            <img src="{{ asset('images/education-03.png') }}" alt="Our Commitment" class="commitment-img" />
+                            <img src="{{ \App\Models\SiteSetting::getImageUrl('edu_commitment_img', 'images/education-03.png') }}" alt="{{ $settings['edu_commitment_title'] ?? 'Our Commitment' }}" class="commitment-img" />
                         </div>
                     </div>
                 </div>
@@ -436,45 +322,169 @@
             <!-- Why Students Trust Us Section -->
             <div class="why-trust-us-section" data-aos="fade-up">
                 <div class="container">
-                    <h2 class="why-trust-title">Why Students Trust Us</h2>
+                    <h2 class="why-trust-title">{{ $settings['edu_trust_title'] ?? 'Why Students Trust Us' }}</h2>
                     <div class="why-trust-grid">
+                        @foreach(array_filter(array_map('trim', explode('|', $settings['edu_trust_items'] ?? 'Personalized counselling|Transparent admission process|Experienced education consultants|Complete documentation support|End-to-end academic guidance|Professional registration support|Career development assistance|Placement support through Edge Hire'))) as $trustItem)
                         <div class="trust-pill-item">
-                            <span class="trust-check-icon"><i class="fa-solid fa-check"></i></span>
-                            <span class="trust-pill-text">Personalized counselling</span>
+                            <span class="trust-check-icon"><img src="/images/check.svg" width="49" height="49" alt="check"></span>
+                            <span class="trust-pill-text">{{ $trustItem }}</span>
                         </div>
-                        <div class="trust-pill-item">
-                            <span class="trust-check-icon"><i class="fa-solid fa-check"></i></span>
-                            <span class="trust-pill-text">Transparent admission process</span>
-                        </div>
-                        <div class="trust-pill-item">
-                            <span class="trust-check-icon"><i class="fa-solid fa-check"></i></span>
-                            <span class="trust-pill-text">Experienced education consultants</span>
-                        </div>
-                        <div class="trust-pill-item">
-                            <span class="trust-check-icon"><i class="fa-solid fa-check"></i></span>
-                            <span class="trust-pill-text">Complete documentation support</span>
-                        </div>
-                        <div class="trust-pill-item">
-                            <span class="trust-check-icon"><i class="fa-solid fa-check"></i></span>
-                            <span class="trust-pill-text">End-to-end academic guidance</span>
-                        </div>
-                        <div class="trust-pill-item">
-                            <span class="trust-check-icon"><i class="fa-solid fa-check"></i></span>
-                            <span class="trust-pill-text">Professional registration support</span>
-                        </div>
-                        <div class="trust-pill-item">
-                            <span class="trust-check-icon"><i class="fa-solid fa-check"></i></span>
-                            <span class="trust-pill-text">Career development assistance</span>
-                        </div>
-                        <div class="trust-pill-item">
-                            <span class="trust-check-icon"><i class="fa-solid fa-check"></i></span>
-                            <span class="trust-pill-text">Placement support through Edge Hire</span>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Connection Wrapper & Institution Section -->
+    <div class="institution-connection-wrapper" id="institution-connection">
+        <div class="institution-connector-svg-container container">
+            <svg width="424" height="144" viewBox="0 0 424 144" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 135V93.0357C10 67.1429 23.4903 55 40.5308 52.8571C57.5712 50.7143 273.89 51.9643 379.919 52.8571C391.279 52.8571 414 44.2857 414 10" stroke="#13443C" stroke-width="8"/>
+                <circle cx="9.5" cy="134.5" r="9.5" fill="#14423B"/>
+                <circle cx="414.5" cy="9.5" r="9.5" fill="#14423B"/>
+            </svg>
+        </div>
+
+        <!-- For Institutions Section -->
+        <div class="for-institutions-section">
+            <div class="for-institutions-banner">
+                <h2>{{ $settings['edu_inst_section_banner'] ?? 'For Institutions' }}</h2>
+            </div>
+            <div class="container">
+                <div class="institution-support-container">
+                    <h3 class="institution-support-title">{{ $settings['edu_inst_support_title'] ?? 'Core Institutional Support' }}</h3>
+                    <div class="institution-support-card">
+                        <div class="institution-support-image">
+                            <img src="{{ \App\Models\SiteSetting::getImageUrl('edu_inst_support_img', 'images/education-instute.png') }}" alt="{{ $settings['edu_inst_support_title'] ?? 'Core Institutional Support' }}" />
+                        </div>
+                        <div class="institution-support-content">
+                            <p>{{ $settings['edu_inst_support_desc'] ?? '' }}</p>
+                        </div>
+                    </div>
+
+                    <!-- Accordion Bar: Our Institutional Support Includes -->
+                    <div class="institution-support-includes-bar">
+                        <span class="bar-text">Our Institutional Support Includes</span>
+                        <span class="bar-icon"><i class="fa-solid fa-chevron-up"></i></span>
+                    </div>
+
+                    <!-- Collapsible Content -->
+                    <div class="institution-support-includes-content active" id="institution-support-includes-content">
+                        <div class="institution-support-includes-inner">
+                            <h2 class="inst-support-heading">{{ $settings['edu_inst_includes_heading'] ?? 'For Institutions Support' }}</h2>
+                            <div class="inst-support-cards-grid">
+                                @for($i = 1; $i <= 3; $i++)
+                                @php
+                                    $dot     = $settings["edu_inst_card_{$i}_dot"]     ?? ['dot-blue','dot-orange','dot-purple'][$i-1];
+                                    $title   = $settings["edu_inst_card_{$i}_title"]   ?? '';
+                                    $content = $settings["edu_inst_card_{$i}_content"] ?? '';
+                                    $isFilled = ($i === 1) ? 'btn-filled' : '';
+                                @endphp
+                                <div class="prog-card">
+                                    <div class="prog-card-top">
+                                        <span class="prog-dot {{ $dot }}"></span>
+                                        <span class="prog-read-time">5 min read</span>
+                                    </div>
+                                    <h3 class="prog-card-title">{{ $title }}</h3>
+                                    <div class="prog-card-body">
+                                        <p>{!! nl2br(e($content)) !!}</p>
+                                    </div>
+                                    <div class="prog-card-bottom">
+                                        <button class="prog-arrow-btn {{ $isFilled }}" aria-label="Open">
+                                            <i class="fa-solid fa-arrow-down"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                @endfor
+                            </div>
+
+                            <!-- Wide Card 4 -->
+                            @php
+                                $wDot     = $settings['edu_inst_card_4_dot']     ?? 'dot-blue';
+                                $wTitle   = $settings['edu_inst_card_4_title']   ?? 'Healthcare Career Support';
+                                $wContent = $settings['edu_inst_card_4_content'] ?? '';
+                            @endphp
+                            <div class="inst-support-wide-card">
+                                <div class="prog-card-top">
+                                    <span class="prog-dot {{ $wDot }}"></span>
+                                    <span class="prog-read-time">5 min read</span>
+                                </div>
+                                <h3 class="prog-card-title">{{ $wTitle }}</h3>
+                                <div class="wide-card-middle">
+                                    <div class="prog-card-body">
+                                        <p>{!! nl2br(e($wContent)) !!}</p>
+                                    </div>
+                                    <div class="prog-card-bottom">
+                                        <button class="prog-arrow-btn btn-filled" aria-label="Open">
+                                            <i class="fa-solid fa-arrow-down"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Upcoming - Siksha Pathik Academy Section -->
+        <div class="upcoming-academy-section" data-aos="fade-up">
+            <div class="container">
+                <div class="academy-card">
+                    <div class="academy-image-wrap">
+                        <img src="{{ \App\Models\SiteSetting::getImageUrl('edu_academy_img', 'images/education-04.webp') }}" alt="{{ $settings['edu_academy_title'] ?? 'Upcoming - Siksha Pathik Academy' }}" class="academy-img" />
+                    </div>
+                    <div class="academy-content">
+                        <h2>{{ $settings['edu_academy_title'] ?? 'Upcoming - Siksha Pathik Academy' }}</h2>
+                        <p>{{ $settings['edu_academy_desc'] ?? '' }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Why Siksha Pathik Section -->
+        <section class="why-pathik-section" data-aos="fade-up">
+            <div class="container">
+                <h2 class="why-pathik-title">{{ $settings['edu_why_pathik_title'] ?? 'Why Siksha Pathik' }}</h2>
+                <div class="why-trust-grid">
+                    @foreach(array_filter(array_map('trim', explode('|', $settings['edu_why_pathik_items'] ?? 'More than an admission consultancy.|Faculty and institutional assistance under one roof.|Dedicated nursing institutional consultancy.|Multi-state operational network.|Complete student lifecycle support.|Integration with Edge Hire for career opportunities.'))) as $pathikItem)
+                    <div class="trust-pill-item">
+                        <span class="trust-check-icon"><img src="/images/check.svg" width="49" height="49" alt="check"></span>
+                        <span class="trust-pill-text">{{ $pathikItem }}</span>
+                    </div>
+                    @endforeach
+                </div>
+
+                <div class="why-pathik-note">
+                    <h3>{{ $settings['edu_pathik_note_title'] ?? 'Important Note' }}</h3>
+                    <p>{{ $settings['edu_pathik_note_content'] ?? '' }}</p>
+                </div>
+
+                <div class="integrated-ecosystem-card">
+                    <div class="ecosystem-left">
+                        <h2>{!! nl2br(e($settings['edu_ecosystem_left_title'] ?? "Integrated\nEcosystem")) !!}</h2>
+                    </div>
+                    <div class="ecosystem-divider"></div>
+                    <div class="ecosystem-right">
+                        <p>{{ $settings['edu_ecosystem_right_desc'] ?? '' }}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Healthcare Education Expertise Section -->
+        <section class="healthcare-expertise-section" style="background-image: url('{{ \App\Models\SiteSetting::getImageUrl('edu_expertise_bg_img', 'images/education-05.webp') }}');" data-aos="fade-up">
+            <div class="container">
+                <div class="expertise-content-wrapper">
+                    <div class="expertise-content">
+                        <h2>{!! nl2br(e($settings['edu_expertise_title'] ?? "Our Healthcare\nEducation Expertise")) !!}</h2>
+                        <p>{{ $settings['edu_expertise_desc'] ?? '' }}</p>
+                        <a href="{{ $settings['edu_expertise_btn_url'] ?? '#' }}" class="btn-see-more">{{ $settings['edu_expertise_btn_text'] ?? 'See more' }}</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div> <!-- Close institution-connection-wrapper -->
 
 </section>
 
@@ -482,14 +492,13 @@
     <div class="container queries-flex">
         <div class="queries-left">
             <h2>
-                If You Have any Queries
-                <span class="text-green">Feel Free To Ask !</span>
+                {{ $settings['edu_queries_heading'] ?? 'If You Have any Queries Feel Free To Ask !' }}
             </h2>
         </div>
         <div class="queries-right">
             <div class="ask-card">
-                <h3>Ask Question</h3>
-                <p>If you have Any Queries Feel Free To ask !</p>
+                <h3>{{ $settings['edu_queries_cta_text'] ?? 'Ask Question' }}</h3>
+                <p>{{ $settings['edu_queries_sub_text'] ?? 'If you have Any Queries Feel Free To ask !' }}</p>
                 <div class="input-wrapper">
                     <input type="text" placeholder="Type............" />
                 </div>
@@ -501,8 +510,8 @@
 <section class="cta-banner-section" data-aos="zoom-in">
     <div class="container">
         <div class="cta-banner-card">
-            <h2>Ready to Contact with us ?</h2>
-            <a href="#contact" class="btn-get-started-white">Get Started <i class="fa-solid fa-arrow-right"></i></a>
+            <h2>{{ $settings['edu_cta_banner_title'] ?? 'Ready to Contact with us ?' }}</h2>
+            <a href="{{ $settings['edu_cta_banner_btn_url'] ?? '#contact' }}" class="btn-get-started-white">{{ $settings['edu_cta_banner_btn_text'] ?? 'Get Started' }} <i class="fa-solid fa-arrow-right"></i></a>
         </div>
     </div>
 </section>
@@ -510,22 +519,78 @@
 
 @push('scripts')
 <script>
-    // Toggle "For Students" section when "What You Will Cover" (Student Card) is clicked
     const studentTrigger = document.getElementById('student-card-trigger');
+    const institutionTrigger = document.getElementById('institution-card-trigger');
+    const studentSubTrigger = document.getElementById('student-sub-card');
+    const institutionSubTrigger = document.getElementById('institution-sub-card');
     const studentSection = document.getElementById('student-connection');
+    const institutionSection = document.getElementById('institution-connection');
 
-    if (studentTrigger && studentSection) {
+    function showStudents() {
+        if (studentSection) studentSection.classList.add('active');
+        if (studentTrigger) studentTrigger.classList.add('selected');
+        if (institutionSection) institutionSection.classList.remove('active');
+        if (institutionTrigger) institutionTrigger.classList.remove('selected');
+    }
+
+    function showInstitutions() {
+        if (institutionSection) institutionSection.classList.add('active');
+        if (institutionTrigger) institutionTrigger.classList.add('selected');
+        if (studentSection) studentSection.classList.remove('active');
+        if (studentTrigger) studentTrigger.classList.remove('selected');
+    }
+
+    if (studentTrigger) {
         studentTrigger.addEventListener('click', function () {
-            const isActive = studentSection.classList.contains('active');
+            showStudents();
+            setTimeout(() => {
+                studentSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 200);
+        });
+    }
+
+    if (studentSubTrigger) {
+        studentSubTrigger.addEventListener('click', function () {
+            showStudents();
+            setTimeout(() => {
+                studentSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 200);
+        });
+    }
+
+    if (institutionTrigger) {
+        institutionTrigger.addEventListener('click', function () {
+            showInstitutions();
+            setTimeout(() => {
+                institutionSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 200);
+        });
+    }
+
+    if (institutionSubTrigger) {
+        institutionSubTrigger.addEventListener('click', function () {
+            showInstitutions();
+            setTimeout(() => {
+                institutionSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 200);
+        });
+    }
+
+    // Toggle "Our Institutional Support Includes" collapsible section
+    const includesBar = document.querySelector('.institution-support-includes-bar');
+    const includesContent = document.getElementById('institution-support-includes-content');
+
+    if (includesBar && includesContent) {
+        includesBar.addEventListener('click', function () {
+            const isActive = includesContent.classList.contains('active');
             if (isActive) {
-                studentSection.classList.remove('active');
-                studentTrigger.classList.remove('selected');
+                includesContent.classList.remove('active');
+                includesBar.querySelector('.bar-icon i').className = 'fa-solid fa-chevron-down';
             } else {
-                studentSection.classList.add('active');
-                studentTrigger.classList.add('selected');
-                // Smooth scroll down to the banner
+                includesContent.classList.add('active');
+                includesBar.querySelector('.bar-icon i').className = 'fa-solid fa-chevron-up';
                 setTimeout(() => {
-                    studentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    includesContent.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 }, 300);
             }
         });

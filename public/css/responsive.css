@@ -1206,3 +1206,791 @@ body {
         height: 200px;
     }
 }
+
+/* ==========================================
+   EDUCATION PAGE RESPONSIVE
+   ========================================== */
+
+/* ---- MOBILE (≤ 768px) ---- */
+@media (max-width: 768px) {
+
+    /* -- Category Bar -- */
+    .biz-category-bar-full {
+        font-size: 18px;
+        padding: 12px 0;
+        margin-bottom: 24px;
+    }
+
+    .biz-category-bar-full .container {
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .biz-category-bar-full .divider {
+        display: none;
+    }
+
+    .biz-category-bar-full .cat-item {
+        padding: 4px 10px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 30px;
+        font-size: 15px;
+    }
+
+    /* -- Section Header -- */
+    .biz-header {
+        margin-bottom: 24px;
+    }
+
+    /* -- Siksha Pathik Logo -- */
+    .siksha-logo-img {
+        max-width: 280px;
+        border-radius: 18px;
+    }
+
+    /* -- Hide Desktop SVG Connectors -- */
+    .biz-connector-top-desktop,
+    .biz-connector-bottom-desktop,
+    .student-connector-svg-container,
+    .institution-connector-svg-container {
+        display: none !important;
+    }
+
+    /* -- Tighten gap between logo and sub-cards -- */
+    .biz-main-node {
+        margin-bottom: 0;
+    }
+
+    /* -- Simple CSS arrow connector replacing SVGs -- */
+    .biz-connector-top-desktop::after {
+        display: none;
+    }
+
+    .biz-diagram-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        margin-bottom: 50px;
+    }
+
+    /* Vertical dotted connector line between logo and cards */
+    .biz-main-node::after {
+        content: '';
+        display: block;
+        width: 3px;
+        height: 28px;
+        background: repeating-linear-gradient(to bottom,
+                #14433B 0px,
+                #14433B 6px,
+                transparent 6px,
+                transparent 12px);
+        margin: 6px auto 0;
+    }
+
+    /* -- Sub-Cards Row: 2-col for Students+Institutions, App full-width -- */
+    .biz-sub-cards-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        width: 100%;
+        margin-top: 30px;
+        margin-bottom: 50px;
+    }
+
+    /* Last card (App) spans full width */
+    .biz-sub-cards-row .biz-sub-card-col:last-child {
+        grid-column: 1 / -1;
+    }
+
+    .biz-sub-card {
+        min-height: 90px;
+        border-radius: 16px;
+        padding: 16px 12px;
+        box-shadow: 4px 4px 0px #2AD6BA;
+    }
+
+    .biz-card-head h3,
+    .biz-card-app h3 {
+        font-size: 18px;
+        text-align: left;
+    }
+
+    /* SVG icon size — !important needed to override inline width/height attributes */
+    .biz-sub-cards-row .biz-card-head svg {
+        width: 32px !important;
+        height: 32px !important;
+        flex-shrink: 0;
+    }
+
+    .biz-click-text {
+        font-size: 13px;
+        margin: 0;
+    }
+
+    .biz-sub-caption {
+        font-size: 13px;
+        margin-top: 10px;
+    }
+
+    /* -- Detail Cards: stack vertically, no right overflow -- */
+    .biz-detail-cards-row {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .biz-detail-card {
+        padding: 24px 20px;
+        border-radius: 22px;
+        /* Shadow shifted bottom-only so it doesn't overflow right edge */
+        box-shadow: none;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .biz-detail-card.selected {
+        box-shadow: none;
+
+    }
+
+    /* Clip overflow on the parent section so shadow never escapes viewport */
+    .business-model-section {
+        overflow-x: hidden;
+    }
+
+    .biz-detail-header {
+        gap: 10px;
+        margin-bottom: 16px;
+    }
+
+    .biz-detail-header .search-icon {
+        font-size: 24px;
+    }
+
+    .biz-detail-header h4 {
+        font-size: 20px;
+    }
+
+    .biz-detail-list li {
+        font-size: 16px;
+        padding-left: 22px;
+        margin-bottom: 8px;
+    }
+
+    .biz-detail-list li::before {
+        font-size: 18px;
+        left: 4px;
+    }
+
+    /* -- For Students Banner -- */
+    .for-students-banner,
+    .for-institutions-banner {
+        padding: 14px 0;
+        margin-bottom: 28px;
+    }
+
+    .for-students-banner h2,
+    .for-institutions-banner h2 {
+        font-size: 24px;
+    }
+
+    /* -- Student Support Card -- */
+    .student-support-title,
+    .institution-support-title {
+        font-size: 26px;
+        margin-bottom: 22px;
+        text-align: left;
+    }
+
+    .student-support-card,
+    .institution-support-card {
+        grid-template-columns: 1fr;
+        border-radius: 24px;
+        margin-bottom: 40px;
+    }
+
+    .student-support-image,
+    .institution-support-image {
+        height: 220px;
+        overflow: hidden;
+    }
+
+    .student-support-image img,
+    .institution-support-image img {
+        height: 220px;
+        object-fit: cover;
+    }
+
+    .student-support-content,
+    .institution-support-content {
+        padding: 24px 20px;
+    }
+
+    .student-support-content p {
+        font-size: 15px;
+    }
+
+    .institution-support-content p {
+        font-size: 15px;
+    }
+
+    /* -- Admission Journey -- */
+    .admission-journey-section {
+        margin-top: 30px;
+        margin-bottom: 40px;
+    }
+
+    .admission-journey-header {
+        margin-bottom: 24px;
+    }
+
+    .admission-journey-header h2 {
+        text-align: left;
+    }
+
+    .admission-journey-header p {
+        text-align: left;
+    }
+
+    .admission-journey-diagram img {
+        border-radius: 16px;
+    }
+
+    /* -- Academic Programmes Section -- */
+    .academic-prog-section {
+        padding: 50px 0;
+    }
+
+    .academic-prog-title {
+        margin-bottom: 24px;
+        text-align: left;
+    }
+
+    .academic-prog-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    /* Text column left-aligned */
+    .academic-prog-content {
+        text-align: left;
+    }
+
+    .academic-prog-content p {
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    .btn-read-more {
+        font-size: 15px;
+        padding: 12px 28px;
+        border-radius: 12px;
+        display: inline-block;
+    }
+
+    /* Image appears below the text on mobile */
+    .academic-prog-image {
+        width: 100%;
+        order: 2;
+    }
+
+    .academic-prog-image img {
+        border-radius: 24px;
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    /* -- Programme Cards Grid -- */
+    .programme-cards-section {
+        padding: 50px 0 40px;
+    }
+
+    .programme-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        margin-bottom: 30px;
+    }
+
+    .prog-card {
+        min-height: auto;
+        padding: 24px 20px 20px;
+        border-radius: 20px;
+    }
+
+    .prog-card-title {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .prog-card-body p {
+        font-size: 14px;
+    }
+
+    .prog-arrow-btn {
+        width: 70px;
+        height: 34px;
+        font-size: 14px;
+    }
+
+    .prog-see-more-wrap {
+        margin-top: 10px;
+    }
+
+    .btn-see-more {
+        font-size: 15px;
+        padding: 10px 30px;
+    }
+
+    /* -- Why Our Admission Support is Different -- */
+    .why-admission-different-section {
+        padding: 60px 0;
+        background-position: center center;
+    }
+
+    .why-diff-content {
+        max-width: 100%;
+    }
+
+    .why-diff-content h2 {
+        font-size: 26px;
+        margin-bottom: 16px;
+    }
+
+    .why-diff-content p {
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    /* -- Our Commitment Section -- */
+    .our-commitment-section {
+        padding: 40px 0 0;
+        margin-top: 40px;
+    }
+
+    .commitment-card {
+        grid-template-columns: 1fr;
+        /* Remove large bottom padding — image goes below naturally */
+        padding: 36px 22px 0px;
+        border-radius: 24px;
+        min-height: auto;
+        overflow: visible;
+        position: relative;
+    }
+
+    .commitment-content {
+        padding-right: 0;
+    }
+
+    .commitment-content h2 {
+        font-size: 26px;
+        margin-bottom: 14px;
+    }
+
+
+
+    /* Image-wrap becomes a regular block below the text */
+    .commitment-image-wrap {
+        position: relative;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        margin-top: 30px;
+        /* Pull image slightly out the bottom of the card */
+        margin-bottom: -1px;
+    }
+
+    .commitment-img {
+        position: relative;
+        bottom: auto;
+        right: auto;
+        transform: none;
+        /* Align image to the LEFT as requested */
+        margin: 0 auto 0 0;
+        max-width: 75%;
+        width: auto;
+        display: block;
+    }
+
+    /* -- Why Students Trust Us -- */
+    .why-trust-us-section {
+        padding: 50px 0 60px;
+        margin-top: 30px;
+    }
+
+    .why-trust-title {
+        margin-bottom: 28px;
+        text-align: left;
+    }
+
+    .why-trust-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        margin-bottom: 50px;
+    }
+
+    .trust-pill-item {
+        padding: 14px 18px;
+        gap: 14px;
+        border-radius: 14px;
+    }
+
+    .trust-check-icon img {
+        width: 34px;
+        height: 34px;
+    }
+
+    .trust-pill-text {
+        font-size: 16px;
+    }
+
+    /* -- Accordion Bar: Our Institutional Support Includes -- */
+    .institution-support-includes-bar {
+        padding: 16px 20px;
+        border-radius: 14px;
+        margin-bottom: 40px;
+        box-shadow: 4px 4px 0px #000000;
+    }
+
+    .institution-support-includes-bar .bar-text {
+        font-size: 18px;
+    }
+
+    .institution-support-includes-bar .bar-icon {
+        font-size: 18px;
+    }
+
+    /* -- Institution Support Cards Inside Collapsible -- */
+    .institution-support-includes-content {
+        border-radius: 20px;
+        margin-top: -10px;
+        margin-bottom: 40px;
+    }
+
+    .institution-support-includes-inner {
+        padding: 30px 18px;
+    }
+
+    .inst-support-heading {
+        text-align: left;
+        margin-bottom: 24px;
+    }
+
+    .inst-support-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .inst-support-wide-card {
+        padding: 22px 18px;
+        border-radius: 18px;
+    }
+
+    .inst-support-wide-card .wide-card-middle {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .inst-support-wide-card .prog-card-body {
+        max-width: 100%;
+    }
+
+    /* -- Upcoming Academy Section -- */
+    .upcoming-academy-section {
+        padding: 60px 0 0;
+    }
+
+    .academy-card {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+
+    .academy-image-wrap {
+        justify-content: center;
+    }
+
+    .academy-img {
+        max-height: 280px;
+        width: auto;
+        margin: 0 auto;
+    }
+
+    .academy-content {
+        padding: 30px 0 40px;
+    }
+
+    .academy-content h2 {
+        font-size: 26px;
+        margin-bottom: 14px;
+    }
+
+
+    /* -- Why Siksha Pathik Section -- */
+    .why-pathik-section {
+        padding: 50px 0 40px;
+    }
+
+    .why-pathik-title {
+        text-align: left;
+        margin-bottom: 28px;
+    }
+
+    .why-pathik-note {
+        margin-bottom: 40px;
+        text-align: left;
+    }
+
+    .why-pathik-note h3 {
+        font-size: 20px;
+        margin-bottom: 14px;
+    }
+
+    .why-pathik-note p {
+        font-size: 14px;
+    }
+
+    /* -- Integrated Ecosystem Card -- */
+    .integrated-ecosystem-card {
+        grid-template-columns: 1fr;
+        padding: 36px 22px;
+        gap: 22px;
+        border-radius: 20px;
+    }
+
+    .ecosystem-divider {
+        width: 100%;
+        height: 1.5px;
+    }
+
+    .ecosystem-left h2 {
+        font-size: 30px;
+        text-align: left;
+    }
+
+    .ecosystem-right p {
+        text-align: left;
+    }
+
+    /* -- Healthcare Expertise Section -- */
+    .healthcare-expertise-section {
+        padding: 50px 0;
+        min-height: auto;
+        background-position: center center;
+    }
+
+    .expertise-content-wrapper {
+        justify-content: flex-start;
+    }
+
+    .expertise-content {
+        max-width: 100%;
+        background: rgba(255, 255, 255, 0.88);
+        border-radius: 20px;
+        padding: 24px 20px;
+    }
+
+    .expertise-content h2 {
+        font-size: 24px;
+        margin-bottom: 14px;
+    }
+
+    .expertise-content p {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    /* -- Education page override for queries & CTA -- */
+    .education .queries-final-section {
+        padding: 50px 0 !important;
+    }
+
+    .education .cta-banner-section {
+        padding: 50px 0 !important;
+    }
+}
+
+/* ==========================================
+   CONTACT PAGE — MOBILE RESPONSIVE (≤ 768px)
+   ========================================== */
+@media (max-width: 768px) {
+
+    /* -- Hero Section -- */
+    .contact-hero-section {
+        padding: 50px 0 30px;
+        text-align: left;
+    }
+
+    .contact-badge {
+        font-size: 12px;
+        padding: 5px 16px;
+        margin-bottom: 14px;
+    }
+
+    .contact-hero-title {
+        font-size: 28px;
+        line-height: 1.2;
+        margin-bottom: 14px;
+        text-align: left;
+    }
+
+    .contact-hero-subtitle {
+        font-size: 14px;
+        line-height: 1.55;
+        text-align: left;
+        max-width: 100%;
+    }
+
+    /* -- Content Section Top Padding -- */
+    .contact-content-section {
+        padding-top: 30px !important;
+    }
+
+    /* -- 3 Quick Cards: stack to 1 column -- */
+    .contact-quick-cards {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-bottom: 36px;
+    }
+
+    .contact-quick-card {
+        padding: 24px 20px;
+        border-radius: 20px;
+    }
+
+    .contact-card-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+        border-radius: 14px;
+        margin-bottom: 14px;
+    }
+
+    .contact-quick-card h4 {
+        font-size: 18px;
+        margin-bottom: 6px;
+    }
+
+    .contact-quick-card p {
+        font-size: 13px;
+        margin-bottom: 12px;
+    }
+
+    .contact-quick-card .contact-link {
+        font-size: 15px;
+    }
+
+    /* -- Main Grid: stack form + info panel -- */
+    .contact-main-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        margin-bottom: 50px;
+    }
+
+    /* -- Form Box -- */
+    .contact-form-box {
+        padding: 28px 20px;
+        border-radius: 24px;
+    }
+
+    .contact-form-box h3 {
+        font-size: 22px;
+        margin-bottom: 8px;
+    }
+
+    .contact-form-box .form-intro {
+        font-size: 14px;
+        margin-bottom: 24px;
+    }
+
+    /* Form rows: stack to 1 column on mobile */
+    .contact-form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .contact-custom-form .form-group {
+        margin-bottom: 16px;
+    }
+
+    .contact-custom-form label {
+        font-size: 13px;
+        margin-bottom: 6px;
+    }
+
+    .contact-custom-form .form-control-input,
+    .contact-custom-form select.form-control-input,
+    .contact-custom-form textarea.form-control-input {
+        padding: 12px 14px;
+        font-size: 14px;
+        border-radius: 12px;
+    }
+
+    .btn-contact-submit {
+        font-size: 16px;
+        padding: 14px 24px;
+        border-radius: 14px;
+    }
+
+    /* -- Info Panel -- */
+    .contact-info-panel {
+        padding: 30px 22px;
+        border-radius: 24px;
+    }
+
+    .contact-info-panel h3 {
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+
+    .contact-info-panel .info-sub {
+        font-size: 14px;
+        margin-bottom: 24px;
+    }
+
+    .contact-feature-list {
+        margin-bottom: 28px;
+    }
+
+    .contact-feature-item {
+        gap: 12px;
+        margin-bottom: 18px;
+    }
+
+    .contact-feature-icon {
+        width: 30px;
+        height: 30px;
+        font-size: 13px;
+        flex-shrink: 0;
+    }
+
+    .contact-feature-text h5 {
+        font-size: 15px;
+    }
+
+    .contact-feature-text p {
+        font-size: 13px;
+    }
+
+    .contact-hours-box {
+        padding: 18px 16px;
+        gap: 14px;
+        border-radius: 16px;
+    }
+
+    .contact-hours-icon {
+        font-size: 22px;
+    }
+
+    .contact-hours-text h6 {
+        font-size: 14px;
+    }
+
+    .contact-hours-text p {
+        font-size: 12px;
+    }
+}

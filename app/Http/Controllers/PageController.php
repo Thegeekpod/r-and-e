@@ -48,7 +48,8 @@ class PageController extends Controller
             ]);
         }
 
-        return view('pages.education');
+        $settings = SiteSetting::all()->pluck('value', 'key');
+        return view('pages.education', compact('settings'));
     }
 
     public function placement()

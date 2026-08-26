@@ -327,6 +327,11 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="{{ route('admin.education.index') }}" class="nav-link {{ request()->routeIs('admin.education.*') ? 'active' : '' }}">
+                    <i class="fa-solid fa-graduation-cap"></i> Education Page Content
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="{{ route('admin.testimonials.index') }}" class="nav-link {{ request()->routeIs('admin.testimonials.*') ? 'active' : '' }}">
                     <i class="fa-solid fa-comment-dots"></i> Testimonials
                 </a>
