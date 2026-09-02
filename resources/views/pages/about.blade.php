@@ -81,28 +81,28 @@
             {{-- Right Side Highlights Box --}}
             <div class="ab-story-right">
                 <div class="ab-highlight-box">
-                    <h3 class="ab-hl-title"><i class="fa-solid fa-award me-2 text-warning"></i> Key Pillars of Success</h3>
+                    <h3 class="ab-hl-title"><i class="fa-solid fa-award me-2 text-warning"></i> {{ $settings['about_pillar_title'] ?? 'Key Pillars of Success' }}</h3>
                     
                     <ul class="ab-hl-list">
                         <li>
                             <div class="ab-hl-icon"><i class="fa-solid fa-calculator"></i></div>
                             <div>
-                                <h4>Finance &amp; Taxation</h4>
-                                <p>GST filings, audit compliance, and strategic financial planning for enterprises.</p>
+                                <h4>{{ $settings['about_pillar1_title'] ?? 'Finance & Taxation' }}</h4>
+                                <p>{{ $settings['about_pillar1_desc'] ?? 'GST filings, audit compliance, and strategic financial planning for enterprises.' }}</p>
                             </div>
                         </li>
                         <li>
                             <div class="ab-hl-icon"><i class="fa-solid fa-graduation-cap"></i></div>
                             <div>
-                                <h4>Education Consultancy</h4>
-                                <p>Nursing &amp; Medical admissions with full INC &amp; WBNC accreditation guidance.</p>
+                                <h4>{{ $settings['about_pillar2_title'] ?? 'Education Consultancy' }}</h4>
+                                <p>{{ $settings['about_pillar2_desc'] ?? 'Nursing & Medical admissions with full INC & WBNC accreditation guidance.' }}</p>
                             </div>
                         </li>
                         <li>
                             <div class="ab-hl-icon"><i class="fa-solid fa-user-doctor"></i></div>
                             <div>
-                                <h4>Healthcare Recruitment</h4>
-                                <p>Doctor &amp; Nursing staff placements across leading hospitals in India.</p>
+                                <h4>{{ $settings['about_pillar3_title'] ?? 'Healthcare Recruitment' }}</h4>
+                                <p>{{ $settings['about_pillar3_desc'] ?? 'Doctor & Nursing staff placements across leading hospitals in India.' }}</p>
                             </div>
                         </li>
                     </ul>
@@ -138,12 +138,13 @@
             {{-- Institutional Promise Card --}}
             <div class="ab-mv-card white-card">
                 <div class="ab-mv-icon green"><i class="fa-solid fa-shield-halved"></i></div>
-                <h3>Our Institutional Promise</h3>
-                <p>We maintain 100% compliance transparency, zero hidden charges, and continuous support for students, job applicants, and corporate clients nationwide.</p>
+                <h3>{{ $settings['about_promise_title'] ?? 'Our Institutional Promise' }}</h3>
+                <p>{{ $settings['about_promise_desc'] ?? 'We maintain 100% compliance transparency, zero hidden charges, and continuous support for students, job applicants, and corporate clients nationwide.' }}</p>
             </div>
         </div>
     </div>
 </section>
+
 
 {{-- 4. Core Values Section --}}
 <section class="ab-section ab-values-area" data-aos="fade-up">

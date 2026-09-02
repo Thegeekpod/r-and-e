@@ -20,15 +20,30 @@ class AboutController extends Controller
             'about_hero_badge',
             'about_hero_title',
             'about_hero_subtitle',
+            'about_exp_years',
+            'about_exp_label',
+            'about_stat1_number',
+            'about_stat1_label',
+            'about_stat2_number',
+            'about_stat2_label',
+            'about_stat3_number',
+            'about_stat3_label',
             'about_story_heading',
             'about_story_content_p1',
             'about_story_content_p2',
-            'about_exp_years',
-            'about_exp_label',
+            'about_pillar_title',
+            'about_pillar1_title',
+            'about_pillar1_desc',
+            'about_pillar2_title',
+            'about_pillar2_desc',
+            'about_pillar3_title',
+            'about_pillar3_desc',
             'about_mission_title',
             'about_mission_desc',
             'about_vision_title',
             'about_vision_desc',
+            'about_promise_title',
+            'about_promise_desc',
             'about_value1_title',
             'about_value1_desc',
             'about_value2_title',
@@ -37,14 +52,6 @@ class AboutController extends Controller
             'about_value3_desc',
             'about_value4_title',
             'about_value4_desc',
-            'about_stat1_number',
-            'about_stat1_label',
-            'about_stat2_number',
-            'about_stat2_label',
-            'about_stat3_number',
-            'about_stat3_label',
-            'about_stat4_number',
-            'about_stat4_label',
         ];
 
         foreach ($textFields as $field) {
@@ -56,7 +63,7 @@ class AboutController extends Controller
             }
         }
 
-        // Handle Image Uploads
+        // Handle Optional Image Uploads if provided
         $imageFields = ['about_hero_image', 'about_story_img'];
 
         foreach ($imageFields as $imgField) {
