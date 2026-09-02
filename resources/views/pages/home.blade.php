@@ -25,15 +25,15 @@
             <div class="hero-stats">
                 <div class="stat-item">
                     <span class="stat-label">{{ $settings['hero_stat1_label'] ?? 'Downloads' }}</span>
-                    <span class="stat-value">{{ $settings['hero_stat1_value'] ?? '432K+' }}</span>
+                    <span class="stat-value count-up">{{ $settings['hero_stat1_value'] ?? '432K+' }}</span>
                 </div>
                 <div class="stat-item">
                     <span class="stat-label">{{ $settings['hero_stat2_label'] ?? 'User' }}</span>
-                    <span class="stat-value">{{ $settings['hero_stat2_value'] ?? '200K+' }}</span>
+                    <span class="stat-value count-up">{{ $settings['hero_stat2_value'] ?? '200K+' }}</span>
                 </div>
                 <div class="stat-item">
                     <span class="stat-label">{{ $settings['hero_stat3_label'] ?? 'Community' }}</span>
-                    <span class="stat-value">{{ $settings['hero_stat3_value'] ?? '20K+' }}</span>
+                    <span class="stat-value count-up">{{ $settings['hero_stat3_value'] ?? '20K+' }}</span>
                 </div>
             </div>
         </div>
@@ -43,7 +43,7 @@
                 data-aos-delay="600" />
 
             <div class="visual-card stats-card" data-aos="fade-up" data-aos-delay="800">
-                <h2>{{ $settings['hero_trust_count'] ?? '230+' }}</h2>
+                <h2 class="count-up">{{ $settings['hero_trust_count'] ?? '230+' }}</h2>
                 <p>
                     {{ $settings['hero_trust_text'] ?? 'some big companies that we work with, and trust us very much' }}
                 </p>
@@ -51,6 +51,7 @@
                     <div class="progress-fill"></div>
                 </div>
             </div>
+
 
             <div class="visual-card analysis-card" data-aos="fade-up" data-aos-delay="1000">
                 <img src="{{ \App\Models\SiteSetting::getImageUrl('hero_banner2_img', 'images/banner-2.webp') }}" alt="" />
@@ -322,26 +323,96 @@
 @push('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        new Swiper('.testimonials-swiper', {
-            slidesPerView: 1,
-            spaceBetween: 30,
-            loop: true,
-            autoplay: {
-                delay: 4000,
-                disableOnInteraction: false,
-            },
-            pagination: {
-                el: '.testimonials-pagination',
-                clickable: true,
-            },
-            breakpoints: {
-                769: {
-                    slidesPerView: 2,
-                    spaceBetween: 30
+        // Testimonials Swiper
+        if (document.querySelector('.testimonials-swiper')) {
+            new Swiper('.testimonials-swiper', {
+                slidesPerView: 1,
+                spaceBetween: 30,
+                loop: true,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.testimonials-pagination',
+                    clickable: true,
+                },
+                breakpoints: {
+                    769: {
+                        slidesPerView: 2,
+                        spaceBetween: 30
+                    }
                 }
+            });
+        }
+
+        // Counter Animation for Home Page Stats
+        function initHomeCounters() {
+            const homeCounters = document.querySelectorAll('.count-up');
+            if (!homeCounters.length) return;
+
+            function animateHomeCounter(el) {
+                const rawText = el.getAttribute('data-raw') || el.innerText.trim();
+                const matches = rawText.match(/([\d,\.]+)\s*(.*)/);
+                if (!matches) return;
+
+                const numStr = matches[1].replace(/,/g, '');
+                const suffix = matches[2] || '';
+                const target = parseFloat(numStr);
+                const hasComma = matches[1].includes(',');
+                const isDecimal = numStr.includes('.');
+
+                let start = 0;
+                const duration = 3000; // 3.0 seconds for smoother, slower count-up
+                const startTime = performance.now();
+
+
+                function updateCount(currentTime) {
+                    const elapsedTime = currentTime - startTime;
+                    const progress = Math.min(elapsedTime / duration, 1);
+                    const easeProgress = 1 - (1 - progress) * (1 - progress);
+                    const currentVal = start + (target - start) * easeProgress;
+
+                    let formattedVal = isDecimal ? currentVal.toFixed(1) : Math.floor(currentVal);
+                    if (hasComma) {
+                        formattedVal = formattedVal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                    }
+
+                    el.innerHTML = formattedVal + suffix;
+
+                    if (progress < 1) {
+                        requestAnimationFrame(updateCount);
+                    } else {
+                        let finalVal = isDecimal ? target.toFixed(1) : target;
+                        if (hasComma) {
+                            finalVal = finalVal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                        }
+                        el.innerHTML = finalVal + suffix;
+                    }
+                }
+
+                requestAnimationFrame(updateCount);
             }
-        });
+
+            const counterObserver = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateHomeCounter(entry.target);
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            homeCounters.forEach(counter => {
+                counter.setAttribute('data-raw', counter.innerText.trim());
+                counterObserver.observe(counter);
+            });
+        }
+
+        initHomeCounters();
     });
 </script>
 @endpush
+
 @endsection
+

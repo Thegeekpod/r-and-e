@@ -332,6 +332,39 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="{{ route('admin.placement.index') }}" class="nav-link {{ request()->routeIs('admin.placement.*') ? 'active' : '' }}">
+                    <i class="fa-solid fa-layer-group"></i> Placement Page Content
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.about.index') }}" class="nav-link {{ request()->routeIs('admin.about.*') ? 'active' : '' }}">
+                    <i class="fa-solid fa-circle-info"></i> About Page Content
+                </a>
+            </li>
+
+            <li class="nav-header">Job Portal & Recruitment</li>
+            <li class="nav-item">
+                <a href="{{ route('admin.job-categories.index') }}" class="nav-link {{ request()->routeIs('admin.job-categories.*') ? 'active' : '' }}">
+                    <i class="fa-solid fa-tags"></i> Job Categories
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.jobs.index') }}" class="nav-link {{ request()->routeIs('admin.jobs.*') ? 'active' : '' }}">
+                    <i class="fa-solid fa-briefcase"></i> Job Openings
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="{{ route('admin.applications.index') }}" class="nav-link d-flex justify-content-between align-items-center {{ request()->routeIs('admin.applications.*') ? 'active' : '' }}">
+                    <span><i class="fa-solid fa-user-graduate"></i> Job Applications</span>
+                    @php $pendingAppsCount = \App\Models\JobApplication::where('status', 'pending')->count(); @endphp
+                    @if($pendingAppsCount > 0)
+                        <span class="badge bg-warning text-dark rounded-pill">{{ $pendingAppsCount }}</span>
+                    @endif
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a href="{{ route('admin.testimonials.index') }}" class="nav-link {{ request()->routeIs('admin.testimonials.*') ? 'active' : '' }}">
                     <i class="fa-solid fa-comment-dots"></i> Testimonials
                 </a>

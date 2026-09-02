@@ -1,15 +1,21 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
+use App\Http\Controllers\Admin\AboutController as AdminAboutController;
 use App\Http\Controllers\Admin\ClientController as AdminClientController;
 use App\Http\Controllers\Admin\ContactMessageController as AdminContactMessageController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\EducationController as AdminEducationController;
 use App\Http\Controllers\Admin\FinanceController as AdminFinanceController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
+use App\Http\Controllers\Admin\JobApplicationController as AdminJobApplicationController;
+use App\Http\Controllers\Admin\JobCategoryController as AdminJobCategoryController;
+use App\Http\Controllers\Admin\JobPostingController as AdminJobPostingController;
 use App\Http\Controllers\Admin\PageStatusController as AdminPageStatusController;
-use App\Http\Controllers\Admin\EducationController as AdminEducationController;
+use App\Http\Controllers\Admin\PlacementController as AdminPlacementController;
 use App\Http\Controllers\Admin\SettingController as AdminSettingController;
 use App\Http\Controllers\Admin\TestimonialController as AdminTestimonialController;
+
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,9 +24,14 @@ Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/finance', [PageController::class, 'finance'])->name('finance');
 Route::get('/education', [PageController::class, 'education'])->name('education');
 Route::get('/placement', [PageController::class, 'placement'])->name('placement');
+Route::get('/jobs', [PageController::class, 'allJobs'])->name('jobs.index');
+Route::get('/jobs/{slug}', [PageController::class, 'showJob'])->name('jobs.show');
+
+Route::post('/jobs/{job}/apply', [PageController::class, 'applyJob'])->name('jobs.apply');
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::post('/contact', [PageController::class, 'storeContact'])->name('contact.store');
+
 
 // Admin Authentication Routes
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -53,6 +64,30 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Education Page Content Editor
         Route::get('/education-content', [AdminEducationController::class, 'index'])->name('education.index');
         Route::post('/education-content', [AdminEducationController::class, 'update'])->name('education.update');
+
+        // Placement Page Content Editor
+        Route::get('/placement-content', [AdminPlacementController::class, 'index'])->name('placement.index');
+        Route::post('/placement-content', [AdminPlacementController::class, 'update'])->name('placement.update');
+
+        // About Us Page Content Editor
+        Route::get('/about-content', [AdminAboutController::class, 'index'])->name('about.index');
+        Route::post('/about-content', [AdminAboutController::class, 'update'])->name('about.update');
+
+
+        // Job Postings Management
+        Route::resource('jobs', AdminJobPostingController::class)->except(['show']);
+
+        // Job Categories Management (CRUD)
+        Route::resource('job-categories', AdminJobCategoryController::class)->except(['create', 'show', 'edit']);
+
+
+        // Job Applications Management
+        Route::get('/applications', [AdminJobApplicationController::class, 'index'])->name('applications.index');
+        Route::get('/applications/{application}', [AdminJobApplicationController::class, 'show'])->name('applications.show');
+        Route::post('/applications/{application}/status', [AdminJobApplicationController::class, 'updateStatus'])->name('applications.updateStatus');
+        Route::get('/applications/{application}/download-resume', [AdminJobApplicationController::class, 'downloadResume'])->name('applications.downloadResume');
+        Route::delete('/applications/{application}', [AdminJobApplicationController::class, 'destroy'])->name('applications.destroy');
+
 
         // Testimonials Management
         Route::resource('testimonials', AdminTestimonialController::class)->except(['show']);
