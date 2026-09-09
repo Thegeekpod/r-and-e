@@ -338,10 +338,12 @@ class DatabaseSeeder extends Seeder
             ClientPartner::updateOrCreate(['name' => $c['name']], $c);
         }
 
-        // Education, Placement, About & Job Postings Settings
+        // Finance, Education, Placement, About, Contact & Job Postings Settings
+        $this->call(FinanceSettingsSeeder::class);
         $this->call(EducationSettingsSeeder::class);
         $this->call(PlacementSettingsSeeder::class);
         $this->call(AboutSettingsSeeder::class);
+        $this->call(ContactSettingsSeeder::class);
         $this->call(JobCategorySeeder::class);
         $this->call(JobPostingSeeder::class);
     }

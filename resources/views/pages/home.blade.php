@@ -297,26 +297,60 @@
 <!-- Clients Section -->
 <section class="clients-section">
     <div class="container">
-        <div class="clients-header">
-            <h2>{{ $settings['clients_heading'] ?? 'Our Valuable Clients' }}</h2>
-            <p>{{ $settings['clients_subtitle'] ?? 'Supported By' }}</p>
+        <div class="clients-header-wrapper">
+            <div class="clients-badge-wrap" data-aos="fade-down">
+                <span class="clients-pill-badge">
+                    <span class="badge-pulsing-dot"></span>
+                    {{ $settings['clients_subtitle'] ?? 'Supported By Global Leaders' }}
+                </span>
+            </div>
+            <h2 class="clients-main-heading" data-aos="fade-up" data-aos-delay="100">
+                {{ $settings['clients_heading'] ?? 'Our Valuable Clients' }}
+            </h2>
+            <p class="clients-subtext" data-aos="fade-up" data-aos-delay="200">
+                Trusted by leading healthcare enterprises, financial organizations, and academic institutions across India.
+            </p>
         </div>
     </div>
     
-    <div class="clients-marquee-wrapper">
+    <div class="clients-marquee-wrapper" data-aos="fade-up" data-aos-delay="300">
         <div class="clients-marquee-track">
-            {{-- Loop twice to create a seamless infinite scrolling loop --}}
-            @for ($i = 0; $i < 2; $i++)
+            {{-- Loop 4 times to create an ultra-smooth, seamless infinite marquee on all screen sizes --}}
+            @for ($i = 0; $i < 4; $i++)
                 @foreach($clients as $client)
                     <div class="client-logo-item" title="{{ $client->name }}">
                         @if($client->logo)
-                            <img src="{{ $client->logo_url }}" alt="{{ $client->name }}">
+                            <img src="{{ $client->logo_url }}" alt="{{ $client->name }}" loading="lazy">
                         @else
                             <span class="client-logo-text">{{ $client->name }}</span>
                         @endif
                     </div>
                 @endforeach
             @endfor
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="clients-trust-bar" data-aos="fade-up" data-aos-delay="400">
+            <div class="trust-badge-item">
+                <i class="fa-solid fa-building-circle-check text-success"></i>
+                <span><strong>100+</strong> Enterprise Partners</span>
+            </div>
+            <div class="trust-badge-divider"></div>
+            <div class="trust-badge-item">
+                <i class="fa-solid fa-star text-warning"></i>
+                <span><strong>99.4%</strong> Client Satisfaction</span>
+            </div>
+            <div class="trust-badge-divider"></div>
+            <div class="trust-badge-item">
+                <i class="fa-solid fa-map-location-dot text-primary"></i>
+                <span><strong>Pan-India</strong> Network</span>
+            </div>
+            <div class="trust-badge-divider"></div>
+            <div class="trust-badge-item">
+                <i class="fa-solid fa-handshake text-success"></i>
+                <span><strong>10+</strong> Years Excellence</span>
+            </div>
         </div>
     </div>
 </section>

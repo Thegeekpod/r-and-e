@@ -821,7 +821,7 @@ img {
 }
 
 .lime-card {
-  background-color: #8bab1d;
+  background-color: #02594a;
 }
 
 .testimonial-avatar {
@@ -883,24 +883,101 @@ img {
   color: #111;
   border-radius: 20px;
   font-weight: 700;
+  padding: 10px;
 }
 
-/* Clients Section */
+/* ==========================================================================
+   Modern Luxury Clients Section & Infinite Marquee
+   ========================================================================== */
 .clients-section {
-  padding: 80px 0;
+  position: relative;
+  padding: 100px 0 90px;
   text-align: center;
   overflow: hidden;
+  background: linear-gradient(180deg, #F2F8F6 0%, #FFFFFF 50%, #EDF7F4 100%);
 }
 
-.clients-header h2 {
-  font-size: 48px;
-  margin-bottom: 10px;
+.clients-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 850px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(3, 89, 74, 0.09) 0%, rgba(185, 255, 102, 0.05) 50%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
 }
 
-.clients-header p {
-  color: var(--primary-color);
+.clients-header-wrapper {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto 50px;
+  padding: 0 20px;
+}
+
+.clients-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 22px;
+  background: #ffffff;
+  color: #03594A;
+  font-family: var(--font-plus-jakarta);
+  font-size: 13px;
   font-weight: 700;
-  margin-bottom: 50px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  border-radius: 50px;
+  border: 1px solid rgba(3, 89, 74, 0.15);
+  box-shadow: 0 4px 15px rgba(3, 89, 74, 0.06);
+  margin-bottom: 18px;
+}
+
+.badge-pulsing-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #10B981;
+  border-radius: 50%;
+  position: relative;
+  display: inline-block;
+}
+
+.badge-pulsing-dot::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border-radius: 50%;
+  background-color: rgba(16, 185, 129, 0.4);
+  animation: pulse-ring 1.8s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.6); opacity: 1; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+.clients-main-heading {
+  font-family: var(--font-soliden);
+  font-size: 46px;
+  font-weight: 800;
+  color: #0C2924;
+  line-height: 1.2;
+  margin-bottom: 14px;
+  letter-spacing: -0.5px;
+}
+
+.clients-subtext {
+  font-family: var(--font-plus-jakarta);
+  font-size: 17px;
+  color: #556965;
+  line-height: 1.6;
+  margin: 0 auto;
 }
 
 /* Infinite Scrolling Client Logos Marquee */
@@ -908,16 +985,17 @@ img {
   overflow: hidden;
   width: 100%;
   position: relative;
-  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
-  padding: 20px 0;
+  z-index: 1;
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  padding: 20px 0 35px;
 }
 
 .clients-marquee-track {
   display: flex;
   width: max-content;
-  gap: 20px;
-  animation: marquee-scroll 32s linear infinite;
+  gap: 26px;
+  animation: marquee-scroll 42s linear infinite;
   align-items: center;
 }
 
@@ -929,44 +1007,105 @@ img {
   0% {
     transform: translateX(0);
   }
-
   100% {
     transform: translateX(-50%);
   }
 }
 
 .client-logo-item {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  /* min-width: 160px; */
-  transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
+  min-width: 180px;
+  height: 84px;
+  padding: 14px 28px;
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1.5px solid rgba(12, 41, 36, 0.08);
+  box-shadow: 0 4px 20px rgba(12, 41, 36, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
+  user-select: none;
+  position: relative;
 }
 
 .client-logo-item:hover {
-  filter: grayscale(0) opacity(1);
-  transform: scale(1.1);
+  transform: translateY(-6px) scale(1.04);
+  border-color: #03594A;
+  box-shadow: 0 16px 32px -4px rgba(3, 89, 74, 0.16), 0 0 0 3px rgba(185, 255, 102, 0.35);
+  background: #ffffff;
 }
 
 .client-logo-item img {
-  max-height: 64px;
-  max-width: 200px;
+  max-height: 46px;
+  max-width: 150px;
   width: auto;
   height: auto;
   object-fit: contain;
   display: block;
-  background: #ffff;
-  border-radius: 10px;
-  padding: 11px;
-  border: solid 1px #0d2824;
+  filter: contrast(95%);
+  transition: transform 0.35s ease, filter 0.35s ease;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+
+.client-logo-item:hover img {
+  transform: scale(1.08);
+  filter: contrast(105%);
 }
 
 .client-logo-text {
-  font-size: 26px;
-  font-weight: 800;
-  color: #64748B;
+  font-family: var(--font-soliden);
+  font-size: 20px;
+  font-weight: 700;
+  color: #0C2924;
   white-space: nowrap;
+  letter-spacing: -0.3px;
+}
+
+/* Trust Bar */
+.clients-trust-bar {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding: 16px 36px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(3, 89, 74, 0.12);
+  border-radius: 50px;
+  box-shadow: 0 10px 30px rgba(12, 41, 36, 0.05);
+  margin-top: 25px;
+}
+
+.trust-badge-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-plus-jakarta);
+  font-size: 14px;
+  color: #2D3748;
+  font-weight: 500;
+}
+
+.trust-badge-item i {
+  font-size: 16px;
+}
+
+.trust-badge-item strong {
+  color: #0C2924;
+  font-weight: 700;
+}
+
+.trust-badge-divider {
+  width: 1px;
+  height: 18px;
+  background-color: rgba(12, 41, 36, 0.15);
 }
 
 /* Footer Styles */
@@ -2377,6 +2516,22 @@ section.education-feature-section.bg-light {
   background-color: #8B5CF6;
 }
 
+.dot-green {
+  background-color: #10B981;
+}
+
+.dot-teal {
+  background-color: #14B8A6;
+}
+
+.dot-red {
+  background-color: #EF4444;
+}
+
+.dot-yellow {
+  background-color: #F59E0B;
+}
+
 .prog-read-time {
   font-size: 14px;
   color: #878C91;
@@ -2455,6 +2610,8 @@ section.education-feature-section.bg-light {
   font-weight: 600;
   text-decoration: none;
   backdrop-filter: blur(4px);
+  cursor: pointer;
+  outline: none;
   transition: all 0.3s ease;
 }
 

@@ -7,12 +7,12 @@
 <!-- Contact Hero -->
 <section class="contact-hero-section">
     <div class="container">
-        <span class="contact-badge" data-aos="fade-down">Get In Touch</span>
+        <span class="contact-badge" data-aos="fade-down">{{ $settings['contact_hero_badge'] ?? 'Get In Touch' }}</span>
         <h1 class="contact-hero-title" data-aos="fade-up">
-            Let's Start a <span class="text-green">Conversation.</span>
+            {{ $settings['contact_hero_title'] ?? "Let's Start a" }} <span class="text-green">{{ $settings['contact_hero_title_highlight'] ?? 'Conversation.' }}</span>
         </h1>
         <p class="contact-hero-subtitle" data-aos="fade-up" data-aos-delay="200">
-            Whether you require taxation advisory, college admission guidance, or healthcare talent recruitment, our consultants are here to assist you every step of the way.
+            {{ $settings['contact_hero_subtitle'] ?? 'Whether you require taxation advisory, college admission guidance, or healthcare talent recruitment, our consultants are here to assist you every step of the way.' }}
         </p>
     </div>
 </section>
@@ -23,16 +23,21 @@
         <!-- 3 Quick Cards -->
         <div class="contact-quick-cards" data-aos="fade-up" data-aos-delay="300">
             <!-- Card 1: Phone -->
+            @php
+                $phone = $settings['contact_card1_phone'] ?? ($settings['contact_phone'] ?? '(406) 555-0120');
+                $email = $settings['contact_card2_email'] ?? ($settings['contact_email'] ?? 'hey@forestin.com');
+                $address = $settings['contact_card3_address'] ?? ($settings['contact_address'] ?? '2972 Westheimer Rd. Santa Ana, Illinois 85486');
+            @endphp
             <div class="contact-quick-card">
                 <div>
                     <div class="contact-card-icon">
                         <i class="fa-solid fa-phone-volume"></i>
                     </div>
-                    <h4>Call Our Specialists</h4>
-                    <p>Mon - Sat from 9:00 AM to 7:00 PM</p>
+                    <h4>{{ $settings['contact_card1_title'] ?? 'Call Our Specialists' }}</h4>
+                    <p>{{ $settings['contact_card1_subtitle'] ?? 'Mon - Sat from 9:00 AM to 7:00 PM' }}</p>
                 </div>
-                <a href="tel:{{ \App\Models\SiteSetting::get('contact_phone', '(406) 555-0120') }}" class="contact-link">
-                    {{ \App\Models\SiteSetting::get('contact_phone', '(406) 555-0120') }} <i class="fa-solid fa-arrow-right"></i>
+                <a href="tel:{{ preg_replace('/[^0-9+]/', '', $phone) }}" class="contact-link">
+                    {{ $phone }} <i class="fa-solid fa-arrow-right"></i>
                 </a>
             </div>
 
@@ -42,11 +47,11 @@
                     <div class="contact-card-icon">
                         <i class="fa-solid fa-envelope-open-text"></i>
                     </div>
-                    <h4>Send Us an Email</h4>
-                    <p>Our team replies within 24 business hours.</p>
+                    <h4>{{ $settings['contact_card2_title'] ?? 'Send Us an Email' }}</h4>
+                    <p>{{ $settings['contact_card2_subtitle'] ?? 'Our team replies within 24 business hours.' }}</p>
                 </div>
-                <a href="mailto:{{ \App\Models\SiteSetting::get('contact_email', 'hey@forestin.com') }}" class="contact-link">
-                    {{ \App\Models\SiteSetting::get('contact_email', 'hey@forestin.com') }} <i class="fa-solid fa-arrow-right"></i>
+                <a href="mailto:{{ $email }}" class="contact-link">
+                    {{ $email }} <i class="fa-solid fa-arrow-right"></i>
                 </a>
             </div>
 
@@ -56,11 +61,11 @@
                     <div class="contact-card-icon">
                         <i class="fa-solid fa-location-dot"></i>
                     </div>
-                    <h4>Main Headquarters</h4>
-                    <p>Visit our corporate consultation office.</p>
+                    <h4>{{ $settings['contact_card3_title'] ?? 'Main Headquarters' }}</h4>
+                    <p>{{ $settings['contact_card3_subtitle'] ?? 'Visit our corporate consultation office.' }}</p>
                 </div>
                 <span class="contact-link text-dark" style="font-size: 15px; font-weight: 600;">
-                    {{ \App\Models\SiteSetting::get('contact_address', '2972 Westheimer Rd. Santa Ana, Illinois 85486') }}
+                    {{ $address }}
                 </span>
             </div>
         </div>
@@ -69,8 +74,8 @@
         <div class="contact-main-grid">
             <!-- Left: Interactive Form -->
             <div class="contact-form-box" data-aos="fade-right">
-                <h3>Send Us a Message</h3>
-                <p class="form-intro">Fill in your inquiry details below and a dedicated consultant will get in touch with you shortly.</p>
+                <h3>{{ $settings['contact_form_title'] ?? 'Send Us a Message' }}</h3>
+                <p class="form-intro">{{ $settings['contact_form_intro'] ?? 'Fill in your inquiry details below and a dedicated consultant will get in touch with you shortly.' }}</p>
 
                 @if(session('contact_success'))
                     <div style="background: rgba(185, 255, 102, 0.2); border: 1.5px solid #03594A; color: #0C2924; padding: 16px 20px; border-radius: 14px; font-weight: 600; margin-bottom: 25px; display: flex; align-items: center; gap: 12px;">
@@ -139,8 +144,8 @@
 
             <!-- Right: Dark Luxury Info Card -->
             <div class="contact-info-panel" data-aos="fade-left">
-                <h3>Why Connect With Us?</h3>
-                <p class="info-sub">At Roy Infinity Edge Consulting, we offer integrated solutions across Finance, Education, and Healthcare HR under one trusted roof.</p>
+                <h3>{{ $settings['contact_info_title'] ?? 'Why Connect With Us?' }}</h3>
+                <p class="info-sub">{{ $settings['contact_info_desc'] ?? 'At Roy Infinity Edge Consulting, we offer integrated solutions across Finance, Education, and Healthcare HR under one trusted roof.' }}</p>
 
                 <ul class="contact-feature-list">
                     <li class="contact-feature-item">
@@ -148,8 +153,8 @@
                             <i class="fa-solid fa-check"></i>
                         </div>
                         <div class="contact-feature-text">
-                            <h5>Transparent & Confidential</h5>
-                            <p>Every consultation is handled with strict confidentiality and transparent guidance.</p>
+                            <h5>{{ $settings['contact_feat1_title'] ?? 'Transparent & Confidential' }}</h5>
+                            <p>{{ $settings['contact_feat1_desc'] ?? 'Every consultation is handled with strict confidentiality and transparent guidance.' }}</p>
                         </div>
                     </li>
 
@@ -158,8 +163,8 @@
                             <i class="fa-solid fa-check"></i>
                         </div>
                         <div class="contact-feature-text">
-                            <h5>Multi-Disciplinary Specialists</h5>
-                            <p>Certified accountants, experienced admission counsellors, and corporate recruiters.</p>
+                            <h5>{{ $settings['contact_feat2_title'] ?? 'Multi-Disciplinary Specialists' }}</h5>
+                            <p>{{ $settings['contact_feat2_desc'] ?? 'Certified accountants, experienced admission counsellors, and corporate recruiters.' }}</p>
                         </div>
                     </li>
 
@@ -168,8 +173,8 @@
                             <i class="fa-solid fa-check"></i>
                         </div>
                         <div class="contact-feature-text">
-                            <h5>Dedicated Relationship Manager</h5>
-                            <p>End-to-end assistance from initial consultation to final outcome.</p>
+                            <h5>{{ $settings['contact_feat3_title'] ?? 'Dedicated Relationship Manager' }}</h5>
+                            <p>{{ $settings['contact_feat3_desc'] ?? 'End-to-end assistance from initial consultation to final outcome.' }}</p>
                         </div>
                     </li>
                 </ul>
@@ -179,8 +184,8 @@
                         <i class="fa-regular fa-clock"></i>
                     </div>
                     <div class="contact-hours-text">
-                        <h6>Working Hours</h6>
-                        <p>Monday - Saturday: 9:00 AM - 7:00 PM<br>Sunday: Closed</p>
+                        <h6>{{ $settings['contact_hours_title'] ?? 'Working Hours' }}</h6>
+                        <p>{!! nl2br(e($settings['contact_hours_text'] ?? "Monday - Saturday: 9:00 AM - 7:00 PM\nSunday: Closed")) !!}</p>
                     </div>
                 </div>
             </div>
@@ -193,14 +198,14 @@
     <div class="container queries-flex">
         <div class="queries-left">
             <h2>
-                If You Have any Queries
-                <span class="text-green">Feel Free To Ask !</span>
+                {{ $settings['contact_queries_heading'] ?? 'If You Have any Queries' }}
+                <span class="text-green">{{ $settings['contact_queries_highlight'] ?? 'Feel Free To Ask !' }}</span>
             </h2>
         </div>
         <div class="queries-right">
             <div class="ask-card">
-                <h3>Ask Question</h3>
-                <p>If you have Any Queries Feel Free To ask !</p>
+                <h3>{{ $settings['contact_queries_card_title'] ?? 'Ask Question' }}</h3>
+                <p>{{ $settings['contact_queries_card_subtitle'] ?? 'If you have Any Queries Feel Free To ask !' }}</p>
                 <div class="input-wrapper">
                     <input type="text" placeholder="Type............" />
                 </div>

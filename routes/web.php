@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\AboutController as AdminAboutController;
 use App\Http\Controllers\Admin\ClientController as AdminClientController;
+use App\Http\Controllers\Admin\ContactContentController as AdminContactContentController;
 use App\Http\Controllers\Admin\ContactMessageController as AdminContactMessageController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\EducationController as AdminEducationController;
@@ -72,6 +73,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // About Us Page Content Editor
         Route::get('/about-content', [AdminAboutController::class, 'index'])->name('about.index');
         Route::post('/about-content', [AdminAboutController::class, 'update'])->name('about.update');
+
+        // Contact Us Page Content Editor
+        Route::get('/contact-content', [AdminContactContentController::class, 'index'])->name('contact-content.index');
+        Route::post('/contact-content', [AdminContactContentController::class, 'update'])->name('contact-content.update');
 
 
         // Job Postings Management

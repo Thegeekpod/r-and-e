@@ -304,39 +304,113 @@
                 </div>
             </div>
 
-            {{-- — Programme Cards (6) — --}}
+            {{-- — Programme Cards (Dynamic Repeater) — --}}
+            @php
+                $progCards = [];
+                if (!empty($settings['edu_prog_cards'])) {
+                    $decoded = json_decode($settings['edu_prog_cards'], true);
+                    if (is_array($decoded)) {
+                        $progCards = $decoded;
+                    }
+                }
+                if (empty($progCards)) {
+                    // Fallback to legacy single settings if available
+                    for ($i = 1; $i <= 6; $i++) {
+                        if (!empty($settings["edu_prog_card_{$i}_title"]) || !empty($settings["edu_prog_card_{$i}_content"])) {
+                            $progCards[] = [
+                                'title'     => $settings["edu_prog_card_{$i}_title"] ?? '',
+                                'dot'       => $settings["edu_prog_card_{$i}_dot"] ?? (['dot-blue','dot-orange','dot-purple','dot-blue','dot-orange','dot-purple'][$i-1] ?? 'dot-blue'),
+                                'read_time' => '5 min read',
+                                'content'   => $settings["edu_prog_card_{$i}_content"] ?? '',
+                            ];
+                        }
+                    }
+                }
+                if (empty($progCards)) {
+                    // Fallback default initial cards
+                    $progCards = [
+                        ['title' => 'Admission follow-up', 'dot' => 'dot-blue', 'read_time' => '5 min read', 'content' => "Documentation Support\nEducational document verification Identity and address proof documentation Migration Certificate guidance"],
+                        ['title' => 'Academic Programmes We Facilitate', 'dot' => 'dot-orange', 'read_time' => '5 min read', 'content' => "Nursing\nGeneral Nursing & Midwifery (GNM) B.Sc. Nursing Post Basic B.Sc. Nursing M.Sc. Nursing"],
+                        ['title' => 'Pharmacy', 'dot' => 'dot-purple', 'read_time' => '5 min read', 'content' => "Diploma in Pharmacy (D.Pharm.)\nBachelor of Pharmacy (B. Pharm.)\nDoctor of Pharmacy (Pharm.D)\nMaster of Pharmacy (M. Pharm.)"],
+                        ['title' => 'Engineering & Technology', 'dot' => 'dot-blue', 'read_time' => '5 min read', 'content' => "Polytechnic Diploma B.Tech\nM.Tech Computer Applications & Information Technology BCA"],
+                        ['title' => 'Education', 'dot' => 'dot-orange', 'read_time' => '5 min read', 'content' => "D.El.Ed.\nB.Ed.\nM.Ed."],
+                        ['title' => 'Law', 'dot' => 'dot-purple', 'read_time' => '5 min read', 'content' => "LL. B.\nB.A.\nB.B.\nLL. B. A.\nLL. B. L\nLL.M."],
+                    ];
+                }
+            @endphp
+
             <div class="admin-card">
-                <div class="admin-card-header">
-                    <h5><i class="fa-solid fa-grid-2 text-success me-2"></i> Programme Cards (6 Cards)</h5>
+                <input type="hidden" name="edu_prog_cards_submitted" value="1">
+                <div class="admin-card-header d-flex align-items-center justify-content-between flex-wrap gap-2">
+                    <div class="d-flex align-items-center gap-2">
+                        <h5><i class="fa-solid fa-grid-2 text-success me-2"></i> Programme Cards</h5>
+                        <span class="badge bg-success rounded-pill" id="progCardCountBadge">{{ count($progCards) }} Cards</span>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-success" id="addProgCardBtn">
+                        <i class="fa-solid fa-plus me-1"></i> Add New Card
+                    </button>
                 </div>
                 <div class="admin-card-body">
-                    <div class="row g-4">
-                        @for($i = 1; $i <= 6; $i++)
-                        <div class="col-md-6">
-                            <div class="p-3 border rounded-3 bg-light">
-                                <h6 class="fw-bold text-dark mb-3">Card {{ $i }}</h6>
-                                <div class="row g-2">
-                                    <div class="col-md-8">
-                                        <label class="form-label">Title</label>
-                                        <input type="text" name="edu_prog_card_{{ $i }}_title" class="form-control"
-                                            value="{{ $settings["edu_prog_card_{$i}_title"] ?? '' }}">
+                    <div class="row g-4" id="progCardsContainer">
+                        @foreach($progCards as $index => $card)
+                        <div class="col-md-6 prog-card-item" data-index="{{ $index }}">
+                            <div class="p-3 border rounded-3 bg-light position-relative shadow-sm h-100">
+                                <div class="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="badge bg-dark px-2 py-1 card-num-badge">Card {{ $index + 1 }}</span>
+                                        <span class="prog-dot-preview {{ $card['dot'] ?? 'dot-blue' }}" style="width:12px; height:12px; border-radius:50%; display:inline-block;"></span>
                                     </div>
-                                    <div class="col-md-4">
-                                        <label class="form-label">Dot Color</label>
-                                        <select name="edu_prog_card_{{ $i }}_dot" class="form-select">
-                                            @foreach(['dot-blue' => 'Blue', 'dot-orange' => 'Orange', 'dot-purple' => 'Purple'] as $val => $label)
-                                                <option value="{{ $val }}" {{ ($settings["edu_prog_card_{$i}_dot"] ?? '') === $val ? 'selected' : '' }}>{{ $label }}</option>
+                                    <div class="btn-group btn-group-sm">
+                                        <button type="button" class="btn btn-outline-secondary btn-move-card-up" title="Move Up">
+                                            <i class="fa-solid fa-arrow-up"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-outline-secondary btn-move-card-down" title="Move Down">
+                                            <i class="fa-solid fa-arrow-down"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-outline-danger btn-delete-card" title="Delete Card">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="col-md-7">
+                                        <label class="form-label small mb-1">Card Title</label>
+                                        <input type="text" name="edu_prog_cards[{{ $index }}][title]" class="form-control form-control-sm"
+                                            value="{{ $card['title'] ?? '' }}" placeholder="e.g. Admission follow-up">
+                                    </div>
+                                    <div class="col-md-5">
+                                        <label class="form-label small mb-1">Dot Color</label>
+                                        <select name="edu_prog_cards[{{ $index }}][dot]" class="form-select form-select-sm prog-dot-select">
+                                            @foreach(['dot-blue' => 'Blue', 'dot-orange' => 'Orange', 'dot-purple' => 'Purple', 'dot-green' => 'Green', 'dot-teal' => 'Teal', 'dot-red' => 'Red', 'dot-yellow' => 'Yellow'] as $val => $label)
+                                                <option value="{{ $val }}" {{ ($card['dot'] ?? '') === $val ? 'selected' : '' }}>{{ $label }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="col-12">
-                                        <label class="form-label">Content <small class="text-muted">(one item per line)</small></label>
-                                        <textarea name="edu_prog_card_{{ $i }}_content" rows="4" class="form-control">{{ $settings["edu_prog_card_{$i}_content"] ?? '' }}</textarea>
+                                        <label class="form-label small mb-1">Read Time / Tag <small class="text-muted">(e.g. 5 min read)</small></label>
+                                        <input type="text" name="edu_prog_cards[{{ $index }}][read_time]" class="form-control form-control-sm"
+                                            value="{{ $card['read_time'] ?? '5 min read' }}" placeholder="5 min read">
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label small mb-1">Content <small class="text-muted">(one item per line or description)</small></label>
+                                        <textarea name="edu_prog_cards[{{ $index }}][content]" rows="4" class="form-control form-control-sm" placeholder="Enter card content...">{{ $card['content'] ?? '' }}</textarea>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        @endfor
+                        @endforeach
+                    </div>
+
+                    <div id="noProgCardsMsg" class="text-center py-4 text-muted {{ count($progCards) === 0 ? '' : 'd-none' }}">
+                        <i class="fa-solid fa-layer-group fa-2x mb-2 text-secondary"></i>
+                        <p class="m-0">No programme cards added. Click "Add New Card" to create one.</p>
+                    </div>
+
+                    <div class="mt-3 pt-3 border-top d-flex justify-content-between align-items-center flex-wrap gap-2">
+                        <small class="text-muted">Cards will automatically render and align nicely in the frontend grid.</small>
+                        <button type="button" class="btn btn-sm btn-outline-success" id="addProgCardBtnBottom">
+                            <i class="fa-solid fa-plus me-1"></i> Add Another Card
+                        </button>
                     </div>
                 </div>
             </div>
@@ -687,3 +761,185 @@
     </div>{{-- end tab-content --}}
 </form>
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const container = document.getElementById('progCardsContainer');
+    const badge = document.getElementById('progCardCountBadge');
+    const noMsg = document.getElementById('noProgCardsMsg');
+    const addBtnTop = document.getElementById('addProgCardBtn');
+    const addBtnBottom = document.getElementById('addProgCardBtnBottom');
+
+    function updateCardCount() {
+        const cards = container.querySelectorAll('.prog-card-item');
+        if (badge) {
+            badge.textContent = `${cards.length} Cards`;
+        }
+        if (noMsg) {
+            if (cards.length === 0) {
+                noMsg.classList.remove('d-none');
+            } else {
+                noMsg.classList.add('d-none');
+            }
+        }
+    }
+
+    function reindexCards() {
+        const cards = container.querySelectorAll('.prog-card-item');
+        cards.forEach((card, index) => {
+            card.setAttribute('data-index', index);
+
+            // Update badge
+            const numBadge = card.querySelector('.card-num-badge');
+            if (numBadge) numBadge.textContent = `Card ${index + 1}`;
+
+            // Update input names
+            const titleInput = card.querySelector('input[name*="[title]"]');
+            if (titleInput) titleInput.setAttribute('name', `edu_prog_cards[${index}][title]`);
+
+            const dotSelect = card.querySelector('select[name*="[dot]"]');
+            if (dotSelect) dotSelect.setAttribute('name', `edu_prog_cards[${index}][dot]`);
+
+            const readTimeInput = card.querySelector('input[name*="[read_time]"]');
+            if (readTimeInput) readTimeInput.setAttribute('name', `edu_prog_cards[${index}][read_time]`);
+
+            const contentTextarea = card.querySelector('textarea[name*="[content]"]');
+            if (contentTextarea) contentTextarea.setAttribute('name', `edu_prog_cards[${index}][content]`);
+
+            // Update move buttons disabled state
+            const moveUpBtn = card.querySelector('.btn-move-card-up');
+            const moveDownBtn = card.querySelector('.btn-move-card-down');
+            if (moveUpBtn) moveUpBtn.disabled = (index === 0);
+            if (moveDownBtn) moveDownBtn.disabled = (index === cards.length - 1);
+        });
+
+        updateCardCount();
+    }
+
+    function createCardElement(index) {
+        const div = document.createElement('div');
+        div.className = 'col-md-6 prog-card-item';
+        div.setAttribute('data-index', index);
+        div.innerHTML = `
+            <div class="p-3 border rounded-3 bg-light position-relative shadow-sm h-100">
+                <div class="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom">
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="badge bg-dark px-2 py-1 card-num-badge">Card ${index + 1}</span>
+                        <span class="prog-dot-preview dot-blue" style="width:12px; height:12px; border-radius:50%; display:inline-block;"></span>
+                    </div>
+                    <div class="btn-group btn-group-sm">
+                        <button type="button" class="btn btn-outline-secondary btn-move-card-up" title="Move Up">
+                            <i class="fa-solid fa-arrow-up"></i>
+                        </button>
+                        <button type="button" class="btn btn-outline-secondary btn-move-card-down" title="Move Down">
+                            <i class="fa-solid fa-arrow-down"></i>
+                        </button>
+                        <button type="button" class="btn btn-outline-danger btn-delete-card" title="Delete Card">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="row g-2">
+                    <div class="col-md-7">
+                        <label class="form-label small mb-1">Card Title</label>
+                        <input type="text" name="edu_prog_cards[${index}][title]" class="form-control form-control-sm"
+                            value="" placeholder="e.g. Admission follow-up">
+                    </div>
+                    <div class="col-md-5">
+                        <label class="form-label small mb-1">Dot Color</label>
+                        <select name="edu_prog_cards[${index}][dot]" class="form-select form-select-sm prog-dot-select">
+                            <option value="dot-blue" selected>Blue</option>
+                            <option value="dot-orange">Orange</option>
+                            <option value="dot-purple">Purple</option>
+                            <option value="dot-green">Green</option>
+                            <option value="dot-teal">Teal</option>
+                            <option value="dot-red">Red</option>
+                            <option value="dot-yellow">Yellow</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label small mb-1">Read Time / Tag <small class="text-muted">(e.g. 5 min read)</small></label>
+                        <input type="text" name="edu_prog_cards[${index}][read_time]" class="form-control form-control-sm"
+                            value="5 min read" placeholder="5 min read">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label small mb-1">Content <small class="text-muted">(one item per line or description)</small></label>
+                        <textarea name="edu_prog_cards[${index}][content]" rows="4" class="form-control form-control-sm" placeholder="Enter card content..."></textarea>
+                    </div>
+                </div>
+            </div>
+        `;
+        return div;
+    }
+
+    function addCard() {
+        const count = container.querySelectorAll('.prog-card-item').length;
+        const newCard = createCardElement(count);
+        container.appendChild(newCard);
+        reindexCards();
+
+        const titleInput = newCard.querySelector('input[name*="[title]"]');
+        if (titleInput) {
+            titleInput.focus();
+        }
+    }
+
+    if (addBtnTop) addBtnTop.addEventListener('click', addCard);
+    if (addBtnBottom) addBtnBottom.addEventListener('click', addCard);
+
+    // Event delegation on container
+    container.addEventListener('click', function (e) {
+        const deleteBtn = e.target.closest('.btn-delete-card');
+        if (deleteBtn) {
+            const cardItem = deleteBtn.closest('.prog-card-item');
+            if (cardItem) {
+                if (confirm('Are you sure you want to remove this programme card?')) {
+                    cardItem.remove();
+                    reindexCards();
+                }
+            }
+            return;
+        }
+
+        const moveUpBtn = e.target.closest('.btn-move-card-up');
+        if (moveUpBtn) {
+            const cardItem = moveUpBtn.closest('.prog-card-item');
+            const prevItem = cardItem ? cardItem.previousElementSibling : null;
+            if (cardItem && prevItem && prevItem.classList.contains('prog-card-item')) {
+                container.insertBefore(cardItem, prevItem);
+                reindexCards();
+            }
+            return;
+        }
+
+        const moveDownBtn = e.target.closest('.btn-move-card-down');
+        if (moveDownBtn) {
+            const cardItem = moveDownBtn.closest('.prog-card-item');
+            const nextItem = cardItem ? cardItem.nextElementSibling : null;
+            if (cardItem && nextItem && nextItem.classList.contains('prog-card-item')) {
+                container.insertBefore(nextItem, cardItem);
+                reindexCards();
+            }
+            return;
+        }
+    });
+
+    // Dot select change preview update
+    container.addEventListener('change', function (e) {
+        if (e.target.classList.contains('prog-dot-select')) {
+            const cardItem = e.target.closest('.prog-card-item');
+            if (cardItem) {
+                const preview = cardItem.querySelector('.prog-dot-preview');
+                if (preview) {
+                    preview.className = `prog-dot-preview ${e.target.value}`;
+                }
+            }
+        }
+    });
+
+    // Initial indexing
+    reindexCards();
+});
+</script>
+@endpush

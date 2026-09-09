@@ -49,10 +49,36 @@ class EducationController extends Controller
             }
         }
 
+        // Programme Cards array handling
+        if ($request->has('edu_prog_cards')) {
+            $progCards = $request->input('edu_prog_cards');
+            if (is_array($progCards)) {
+                $cleanedCards = [];
+                foreach ($progCards as $card) {
+                    if (!empty($card['title']) || !empty($card['content'])) {
+                        $cleanedCards[] = [
+                            'title'     => $card['title'] ?? '',
+                            'dot'       => $card['dot'] ?? 'dot-blue',
+                            'read_time' => $card['read_time'] ?? '5 min read',
+                            'content'   => $card['content'] ?? '',
+                        ];
+                    }
+                }
+                SiteSetting::set('edu_prog_cards', json_encode(array_values($cleanedCards)), 'json', 'education');
+            }
+        } elseif ($request->has('edu_prog_cards_submitted')) {
+            // Case where user deleted all cards
+            SiteSetting::set('edu_prog_cards', json_encode([]), 'json', 'education');
+        }
+
         // Handle all text / textarea fields
         foreach ($data as $key => $value) {
-            if (!in_array($key, $imageFields) && is_string($value)) {
-                SiteSetting::set($key, $value, 'text', 'education');
+            if (!in_array($key, $imageFields) && $key !== 'edu_prog_cards' && $key !== 'edu_prog_cards_submitted') {
+                if (is_array($value)) {
+                    SiteSetting::set($key, json_encode(array_values($value)), 'json', 'education');
+                } elseif (is_string($value)) {
+                    SiteSetting::set($key, $value, 'text', 'education');
+                }
             }
         }
 

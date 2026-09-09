@@ -341,6 +341,11 @@
                     <i class="fa-solid fa-circle-info"></i> About Page Content
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.contact-content.index') }}" class="nav-link {{ request()->routeIs('admin.contact-content.*') ? 'active' : '' }}">
+                    <i class="fa-solid fa-address-book"></i> Contact Page Content
+                </a>
+            </li>
 
             <li class="nav-header">Job Portal & Recruitment</li>
             <li class="nav-item">

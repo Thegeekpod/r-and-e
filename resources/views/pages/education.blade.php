@@ -260,20 +260,56 @@
             </div>
 
             <!-- Programme Cards Grid Section -->
+            @php
+                $progCards = [];
+                if (!empty($settings['edu_prog_cards'])) {
+                    $decoded = json_decode($settings['edu_prog_cards'], true);
+                    if (is_array($decoded)) {
+                        $progCards = $decoded;
+                    }
+                }
+                if (empty($progCards)) {
+                    // Fallback to legacy single settings if available
+                    for ($i = 1; $i <= 6; $i++) {
+                        if (!empty($settings["edu_prog_card_{$i}_title"]) || !empty($settings["edu_prog_card_{$i}_content"])) {
+                            $progCards[] = [
+                                'title'     => $settings["edu_prog_card_{$i}_title"] ?? '',
+                                'dot'       => $settings["edu_prog_card_{$i}_dot"] ?? (['dot-blue','dot-orange','dot-purple','dot-blue','dot-orange','dot-purple'][$i-1] ?? 'dot-blue'),
+                                'read_time' => '5 min read',
+                                'content'   => $settings["edu_prog_card_{$i}_content"] ?? '',
+                            ];
+                        }
+                    }
+                }
+                if (empty($progCards)) {
+                    // Default fallback
+                    $progCards = [
+                        ['title' => 'Admission follow-up', 'dot' => 'dot-blue', 'read_time' => '5 min read', 'content' => "Documentation Support\nEducational document verification Identity and address proof documentation Migration Certificate guidance"],
+                        ['title' => 'Academic Programmes We Facilitate', 'dot' => 'dot-orange', 'read_time' => '5 min read', 'content' => "Nursing\nGeneral Nursing & Midwifery (GNM) B.Sc. Nursing Post Basic B.Sc. Nursing M.Sc. Nursing"],
+                        ['title' => 'Pharmacy', 'dot' => 'dot-purple', 'read_time' => '5 min read', 'content' => "Diploma in Pharmacy (D.Pharm.)\nBachelor of Pharmacy (B. Pharm.)\nDoctor of Pharmacy (Pharm.D)\nMaster of Pharmacy (M. Pharm.)"],
+                        ['title' => 'Engineering & Technology', 'dot' => 'dot-blue', 'read_time' => '5 min read', 'content' => "Polytechnic Diploma B.Tech\nM.Tech Computer Applications & Information Technology BCA"],
+                        ['title' => 'Education', 'dot' => 'dot-orange', 'read_time' => '5 min read', 'content' => "D.El.Ed.\nB.Ed.\nM.Ed."],
+                        ['title' => 'Law', 'dot' => 'dot-purple', 'read_time' => '5 min read', 'content' => "LL. B.\nB.A.\nB.B.\nLL. B. A.\nLL. B. L\nLL.M."],
+                    ];
+                }
+            @endphp
+            @if(count($progCards) > 0)
             <div class="programme-cards-section" data-aos="fade-up">
                 <div class="container">
-                    <div class="programme-cards-grid">
-                        @for($i = 1; $i <= 6; $i++)
+                    <div class="programme-cards-grid" id="programmeCardsGrid">
+                        @foreach($progCards as $index => $card)
                         @php
-                            $dot      = $settings["edu_prog_card_{$i}_dot"]     ?? ['dot-blue','dot-orange','dot-purple','dot-blue','dot-orange','dot-purple'][$i-1];
-                            $title    = $settings["edu_prog_card_{$i}_title"]   ?? '';
-                            $content  = $settings["edu_prog_card_{$i}_content"] ?? '';
-                            $isFilled = ($i === 4) ? 'btn-filled' : '';
+                            $dot      = $card['dot'] ?? 'dot-blue';
+                            $title    = $card['title'] ?? '';
+                            $readTime = !empty($card['read_time']) ? $card['read_time'] : '5 min read';
+                            $content  = $card['content'] ?? '';
+                            $isFilled = ($index === 3) ? 'btn-filled' : '';
+                            $isExtra  = ($index >= 6);
                         @endphp
-                        <div class="prog-card">
+                        <div class="prog-card {{ $isExtra ? 'prog-card-extra' : '' }}" {!! $isExtra ? 'style="display:none;"' : '' !!}>
                             <div class="prog-card-top">
                                 <span class="prog-dot {{ $dot }}"></span>
-                                <span class="prog-read-time">5 min read</span>
+                                <span class="prog-read-time">{{ $readTime }}</span>
                             </div>
                             <h3 class="prog-card-title">{{ $title }}</h3>
                             <div class="prog-card-body">
@@ -285,14 +321,19 @@
                                 </button>
                             </div>
                         </div>
-                        @endfor
+                        @endforeach
                     </div>
 
+                    @if(count($progCards) > 6)
                     <div class="prog-see-more-wrap">
-                        <a href="#" class="btn-see-more">See more</a>
+                        <button type="button" class="btn-see-more" id="btnSeeMoreProgCards" data-expanded="false">
+                            See more
+                        </button>
                     </div>
+                    @endif
                 </div>
             </div>
+            @endif
 
             <!-- Why Our Admission Support is Different Banner Section -->
             <div class="why-admission-different-section" data-aos="fade-up">
@@ -592,6 +633,43 @@
                 setTimeout(() => {
                     includesContent.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 }, 300);
+            }
+        });
+    }
+
+    // Programme cards See More / See Less functionality
+    const btnSeeMore = document.getElementById('btnSeeMoreProgCards');
+    if (btnSeeMore) {
+        btnSeeMore.addEventListener('click', function () {
+            const isExpanded = this.getAttribute('data-expanded') === 'true';
+            const extraCards = document.querySelectorAll('.prog-card-extra');
+
+            if (!isExpanded) {
+                // Reveal extra cards with smooth animation
+                extraCards.forEach(card => {
+                    card.style.display = 'flex';
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(15px)';
+                    card.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+                    requestAnimationFrame(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    });
+                });
+                this.setAttribute('data-expanded', 'true');
+                this.textContent = 'See less';
+            } else {
+                // Hide extra cards
+                extraCards.forEach(card => {
+                    card.style.display = 'none';
+                });
+                this.setAttribute('data-expanded', 'false');
+                this.textContent = 'See more';
+
+                const progSection = document.querySelector('.programme-cards-section');
+                if (progSection) {
+                    progSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
             }
         });
     }

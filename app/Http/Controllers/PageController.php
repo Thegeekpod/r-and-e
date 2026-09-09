@@ -221,7 +221,9 @@ class PageController extends Controller
             ]);
         }
 
-        return view('pages.contact');
+        $settings = SiteSetting::all()->pluck('value', 'key');
+
+        return view('pages.contact', compact('settings'));
     }
 
     public function storeContact(Request $request)

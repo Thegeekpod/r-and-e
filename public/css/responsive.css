@@ -746,36 +746,60 @@ body {
        12. CLIENTS SECTION
        ========================================== */
     .clients-section {
-        padding: 40px 0;
-        text-align: left;
+        padding: 55px 0 45px;
+        text-align: center;
     }
 
-    .clients-header {
-        padding: 0 18px;
+    .clients-header-wrapper {
+        margin-bottom: 30px;
+        padding: 0 15px;
     }
 
-    .clients-header h2 {
-        font-size: 20px;
+    .clients-pill-badge {
+        font-size: 11px;
+        padding: 6px 16px;
+        margin-bottom: 12px;
     }
 
-    .clients-header p {
-        font-size: 13px;
-        margin-bottom: 20px;
-        opacity: 0.75;
+    .clients-main-heading {
+        font-size: 26px;
+        margin-bottom: 10px;
     }
 
-    /* .client-logo-item {
-        min-width: 100px;
-    } */
+    .clients-subtext {
+        font-size: 14px;
+    }
+
+    .client-logo-item {
+        min-width: 140px;
+        height: 66px;
+        padding: 10px 18px;
+        border-radius: 14px;
+    }
 
     .client-logo-item img {
-        max-height: 36px;
-        padding: 5px;
-        border-radius: 6px;
+        max-height: 34px;
+        max-width: 110px;
+    }
+
+    .client-logo-text {
+        font-size: 16px;
     }
 
     .clients-marquee-wrapper {
-        padding: 10px 0;
+        padding: 10px 0 25px;
+    }
+
+    .clients-trust-bar {
+        padding: 12px 18px;
+        gap: 12px;
+        border-radius: 20px;
+        margin-top: 15px;
+        font-size: 12px;
+    }
+
+    .trust-badge-divider {
+        display: none;
     }
 
     /* ==========================================
