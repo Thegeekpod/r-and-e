@@ -1027,7 +1027,7 @@ img {
   justify-content: center;
   min-width: 140px;
   height: 80px;
-  padding: 0px;
+  padding: 10px;
   background: #fff;
   border-radius: 20px;
   /* border: 1.5px solid rgba(12, 41, 36, 0.08); */
@@ -1047,7 +1047,7 @@ img {
 }
 
 .client-logo-item img {
-  max-height: 70px;
+  max-height: 65px;
   max-width: 100%;
   width: auto;
   height: auto;
