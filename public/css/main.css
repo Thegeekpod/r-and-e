@@ -1002,7 +1002,7 @@ img {
   display: flex;
   width: max-content;
   gap: 26px;
-  animation: marquee-scroll 80s linear infinite;
+  animation: marquee-scroll 180s linear infinite;
   align-items: center;
 }
 
@@ -1047,7 +1047,7 @@ img {
 }
 
 .client-logo-item img {
-  max-height: 65px;
+  max-height: 60px;
   max-width: 100%;
   width: auto;
   height: auto;
@@ -1057,7 +1057,7 @@ img {
   background: transparent !important;
   border: none !important;
   padding: 0 !important;
-  border-radius: 0 !important;
+  border-radius: 5px !important;
 }
 
 .client-logo-item:hover img {
