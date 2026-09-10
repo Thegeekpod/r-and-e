@@ -177,9 +177,9 @@
                     </div>
                     <h3 class="roy-blog-empty-title">No Publications Found</h3>
                     <p class="roy-blog-empty-desc">We couldn't find any articles matching your search criteria. Try using different keywords or browse all categories.</p>
-                    <a href="{{ route('blog.index') }}" class="btn-learn-more roy-blog-empty-btn">
-                        View All Articles
-                    </a>
+                    <!-- <a href="{{ route('blog.index') }}" class="btn-learn-more roy-blog-empty-btn">
+                      View All Publications
+                    </a> -->
                 </div>
             @endforelse
         </div>
