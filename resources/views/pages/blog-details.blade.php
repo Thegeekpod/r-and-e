@@ -73,7 +73,7 @@
                     <div>
                         @if(!empty($post->tags_array))
                             <div class="roy-tags-wrap">
-                                <span style="font-size: 14px; font-weight: 700; color: #64748b; margin-right: 4px;"><i class="fa-solid fa-tags"></i> Tags:</span>
+                                <span class="roy-tags-label"><i class="fa-solid fa-tags"></i> Tags:</span>
                                 @foreach($post->tags_array as $tag)
                                     <span class="roy-tag-chip">#{{ $tag }}</span>
                                 @endforeach
@@ -82,7 +82,7 @@
                     </div>
 
                     <div class="roy-share-wrap">
-                        <span style="font-size: 14px; font-weight: 700; color: #64748b; margin-right: 6px;">Share:</span>
+                        <span class="roy-share-label">Share:</span>
                         @php
                             $shareUrl = urlencode(url()->current());
                             $shareTitle = urlencode($post->title);
@@ -108,7 +108,7 @@
                         <i class="fa-solid fa-user-tie"></i>
                     </div>
                     <div class="roy-author-details">
-                        <span style="display: inline-block; background: #EAFFFB; color: #03594A; font-size: 12px; font-weight: 700; padding: 3px 12px; border-radius: 50px; margin-bottom: 6px;">Editorial Authority</span>
+                        <span class="roy-author-badge">Editorial Authority</span>
                         <h4>{{ $post->author_name }}</h4>
                         <p>
                             Senior Strategic Advisory Specialist at Roy Infinity Edge Consulting, delivering expert solutions across financial compliance, higher education career guidance, and corporate healthcare placement.
@@ -121,19 +121,19 @@
             <aside class="roy-blog-sidebar">
                 {{-- Quick Advisory Widget --}}
                 <div class="roy-sidebar-card roy-sidebar-cta">
-                    <h3 class="roy-sidebar-title"><i class="fa-solid fa-headset" style="color: #B9FF66;"></i> Need Direct Advice?</h3>
-                    <p style="font-size: 14.5px; color: rgba(255, 255, 255, 0.85); line-height: 1.6; margin-bottom: 20px;">
+                    <h3 class="roy-sidebar-title"><i class="fa-solid fa-headset roy-sidebar-cta-icon"></i> Need Direct Advice?</h3>
+                    <p class="roy-sidebar-cta-desc">
                         Connect directly with our senior consulting desk for confidential, one-on-one professional guidance.
                     </p>
-                    <a href="{{ route('contact') }}" class="roy-blog-bottom-cta-btn" style="width: 100%; justify-content: center; padding: 12px 20px; font-size: 14.5px; box-shadow: none;">
+                    <a href="{{ route('contact') }}" class="roy-sidebar-cta-btn">
                         <span>Contact Our Desk</span>
-                        <img src="{{ asset('images/right-uparrow.svg') }}" alt="Arrow" style="width: 12px; height: 12px;">
+                        <img src="{{ asset('images/right-uparrow.svg') }}" alt="Arrow" class="roy-sidebar-cta-arrow">
                     </a>
                 </div>
 
                 {{-- Topics List Widget --}}
                 <div class="roy-sidebar-card">
-                    <h3 class="roy-sidebar-title"><i class="fa-solid fa-folder-open" style="color: #03594A;"></i> Topic Categories</h3>
+                    <h3 class="roy-sidebar-title"><i class="fa-solid fa-folder-open roy-sidebar-cat-icon"></i> Topic Categories</h3>
                     <ul class="roy-sidebar-cat-list">
                         @foreach($categories as $cat)
                             <li>
@@ -148,10 +148,10 @@
 
                 {{-- Search Widget --}}
                 <div class="roy-sidebar-card">
-                    <h3 class="roy-sidebar-title"><i class="fa-solid fa-magnifying-glass" style="color: #03594A;"></i> Search Articles</h3>
-                    <form action="{{ route('blog.index') }}" method="GET" style="display: flex; gap: 8px;">
-                        <input type="text" name="keyword" placeholder="Search keywords..." style="flex: 1; border: 1.5px solid #cbd5e1; border-radius: 50px; padding: 10px 18px; font-size: 14px; outline: none; font-family: var(--font-plus-jakarta, sans-serif);">
-                        <button type="submit" style="background: #03594A; color: #fff; border: none; border-radius: 50px; padding: 10px 18px; font-weight: 700; font-size: 13.5px; cursor: pointer;">Go</button>
+                    <h3 class="roy-sidebar-title"><i class="fa-solid fa-magnifying-glass roy-sidebar-search-icon"></i> Search Articles</h3>
+                    <form action="{{ route('blog.index') }}" method="GET" class="roy-sidebar-search-form">
+                        <input type="text" name="keyword" placeholder="Search keywords..." class="roy-sidebar-search-input">
+                        <button type="submit" class="roy-sidebar-search-btn">Go</button>
                     </form>
                 </div>
             </aside>
@@ -163,14 +163,14 @@
 @if($relatedPosts->count() > 0)
 <section class="roy-related-section">
     <div class="container">
-        <div class="blog-section-title-wrap" style="display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 16px;" data-aos="fade-up">
+        <div class="blog-section-title-wrap roy-related-title-wrap" data-aos="fade-up">
             <div>
                 <h2>Related Publications</h2>
                 <p>Continue exploring curated insights and strategic guidance</p>
             </div>
             <a href="{{ route('blog.index') }}" class="blog-tab-btn">
                 <span>View All Articles</span>
-                <img src="{{ asset('images/right-uparrow.svg') }}" alt="Arrow" style="width: 12px; height: 12px;">
+                <img src="{{ asset('images/right-uparrow.svg') }}" alt="Arrow" class="roy-btn-arrow-sm">
             </a>
         </div>
 
@@ -207,11 +207,11 @@
 
                         <div class="roy-blog-card-bottom">
                             <div class="roy-blog-card-author">
-                                <span style="font-size: 13px; color: #64748b;">By {{ $related->author_name }}</span>
+                                <span class="roy-blog-card-author-name">By {{ $related->author_name }}</span>
                             </div>
                             <a href="{{ route('blog.show', $related->slug) }}" class="roy-blog-card-btn">
                                 <span>Read</span>
-                                <img src="{{ asset('images/right-uparrow.svg') }}" alt="Arrow" style="width: 12px; height: 12px;">
+                                <img src="{{ asset('images/right-uparrow.svg') }}" alt="Arrow" class="roy-btn-arrow-sm">
                             </a>
                         </div>
                     </div>
@@ -222,4 +222,5 @@
 </section>
 @endif
 @endsection
+
 

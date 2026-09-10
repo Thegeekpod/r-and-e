@@ -46,9 +46,9 @@
         </form>
 
         @if(request('keyword'))
-            <div style="margin: -10px 0 25px 10px; font-size: 14.5px; color: #475569; font-family: var(--font-plus-jakarta, sans-serif);">
-                Showing search results for: <strong style="color: #03594A;">"{{ request('keyword') }}"</strong>
-                — <a href="{{ isset($currentCategory) ? route('blog.category', $currentCategory->slug) : route('blog.index') }}" style="color: #e11d48; text-decoration: underline; font-weight: 700; margin-left: 6px;">Clear Search</a>
+            <div class="blog-search-results-info">
+                Showing search results for: <strong class="blog-search-keyword">"{{ request('keyword') }}"</strong>
+                — <a href="{{ isset($currentCategory) ? route('blog.category', $currentCategory->slug) : route('blog.index') }}" class="blog-search-clear-link">Clear Search</a>
             </div>
         @endif
 
@@ -104,7 +104,7 @@
                     </div>
 
                     <a href="{{ route('blog.show', $featuredPost->slug) }}" class="blog-spotlight-btn">
-                        Read Full Publication <img src="{{ asset('images/right-uparrow.svg') }}" alt="Arrow" style="width: 14px; height: 14px;">
+                        Read Full Publication <img src="{{ asset('images/right-uparrow.svg') }}" alt="Arrow" class="blog-spotlight-btn-arrow">
                     </a>
                 </div>
             </div>
@@ -160,24 +160,24 @@
 
                         <div class="roy-blog-card-bottom">
                             <div class="roy-blog-card-author">
-                                <i class="fa-solid fa-pen-nib" style="color: #03594A;"></i>
+                                <i class="fa-solid fa-pen-nib roy-author-pen-icon"></i>
                                 <span>{{ $post->author_name }}</span>
                             </div>
                             <a href="{{ route('blog.show', $post->slug) }}" class="roy-blog-card-btn">
                                 <span>Read</span>
-                                <img src="{{ asset('images/right-uparrow.svg') }}" alt="Arrow" style="width: 12px; height: 12px;">
+                                <img src="{{ asset('images/right-uparrow.svg') }}" alt="Arrow" class="roy-card-btn-arrow">
                             </a>
                         </div>
                     </div>
                 </article>
             @empty
-                <div style="grid-column: 1 / -1; background: #ffffff; border-radius: 32px; border: 1.5px solid #e2e8f0; padding: 60px 40px; text-align: center;" data-aos="fade-up">
-                    <div style="width: 70px; height: 70px; margin: 0 auto 20px auto; border-radius: 50%; background: #e5faf5; color: #03594A; display: flex; align-items: center; justify-content: center; font-size: 28px;">
+                <div class="roy-blog-empty-box" data-aos="fade-up">
+                    <div class="roy-blog-empty-icon">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </div>
-                    <h3 style="font-size: 24px; font-weight: 800; color: #111; font-family: var(--font-soliden); margin-bottom: 10px;">No Publications Found</h3>
-                    <p style="color: #64748b; font-size: 16px; max-width: 450px; margin: 0 auto 24px auto;">We couldn't find any articles matching your search criteria. Try using different keywords or browse all categories.</p>
-                    <a href="{{ route('blog.index') }}" class="btn-learn-more" style="display: inline-block;">
+                    <h3 class="roy-blog-empty-title">No Publications Found</h3>
+                    <p class="roy-blog-empty-desc">We couldn't find any articles matching your search criteria. Try using different keywords or browse all categories.</p>
+                    <a href="{{ route('blog.index') }}" class="btn-learn-more roy-blog-empty-btn">
                         View All Articles
                     </a>
                 </div>
@@ -186,11 +186,12 @@
 
         {{-- Custom Pagination --}}
         @if($posts->hasPages())
-            <div style="margin-top: 50px; display: flex; justify-content: center;">
+            <div class="roy-blog-pagination-wrap">
                 {{ $posts->links() }}
             </div>
         @endif
     </div>
 </section>
 @endsection
+
 
