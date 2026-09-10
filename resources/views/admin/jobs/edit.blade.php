@@ -51,8 +51,8 @@
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label fw-bold">Company / Hospital Name <span class="text-danger">*</span></label>
-                            <input type="text" name="company_name" class="form-control" value="{{ old('company_name', $job->company_name) }}" required>
+                            <label class="form-label fw-bold">Company / Hospital Name <small class="text-muted fw-normal">(Optional)</small></label>
+                            <input type="text" name="company_name" class="form-control" value="{{ old('company_name', $job->company_name) }}">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label fw-bold">Location <span class="text-danger">*</span></label>

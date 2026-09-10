@@ -73,7 +73,7 @@
                                 <div><i class="fa-regular fa-clock me-1 text-primary"></i> {{ $job->type }}</div>
                                 <small class="text-muted"><i class="fa-solid fa-location-dot me-1 text-danger"></i> {{ $job->location }}</small>
                             </td>
-                            <td><span class="fw-medium text-dark">{{ $job->company_name }}</span></td>
+                            <td><span class="fw-medium text-dark">{{ $job->company_name ?: '—' }}</span></td>
                             <td>
                                 <a href="{{ route('admin.applications.index', ['job_id' => $job->id]) }}" class="badge bg-info text-dark text-decoration-none px-3 py-2">
                                     <i class="fa-solid fa-users me-1"></i> {{ $job->applications_count }} Applicants

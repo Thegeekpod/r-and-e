@@ -30,7 +30,9 @@
             </div>
 
             <h1 class="job-details-title">{{ $job->title }}</h1>
-            <p class="job-company-name"><i class="fa-solid fa-building job-icon-space"></i> {{ $job->company_name }}</p>
+            @if(!empty($job->company_name))
+                <p class="job-company-name"><i class="fa-solid fa-building job-icon-space"></i> {{ $job->company_name }}</p>
+            @endif
 
             <div class="job-meta-row">
                 <div class="job-meta-item">

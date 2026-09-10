@@ -115,7 +115,9 @@
                     <h3 class="job-card-title">{{ $job->title }}</h3>
                     <span class="job-card-type">{{ $job->type }}</span>
                 </div>
-                <p class="job-card-company">{{ $job->company_name }}</p>
+                @if(!empty($job->company_name))
+                    <p class="job-card-company">{{ $job->company_name }}</p>
+                @endif
                 <div class="job-card-meta">
                     <span><i class="fa-solid fa-location-dot" style="color:#e53935;"></i> {{ $job->location }}</span>
                     @if($job->salary_range)
