@@ -1,7 +1,7 @@
 /* Global Swiper styles for Testimonials */
 html,
 body {
-    overflow-x: hidden !important;
+    overflow-x: clip !important;
     position: relative;
     width: 100%;
 }

@@ -22,6 +22,7 @@
                     <li><a href="{{ route('education') }}">Education</a></li>
                     <li><a href="{{ route('placement') }}">Placement</a></li>
                     <li><a href="{{ route('about') }}">About Us</a></li>
+                    <li><a href="{{ route('blog.index') }}">Blog &amp; Insights</a></li>
                     <li><a href="{{ route('contact') }}">Contact Us</a></li>
                 </ul>
             </div>

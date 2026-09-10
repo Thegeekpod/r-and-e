@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BlogCategory;
+use App\Models\BlogPost;
 use App\Models\ClientPartner;
 use App\Models\ContactMessage;
 use App\Models\JobApplication;
 use App\Models\JobCategory;
 use App\Models\JobPosting;
 use App\Models\SiteSetting;
-
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
 
@@ -211,6 +212,129 @@ class PageController extends Controller
         return view('pages.about', compact('settings'));
     }
 
+
+    public function blog(Request $request)
+    {
+        $settings = SiteSetting::all()->pluck('value', 'key');
+
+        $query = BlogPost::with('category')->where('status', 'published');
+
+        if ($request->filled('keyword')) {
+            $keyword = $request->input('keyword');
+            $query->where(function ($q) use ($keyword) {
+                $q->where('title', 'like', "%{$keyword}%")
+                  ->orWhere('excerpt', 'like', "%{$keyword}%")
+                  ->orWhere('content', 'like', "%{$keyword}%")
+                  ->orWhere('tags', 'like', "%{$keyword}%");
+            });
+        }
+
+        if ($request->filled('category')) {
+            $catSlug = $request->input('category');
+            $query->whereHas('category', function ($q) use ($catSlug) {
+                $q->where('slug', $catSlug);
+            });
+        }
+
+        $featuredPost = BlogPost::with('category')
+            ->where('status', 'published')
+            ->where('is_featured', true)
+            ->latest('published_at')
+            ->first();
+
+        // If search or filter is active, don't show the featured spotlight block above grid
+        if ($request->filled('keyword') || $request->filled('category')) {
+            $featuredPost = null;
+        }
+
+        $posts = $query->latest('published_at')->paginate(9)->withQueryString();
+
+        $categories = BlogCategory::where('status', 'active')
+            ->withCount(['posts' => function ($q) {
+                $q->where('status', 'published');
+            }])
+            ->orderBy('order')
+            ->get();
+
+        $recentPosts = BlogPost::where('status', 'published')->latest('published_at')->take(4)->get();
+
+        return view('pages.blog', compact('settings', 'posts', 'featuredPost', 'categories', 'recentPosts'));
+    }
+
+    public function blogCategory(Request $request, $slug)
+    {
+        $settings = SiteSetting::all()->pluck('value', 'key');
+        $currentCategory = BlogCategory::where('slug', $slug)->where('status', 'active')->firstOrFail();
+
+        $query = BlogPost::with('category')->where('status', 'published')->where('category_id', $currentCategory->id);
+
+        if ($request->filled('keyword')) {
+            $keyword = $request->input('keyword');
+            $query->where(function ($q) use ($keyword) {
+                $q->where('title', 'like', "%{$keyword}%")
+                  ->orWhere('excerpt', 'like', "%{$keyword}%")
+                  ->orWhere('content', 'like', "%{$keyword}%")
+                  ->orWhere('tags', 'like', "%{$keyword}%");
+            });
+        }
+
+        $posts = $query->latest('published_at')->paginate(9)->withQueryString();
+
+        $categories = BlogCategory::where('status', 'active')
+            ->withCount(['posts' => function ($q) {
+                $q->where('status', 'published');
+            }])
+            ->orderBy('order')
+            ->get();
+
+        $recentPosts = BlogPost::where('status', 'published')->latest('published_at')->take(4)->get();
+
+        return view('pages.blog', [
+            'settings'        => $settings,
+            'posts'           => $posts,
+            'featuredPost'    => null,
+            'categories'      => $categories,
+            'recentPosts'     => $recentPosts,
+            'currentCategory' => $currentCategory,
+        ]);
+    }
+
+    public function showBlogPost($slug)
+    {
+        $settings = SiteSetting::all()->pluck('value', 'key');
+        $post = BlogPost::with('category')->where('slug', $slug)->where('status', 'published')->firstOrFail();
+        $post->increment('views_count');
+
+        $relatedPosts = BlogPost::where('status', 'published')
+            ->where('id', '!=', $post->id)
+            ->where(function ($q) use ($post) {
+                if ($post->category_id) {
+                    $q->where('category_id', $post->category_id);
+                }
+            })
+            ->latest('published_at')
+            ->take(3)
+            ->get();
+
+        if ($relatedPosts->count() < 3) {
+            $extra = BlogPost::where('status', 'published')
+                ->where('id', '!=', $post->id)
+                ->whereNotIn('id', $relatedPosts->pluck('id'))
+                ->latest('published_at')
+                ->take(3 - $relatedPosts->count())
+                ->get();
+            $relatedPosts = $relatedPosts->concat($extra);
+        }
+
+        $categories = BlogCategory::where('status', 'active')
+            ->withCount(['posts' => function ($q) {
+                $q->where('status', 'published');
+            }])
+            ->orderBy('order')
+            ->get();
+
+        return view('pages.blog-details', compact('settings', 'post', 'relatedPosts', 'categories'));
+    }
 
     public function contact()
     {

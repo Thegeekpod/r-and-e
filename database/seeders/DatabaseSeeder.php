@@ -346,6 +346,8 @@ class DatabaseSeeder extends Seeder
         $this->call(ContactSettingsSeeder::class);
         $this->call(JobCategorySeeder::class);
         $this->call(JobPostingSeeder::class);
+        $this->call(SeoSettingSeeder::class);
+        $this->call(BlogSeeder::class);
     }
 }
 

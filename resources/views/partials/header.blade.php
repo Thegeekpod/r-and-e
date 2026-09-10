@@ -14,6 +14,7 @@
                 <li><a href="{{ route('education') }}" class="{{ request()->routeIs('education') ? 'active' : '' }}">Education</a></li>
                 <li><a href="{{ route('placement') }}" class="{{ request()->routeIs('placement') ? 'active' : '' }}">Placement</a></li>
                 <li><a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'active' : '' }}">About Us</a></li>
+                <li><a href="{{ route('blog.index') }}" class="{{ request()->routeIs('blog.*') ? 'active' : '' }}">Blog</a></li>
                 <li><a href="{{ route('contact') }}" class="btn-contact {{ request()->routeIs('contact') ? 'active' : '' }}">Contact Us</a></li>
             </ul>
         </nav>

@@ -4,7 +4,30 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@yield('title', 'Roy Infinity Edge Consulting | Finance, Education, Placement')</title>
+    
+    {{-- Dynamic SEO Title --}}
+    <title>{{ !empty($seoData?->meta_title) ? $seoData->meta_title : ($__env->yieldContent('title') ?: ($settings['site_title'] ?? 'Roy Infinity Edge Consulting | Finance, Education, Placement')) }}</title>
+    
+    {{-- Dynamic SEO Meta Description --}}
+    @if(!empty($seoData?->meta_description))
+        <meta name="description" content="{{ $seoData->meta_description }}" />
+    @elseif(!empty($settings['site_description']))
+        <meta name="description" content="{{ $settings['site_description'] }}" />
+    @endif
+
+    {{-- Canonical & OpenGraph Metadata --}}
+    <link rel="canonical" href="{{ url()->current() }}" />
+    <meta property="og:title" content="{{ !empty($seoData?->meta_title) ? $seoData->meta_title : ($__env->yieldContent('title') ?: ($settings['site_title'] ?? 'Roy Infinity Edge Consulting')) }}" />
+    @if(!empty($seoData?->meta_description))
+        <meta property="og:description" content="{{ $seoData->meta_description }}" />
+    @endif
+    <meta property="og:url" content="{{ url()->current() }}" />
+    <meta property="og:type" content="website" />
+
+    {{-- Injected Custom Head Scripts / Tags --}}
+    @if(!empty($seoData?->other_scripts))
+        {!! $seoData->other_scripts !!}
+    @endif
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />

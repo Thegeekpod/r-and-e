@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\AboutController as AdminAboutController;
+use App\Http\Controllers\Admin\BlogCategoryController as AdminBlogCategoryController;
+use App\Http\Controllers\Admin\BlogPostController as AdminBlogPostController;
 use App\Http\Controllers\Admin\ClientController as AdminClientController;
 use App\Http\Controllers\Admin\ContactContentController as AdminContactContentController;
 use App\Http\Controllers\Admin\ContactMessageController as AdminContactMessageController;
@@ -14,6 +16,7 @@ use App\Http\Controllers\Admin\JobCategoryController as AdminJobCategoryControll
 use App\Http\Controllers\Admin\JobPostingController as AdminJobPostingController;
 use App\Http\Controllers\Admin\PageStatusController as AdminPageStatusController;
 use App\Http\Controllers\Admin\PlacementController as AdminPlacementController;
+use App\Http\Controllers\Admin\SeoSettingController as AdminSeoSettingController;
 use App\Http\Controllers\Admin\SettingController as AdminSettingController;
 use App\Http\Controllers\Admin\TestimonialController as AdminTestimonialController;
 
@@ -30,6 +33,12 @@ Route::get('/jobs/{slug}', [PageController::class, 'showJob'])->name('jobs.show'
 
 Route::post('/jobs/{job}/apply', [PageController::class, 'applyJob'])->name('jobs.apply');
 Route::get('/about', [PageController::class, 'about'])->name('about');
+
+// Blog & Articles Front-End Routes
+Route::get('/blog', [PageController::class, 'blog'])->name('blog.index');
+Route::get('/blog/category/{slug}', [PageController::class, 'blogCategory'])->name('blog.category');
+Route::get('/blog/{slug}', [PageController::class, 'showBlogPost'])->name('blog.show');
+
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::post('/contact', [PageController::class, 'storeContact'])->name('contact.store');
 
@@ -99,6 +108,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Clients Management
         Route::resource('clients', AdminClientController::class)->except(['show', 'create', 'edit']);
+
+        // Blog & Editorial Management
+        Route::resource('blog-categories', AdminBlogCategoryController::class)->except(['create', 'show', 'edit']);
+        Route::resource('blog-posts', AdminBlogPostController::class)->except(['show']);
+
+        // Site SEO Management
+        Route::resource('seo', AdminSeoSettingController::class)->except(['show']);
 
         // General Site Settings
         Route::get('/settings', [AdminSettingController::class, 'index'])->name('settings.index');

@@ -347,6 +347,18 @@
                 </a>
             </li>
 
+            <li class="nav-header">Blog & Editorial</li>
+            <li class="nav-item">
+                <a href="{{ route('admin.blog-categories.index') }}" class="nav-link {{ request()->routeIs('admin.blog-categories.*') ? 'active' : '' }}">
+                    <i class="fa-solid fa-folder-tree text-warning"></i> Blog Categories
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.blog-posts.index') }}" class="nav-link {{ request()->routeIs('admin.blog-posts.*') ? 'active' : '' }}">
+                    <i class="fa-solid fa-newspaper text-info"></i> Blog Articles
+                </a>
+            </li>
+
             <li class="nav-header">Job Portal & Recruitment</li>
             <li class="nav-item">
                 <a href="{{ route('admin.job-categories.index') }}" class="nav-link {{ request()->routeIs('admin.job-categories.*') ? 'active' : '' }}">
@@ -393,6 +405,11 @@
             <li class="nav-item">
                 <a href="{{ route('admin.pages.index') }}" class="nav-link {{ request()->routeIs('admin.pages.*') ? 'active' : '' }}">
                     <i class="fa-solid fa-toggle-on text-success"></i> Page Visibility Manager
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.seo.index') }}" class="nav-link {{ request()->routeIs('admin.seo.*') ? 'active' : '' }}">
+                    <i class="fa-solid fa-magnifying-glass text-info"></i> SEO Settings
                 </a>
             </li>
             <li class="nav-item">
