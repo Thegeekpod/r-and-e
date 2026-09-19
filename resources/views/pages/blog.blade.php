@@ -186,8 +186,8 @@
 
         {{-- Custom Pagination --}}
         @if($posts->hasPages())
-            <div class="roy-blog-pagination-wrap">
-                {{ $posts->links() }}
+            <div class="jobs-pagination-wrapper roy-blog-pagination-wrap" data-aos="fade-up">
+                {{ $posts->links('partials.pagination') }}
             </div>
         @endif
     </div>

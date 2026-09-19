@@ -104,7 +104,7 @@
                             <div class="p-3 border rounded-3 bg-light h-100">
                                 <div class="d-flex align-items-center gap-2 mb-3">
                                     <span class="badge bg-primary p-2"><i class="fa-solid fa-phone-volume"></i></span>
-                                    <h6 class="fw-bold m-0">Card 1: Phone Call</h6>
+                                    <h6 class="fw-bold m-0">Card 1: Call Specialists (3 Helplines)</h6>
                                 </div>
                                 <div class="mb-2">
                                     <label class="form-label small">Card Title</label>
@@ -116,10 +116,20 @@
                                     <input type="text" name="contact_card1_subtitle" class="form-control form-control-sm"
                                         value="{{ $settings['contact_card1_subtitle'] ?? 'Mon - Sat from 9:00 AM to 7:00 PM' }}">
                                 </div>
-                                <div>
-                                    <label class="form-label small">Display Phone Number</label>
-                                    <input type="text" name="contact_card1_phone" class="form-control form-control-sm"
-                                        value="{{ $settings['contact_card1_phone'] ?? ($settings['contact_phone'] ?? '(406) 555-0120') }}">
+                                <div class="mb-2">
+                                    <label class="form-label small text-success fw-bold"><i class="fa-solid fa-calculator me-1"></i> Finance Helpline</label>
+                                    <input type="text" name="contact_card1_phone_finance" class="form-control form-control-sm"
+                                        value="{{ $settings['contact_card1_phone_finance'] ?? ($settings['contact_phone_finance'] ?? '+91 7797990099') }}">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label small text-primary fw-bold"><i class="fa-solid fa-graduation-cap me-1"></i> Education Helpline</label>
+                                    <input type="text" name="contact_card1_phone_education" class="form-control form-control-sm"
+                                        value="{{ $settings['contact_card1_phone_education'] ?? ($settings['contact_phone_education'] ?? '+91 7797990099') }}">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label small text-warning fw-bold"><i class="fa-solid fa-briefcase me-1"></i> Placement Helpline</label>
+                                    <input type="text" name="contact_card1_phone_placement" class="form-control form-control-sm"
+                                        value="{{ $settings['contact_card1_phone_placement'] ?? ($settings['contact_phone_placement'] ?? '+91 7797990099') }}">
                                 </div>
                             </div>
                         </div>

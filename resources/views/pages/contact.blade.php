@@ -20,53 +20,73 @@
 <!-- Contact Main Container -->
 <section class="contact-content-section pt-100">
     <div class="container">
-        <!-- 3 Quick Cards -->
-        <div class="contact-quick-cards" data-aos="fade-up" data-aos-delay="300">
-            <!-- Card 1: Phone -->
+        <!-- 2-Column Balanced Quick Contact Hub -->
+        <div class="contact-hub-grid" data-aos="fade-up" data-aos-delay="300">
+            <!-- Left Column: Department Helplines Main Card -->
             @php
-                $phone = $settings['contact_card1_phone'] ?? ($settings['contact_phone'] ?? '(406) 555-0120');
+                $phoneFinance = $settings['contact_card1_phone_finance'] ?? ($settings['contact_phone_finance'] ?? '+91 7797990099');
+                $phoneEducation = $settings['contact_card1_phone_education'] ?? ($settings['contact_phone_education'] ?? '+91 7797990099');
+                $phonePlacement = $settings['contact_card1_phone_placement'] ?? ($settings['contact_phone_placement'] ?? '+91 7797990099');
                 $email = $settings['contact_card2_email'] ?? ($settings['contact_email'] ?? 'hey@forestin.com');
                 $address = $settings['contact_card3_address'] ?? ($settings['contact_address'] ?? '2972 Westheimer Rd. Santa Ana, Illinois 85486');
             @endphp
-            <div class="contact-quick-card">
-                <div>
+            
+            <div class="contact-hub-main-card">
+                <div class="contact-hub-header">
                     <div class="contact-card-icon">
                         <i class="fa-solid fa-phone-volume"></i>
                     </div>
-                    <h4>{{ $settings['contact_card1_title'] ?? 'Call Our Specialists' }}</h4>
-                    <p>{{ $settings['contact_card1_subtitle'] ?? 'Mon - Sat from 9:00 AM to 7:00 PM' }}</p>
+                    <div>
+                        <h4>{{ $settings['contact_card1_title'] ?? 'Call Our Specialists' }}</h4>
+                        <p>{{ $settings['contact_card1_subtitle'] ?? 'Mon - Sat from 9:00 AM to 7:00 PM' }}</p>
+                    </div>
                 </div>
-                <a href="tel:{{ preg_replace('/[^0-9+]/', '', $phone) }}" class="contact-link">
-                    {{ $phone }} <i class="fa-solid fa-arrow-right"></i>
-                </a>
+                
+                <div class="contact-specialist-phones">
+                    <a href="tel:{{ preg_replace('/[^0-9+]/', '', $phoneFinance) }}" class="contact-phone-row" title="Call Finance Helpline">
+                        <span class="phone-dept-name"><i class="fa-solid fa-fw fa-calculator"></i> Finance &amp; Taxation</span>
+                        <span class="phone-dept-number">{{ $phoneFinance }} <i class="fa-solid fa-arrow-right"></i></span>
+                    </a>
+                    <a href="tel:{{ preg_replace('/[^0-9+]/', '', $phoneEducation) }}" class="contact-phone-row" title="Call Education Helpline">
+                        <span class="phone-dept-name"><i class="fa-solid fa-fw fa-graduation-cap"></i> Education Guidance</span>
+                        <span class="phone-dept-number">{{ $phoneEducation }} <i class="fa-solid fa-arrow-right"></i></span>
+                    </a>
+                    <a href="tel:{{ preg_replace('/[^0-9+]/', '', $phonePlacement) }}" class="contact-phone-row" title="Call Placement Helpline">
+                        <span class="phone-dept-name"><i class="fa-solid fa-fw fa-briefcase"></i> Placement &amp; Hiring</span>
+                        <span class="phone-dept-number">{{ $phonePlacement }} <i class="fa-solid fa-arrow-right"></i></span>
+                    </a>
+                </div>
             </div>
 
-            <!-- Card 2: Email -->
-            <div class="contact-quick-card">
-                <div>
-                    <div class="contact-card-icon">
+            <!-- Right Column: 2 Stacked Horizontal Cards (Email & Location) -->
+            <div class="contact-hub-side-stack">
+                <!-- Card 2: Email -->
+                <div class="contact-side-card">
+                    <div class="contact-side-icon">
                         <i class="fa-solid fa-envelope-open-text"></i>
                     </div>
-                    <h4>{{ $settings['contact_card2_title'] ?? 'Send Us an Email' }}</h4>
-                    <p>{{ $settings['contact_card2_subtitle'] ?? 'Our team replies within 24 business hours.' }}</p>
+                    <div class="contact-side-body">
+                        <h4>{{ $settings['contact_card2_title'] ?? 'Send Us an Email' }}</h4>
+                        <p>{{ $settings['contact_card2_subtitle'] ?? 'Our team replies within 24 business hours.' }}</p>
+                        <a href="mailto:{{ $email }}" class="contact-link">
+                            {{ $email }} <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
                 </div>
-                <a href="mailto:{{ $email }}" class="contact-link">
-                    {{ $email }} <i class="fa-solid fa-arrow-right"></i>
-                </a>
-            </div>
 
-            <!-- Card 3: Location -->
-            <div class="contact-quick-card">
-                <div>
-                    <div class="contact-card-icon">
+                <!-- Card 3: Location -->
+                <div class="contact-side-card">
+                    <div class="contact-side-icon">
                         <i class="fa-solid fa-location-dot"></i>
                     </div>
-                    <h4>{{ $settings['contact_card3_title'] ?? 'Main Headquarters' }}</h4>
-                    <p>{{ $settings['contact_card3_subtitle'] ?? 'Visit our corporate consultation office.' }}</p>
+                    <div class="contact-side-body">
+                        <h4>{{ $settings['contact_card3_title'] ?? 'Main Headquarters' }}</h4>
+                        <p>{{ $settings['contact_card3_subtitle'] ?? 'Visit our corporate consultation office.' }}</p>
+                        <span class="contact-address-text">
+                            {{ $address }}
+                        </span>
+                    </div>
                 </div>
-                <span class="contact-link text-dark" style="font-size: 15px; font-weight: 600;">
-                    {{ $address }}
-                </span>
             </div>
         </div>
 

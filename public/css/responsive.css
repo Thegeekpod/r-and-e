@@ -1886,38 +1886,73 @@ body {
         padding-top: 30px !important;
     }
 
-    /* -- 3 Quick Cards: stack to 1 column -- */
-    .contact-quick-cards {
+    /* -- Quick Contact Hub: stack on mobile -- */
+    .contact-hub-grid {
         grid-template-columns: 1fr;
         gap: 16px;
         margin-bottom: 36px;
     }
 
-    .contact-quick-card {
-        padding: 24px 20px;
+    .contact-hub-main-card {
+        padding: 22px 18px;
         border-radius: 20px;
     }
 
+    .contact-hub-header {
+        gap: 12px;
+        margin-bottom: 8px;
+    }
+
     .contact-card-icon {
-        width: 48px;
-        height: 48px;
-        font-size: 20px;
-        border-radius: 14px;
-        margin-bottom: 14px;
-    }
-
-    .contact-quick-card h4 {
+        width: 46px;
+        height: 46px;
         font-size: 18px;
-        margin-bottom: 6px;
+        border-radius: 12px;
     }
 
-    .contact-quick-card p {
+    .contact-hub-header h4 {
+        font-size: 18px;
+    }
+
+    .contact-hub-header p {
         font-size: 13px;
-        margin-bottom: 12px;
     }
 
-    .contact-quick-card .contact-link {
-        font-size: 15px;
+    .contact-phone-row {
+        padding: 9px 0;
+    }
+
+    .contact-phone-row .phone-dept-name {
+        font-size: 13.5px;
+    }
+
+    .contact-phone-row .phone-dept-number {
+        font-size: 14px;
+    }
+
+    .contact-hub-side-stack {
+        gap: 14px;
+    }
+
+    .contact-side-card {
+        padding: 18px 16px;
+        border-radius: 18px;
+        gap: 14px;
+    }
+
+    .contact-side-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 18px;
+        border-radius: 12px;
+    }
+
+    .contact-side-body h4 {
+        font-size: 17px;
+    }
+
+    .contact-side-body p {
+        font-size: 12.5px;
     }
 
     /* -- Main Grid: stack form + info panel -- */
