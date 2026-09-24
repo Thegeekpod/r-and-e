@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ClientController as AdminClientController;
 use App\Http\Controllers\Admin\ContactContentController as AdminContactContentController;
 use App\Http\Controllers\Admin\ContactMessageController as AdminContactMessageController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\EdgeNetworkSubmissionController as AdminEdgeNetworkSubmissionController;
 use App\Http\Controllers\Admin\EducationController as AdminEducationController;
 use App\Http\Controllers\Admin\FinanceController as AdminFinanceController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
@@ -41,6 +42,9 @@ Route::get('/blog/{slug}', [PageController::class, 'showBlogPost'])->name('blog.
 
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::post('/contact', [PageController::class, 'storeContact'])->name('contact.store');
+
+// EDGE Accounts Network Form Submissions
+Route::post('/edge-network/submit', [PageController::class, 'submitEdgeNetwork'])->name('edge-network.submit');
 
 
 // Admin Authentication Routes
@@ -101,6 +105,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/applications/{application}/status', [AdminJobApplicationController::class, 'updateStatus'])->name('applications.updateStatus');
         Route::get('/applications/{application}/download-resume', [AdminJobApplicationController::class, 'downloadResume'])->name('applications.downloadResume');
         Route::delete('/applications/{application}', [AdminJobApplicationController::class, 'destroy'])->name('applications.destroy');
+
+        // EDGE Accounts Network Management
+        Route::get('/edge-network', [AdminEdgeNetworkSubmissionController::class, 'index'])->name('edge-network.index');
+        Route::get('/edge-network/{submission}', [AdminEdgeNetworkSubmissionController::class, 'show'])->name('edge-network.show');
+        Route::post('/edge-network/{submission}/status', [AdminEdgeNetworkSubmissionController::class, 'updateStatus'])->name('edge-network.updateStatus');
+        Route::post('/edge-network/{submission}/toggle-read', [AdminEdgeNetworkSubmissionController::class, 'toggleRead'])->name('edge-network.toggleRead');
+        Route::get('/edge-network/{submission}/download/{fileType}', [AdminEdgeNetworkSubmissionController::class, 'downloadFile'])->name('edge-network.downloadFile');
+        Route::delete('/edge-network/{submission}', [AdminEdgeNetworkSubmissionController::class, 'destroy'])->name('edge-network.destroy');
 
 
         // Testimonials Management

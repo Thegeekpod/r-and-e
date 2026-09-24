@@ -44,6 +44,11 @@
                 <i class="fa-solid fa-bullhorn me-2"></i> 5. CTA & Meta
             </button>
         </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="edge-tab" data-bs-toggle="tab" data-bs-target="#edge-pane" type="button" role="tab">
+                <i class="fa-solid fa-network-wired me-2"></i> 6. EDGE Accounts Network
+            </button>
+        </li>
     </ul>
 
     <!-- Tab Contents -->
@@ -354,6 +359,167 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- 6. EDGE ACCOUNTS NETWORK SECTION -->
+        <div class="tab-pane fade" id="edge-pane" role="tabpanel">
+            
+            {{-- Header & Branding --}}
+            <div class="admin-card mb-4">
+                <div class="admin-card-header">
+                    <h5><i class="fa-solid fa-gem text-success me-2"></i> Network Header, Branding &amp; Images</h5>
+                </div>
+                <div class="admin-card-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Top Badge Text</label>
+                            <input type="text" name="finance_edge_badge_text" class="form-control" value="{{ $settings['finance_edge_badge_text'] ?? 'A Product of Vriddhi Edge' }}">
+                            <small class="text-muted">Displays inside the top pill badge.</small>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Subtitle / Tagline</label>
+                            <input type="text" name="finance_edge_subtitle" class="form-control" value="{{ $settings['finance_edge_subtitle'] ?? 'Accounting Expertise. On Demand.' }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Brand Title Prefix (Bold)</label>
+                            <input type="text" name="finance_edge_title_bold" class="form-control" value="{{ $settings['finance_edge_title_bold'] ?? 'EDGE' }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Brand Title Suffix (Light)</label>
+                            <input type="text" name="finance_edge_title_light" class="form-control" value="{{ $settings['finance_edge_title_light'] ?? 'Accounts Network' }}">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label fw-bold">Lead Description</label>
+                            <textarea name="finance_edge_lead_desc" rows="2" class="form-control">{{ $settings['finance_edge_lead_desc'] ?? 'A professional online accounting network connecting credible accounting professionals with businesses that need reliable accounting support.' }}</textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Left Vertical Banner Text (Multiline)</label>
+                            <textarea name="finance_edge_side_tag" rows="3" class="form-control">{{ $settings['finance_edge_side_tag'] ?? "YOUR\nSKILLS\nCAN CREATE\nMORE\nOPPORTUNITIES" }}</textarea>
+                            <small class="text-muted">Each line will wrap vertically on the left banner.</small>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Right Decorative Script Accent (Multiline)</label>
+                            <textarea name="finance_edge_script_accent" rows="3" class="form-control">{{ $settings['finance_edge_script_accent'] ?? "Skills\nMeet\nOpportunity" }}</textarea>
+                            <small class="text-muted">Stylish script accent on the right side.</small>
+                        </div>
+
+                        {{-- Logo Upload --}}
+                        <div class="col-md-6 mt-4">
+                            <label class="form-label fw-bold">Vriddhi Edge Logo (Used in badge, footer &amp; popup)</label>
+                            <input type="file" name="finance_edge_vriddhi_logo" class="form-control" accept="image/*">
+                            <div class="img-preview-box mt-2 p-2 bg-light rounded text-center">
+                                <span class="d-block small text-muted mb-1">Current Logo Preview:</span>
+                                <img src="{{ \App\Models\SiteSetting::getImageUrl('finance_edge_vriddhi_logo', 'images/vriddhi-edge-logo.png') }}" alt="Vriddhi Edge Logo" style="max-height: 55px; width: auto; object-fit: contain;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Dual Cards Configuration --}}
+            <div class="row g-4 mb-4">
+                {{-- Left: Professionals Card --}}
+                <div class="col-lg-6">
+                    <div class="admin-card h-100 mb-0">
+                        <div class="admin-card-header bg-success-subtle">
+                            <h5 class="text-success"><i class="fa-solid fa-user-graduate me-2"></i> Left Card: For Accounting Professionals</h5>
+                        </div>
+                        <div class="admin-card-body">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Card Title (Multiline)</label>
+                                <textarea name="finance_edge_pro_title" rows="2" class="form-control">{{ $settings['finance_edge_pro_title'] ?? "FOR ACCOUNTING\nPROFESSIONALS" }}</textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Card Subtitle</label>
+                                <input type="text" name="finance_edge_pro_subtitle" class="form-control" value="{{ $settings['finance_edge_pro_subtitle'] ?? 'Your Expertise. Your Profile. Your Opportunities.' }}">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Checklist Items (One item per line)</label>
+                                <textarea name="finance_edge_pro_points" rows="6" class="form-control">{{ $settings['finance_edge_pro_points'] ?? "Create your professional profile\nShowcase your skills, experience & areas of expertise\nDiscover relevant accounting assignments\nChoose suitable clients and engagements\nWork remotely on project-based or ongoing assignments\nBuild an additional source of professional income" }}</textarea>
+                                <small class="text-muted">Enter each bullet point on a new line.</small>
+                            </div>
+                            <div>
+                                <label class="form-label fw-bold">Button CTA Text</label>
+                                <input type="text" name="finance_edge_pro_btn_text" class="form-control" value="{{ $settings['finance_edge_pro_btn_text'] ?? 'Login / Submit Your Profile' }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Right: Businesses Card --}}
+                <div class="col-lg-6">
+                    <div class="admin-card h-100 mb-0">
+                        <div class="admin-card-header bg-primary-subtle">
+                            <h5 class="text-primary"><i class="fa-solid fa-building-user me-2"></i> Right Card: For Businesses</h5>
+                        </div>
+                        <div class="admin-card-body">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Card Title</label>
+                                <input type="text" name="finance_edge_biz_title" class="form-control" value="{{ $settings['finance_edge_biz_title'] ?? 'FOR BUSINESSES' }}">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Card Subtitle</label>
+                                <input type="text" name="finance_edge_biz_subtitle" class="form-control" value="{{ $settings['finance_edge_biz_subtitle'] ?? 'Find Accounting Support Online.' }}">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Card Short Description</label>
+                                <textarea name="finance_edge_biz_desc" rows="2" class="form-control">{{ $settings['finance_edge_biz_desc'] ?? 'Get access to suitable accounting professionals without the commitment and overhead of hiring a full-time accountant.' }}</textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Checklist Items (One item per line)</label>
+                                <textarea name="finance_edge_biz_points" rows="5" class="form-control">{{ $settings['finance_edge_biz_points'] ?? "Submit your accounting assignment details\nSpecify your requirements and scope of work\nMention your Expected Budget / Professional Fees (Approx.)\nConnect with suitable accounting professionals\nEngage for project-based or ongoing accounting work" }}</textarea>
+                                <small class="text-muted">Enter each bullet point on a new line.</small>
+                            </div>
+                            <div>
+                                <label class="form-label fw-bold">Button CTA Text</label>
+                                <input type="text" name="finance_edge_biz_btn_text" class="form-control" value="{{ $settings['finance_edge_biz_btn_text'] ?? 'Submit Your Requirement' }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Center Badge, Values Bar & Footer Strip --}}
+            <div class="admin-card mb-4">
+                <div class="admin-card-header">
+                    <h5><i class="fa-solid fa-award text-warning me-2"></i> Center Badge, Value Strip &amp; Footer Text</h5>
+                </div>
+                <div class="admin-card-body">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">Center Infinity Badge Text (Multiline)</label>
+                            <textarea name="finance_edge_center_text" rows="2" class="form-control">{{ $settings['finance_edge_center_text'] ?? "TWO SIDES\nONE EDGE" }}</textarea>
+                        </div>
+                        <div class="col-md-8">
+                            <label class="form-label fw-bold">Values Bar - Tagline</label>
+                            <input type="text" name="finance_edge_val_tagline" class="form-control mb-2" value="{{ $settings['finance_edge_val_tagline'] ?? 'A network designed to create value for both professionals and businesses.' }}">
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">Value 1 (Left)</label>
+                            <input type="text" name="finance_edge_val1" class="form-control" value="{{ $settings['finance_edge_val1'] ?? 'Credible Professionals' }}">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">Value 2 (Middle)</label>
+                            <input type="text" name="finance_edge_val2" class="form-control" value="{{ $settings['finance_edge_val2'] ?? 'Relevant Opportunities' }}">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">Value 3 (Right)</label>
+                            <input type="text" name="finance_edge_val3" class="form-control" value="{{ $settings['finance_edge_val3'] ?? 'Flexible Accounting Support' }}">
+                        </div>
+
+                        <div class="col-md-6 mt-3">
+                            <label class="form-label fw-bold">Footer Strip Quote</label>
+                            <textarea name="finance_edge_foot_quote" rows="2" class="form-control">{{ $settings['finance_edge_foot_quote'] ?? 'Not every skilled accounting professional has access to the right clients. And not every business needs — or wants — the cost of a full-time accountant.' }}</textarea>
+                        </div>
+                        <div class="col-md-6 mt-3">
+                            <label class="form-label fw-bold">Footer Powered By Organization</label>
+                            <input type="text" name="finance_edge_foot_powered" class="form-control mb-2" value="{{ $settings['finance_edge_foot_powered'] ?? 'Roy Infinity Edge Consulting' }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
     </div>

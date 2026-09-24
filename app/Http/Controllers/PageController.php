@@ -6,6 +6,7 @@ use App\Models\BlogCategory;
 use App\Models\BlogPost;
 use App\Models\ClientPartner;
 use App\Models\ContactMessage;
+use App\Models\EdgeNetworkSubmission;
 use App\Models\JobApplication;
 use App\Models\JobCategory;
 use App\Models\JobPosting;
@@ -364,5 +365,119 @@ class PageController extends Controller
         ContactMessage::create($validated);
 
         return redirect()->back()->with('contact_success', 'Thank you! Your message has been sent successfully. Our team will contact you shortly.');
+    }
+
+    public function submitEdgeNetwork(Request $request)
+    {
+        $type = $request->input('type', 'professional');
+
+        if ($type === 'professional') {
+            $validated = $request->validate([
+                'type'             => 'required|in:professional,business',
+                'name'             => 'required|string|max:255',
+                'email'            => 'required|email|max:255',
+                'phone'            => 'required|string|max:50',
+                'city'             => 'required|string|max:255',
+                'qualification'    => 'required|string|max:255',
+                'experience_years' => 'nullable|string|max:100',
+                'skills'           => 'nullable',
+                'availability'     => 'nullable|string|max:100',
+                'expected_fees'    => 'nullable|string|max:255',
+                'bio'              => 'nullable|string|max:5000',
+                'resume'           => 'nullable|file|mimes:pdf,doc,docx|max:5120',
+            ]);
+
+            $resumePath = null;
+            if ($request->hasFile('resume')) {
+                $uploadDir = public_path('uploads/edge_network/resumes');
+                if (!file_exists($uploadDir)) {
+                    mkdir($uploadDir, 0755, true);
+                }
+                $file = $request->file('resume');
+                $filename = time() . '_' . preg_replace('/[^a-zA-Z0-9_-]/', '_', $validated['name']) . '.' . $file->getClientOriginalExtension();
+                $file->move($uploadDir, $filename);
+                $resumePath = 'uploads/edge_network/resumes/' . $filename;
+            }
+
+            // Convert skills array to comma-separated string if passed as array
+            $skills = $request->input('skills');
+            if (is_array($skills)) {
+                $skills = implode(', ', $skills);
+            }
+
+            EdgeNetworkSubmission::create([
+                'type'             => 'professional',
+                'name'             => $validated['name'],
+                'email'            => $validated['email'],
+                'phone'            => $validated['phone'],
+                'city'             => $validated['city'],
+                'qualification'    => $validated['qualification'],
+                'experience_years' => $validated['experience_years'] ?? null,
+                'skills'           => $skills,
+                'availability'     => $validated['availability'] ?? null,
+                'expected_fees'    => $validated['expected_fees'] ?? null,
+                'bio'              => $validated['bio'] ?? null,
+                'resume_path'      => $resumePath,
+                'status'           => 'pending',
+                'is_read'          => false,
+            ]);
+
+            $msg = 'Thank you for registering your profile with EDGE Accounts Network! Our team will review your credentials and connect you with matching assignments.';
+        } else {
+            $validated = $request->validate([
+                'type'                => 'required|in:professional,business',
+                'company_name'        => 'required|string|max:255',
+                'name'                => 'required|string|max:255',
+                'email'               => 'required|email|max:255',
+                'phone'               => 'required|string|max:50',
+                'city'                => 'required|string|max:255',
+                'business_nature'     => 'nullable|string|max:255',
+                'service_needed'      => 'required|string|max:255',
+                'engagement_type'     => 'nullable|string|max:100',
+                'expected_budget'     => 'nullable|string|max:255',
+                'requirement_details' => 'required|string|max:5000',
+                'attachment'          => 'nullable|file|mimes:pdf,doc,docx,zip,png,jpg,jpeg|max:5120',
+            ]);
+
+            $attachmentPath = null;
+            if ($request->hasFile('attachment')) {
+                $uploadDir = public_path('uploads/edge_network/attachments');
+                if (!file_exists($uploadDir)) {
+                    mkdir($uploadDir, 0755, true);
+                }
+                $file = $request->file('attachment');
+                $filename = time() . '_' . preg_replace('/[^a-zA-Z0-9_-]/', '_', $validated['company_name']) . '.' . $file->getClientOriginalExtension();
+                $file->move($uploadDir, $filename);
+                $attachmentPath = 'uploads/edge_network/attachments/' . $filename;
+            }
+
+            EdgeNetworkSubmission::create([
+                'type'                => 'business',
+                'name'                => $validated['name'],
+                'email'               => $validated['email'],
+                'phone'               => $validated['phone'],
+                'city'                => $validated['city'],
+                'company_name'        => $validated['company_name'],
+                'business_nature'     => $validated['business_nature'] ?? null,
+                'service_needed'      => $validated['service_needed'],
+                'engagement_type'     => $validated['engagement_type'] ?? null,
+                'expected_budget'     => $validated['expected_budget'] ?? null,
+                'requirement_details' => $validated['requirement_details'],
+                'attachment_path'     => $attachmentPath,
+                'status'              => 'pending',
+                'is_read'             => false,
+            ]);
+
+            $msg = 'Thank you for submitting your accounting requirement! Our network coordinators will review your scope and introduce verified accounting professionals shortly.';
+        }
+
+        if ($request->ajax() || $request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => $msg,
+            ]);
+        }
+
+        return redirect()->back()->with('edge_success', $msg);
     }
 }

@@ -398,6 +398,16 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="{{ route('admin.edge-network.index') }}" class="nav-link d-flex justify-content-between align-items-center {{ request()->routeIs('admin.edge-network.*') ? 'active' : '' }}">
+                    <span><i class="fa-solid fa-infinity text-success"></i> EDGE Accounts</span>
+                    @php $unreadEdgeCount = \App\Models\EdgeNetworkSubmission::where('is_read', false)->count(); @endphp
+                    @if($unreadEdgeCount > 0)
+                        <span class="badge bg-danger rounded-pill">{{ $unreadEdgeCount }}</span>
+                    @endif
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a href="{{ route('admin.contacts.index') }}" class="nav-link d-flex justify-content-between align-items-center {{ request()->routeIs('admin.contacts.*') ? 'active' : '' }}">
                     <span><i class="fa-solid fa-envelope-open-text"></i> Inquiries & Leads</span>
                     @php $unreadNavCount = \App\Models\ContactMessage::where('is_read', false)->count(); @endphp

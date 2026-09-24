@@ -116,6 +116,130 @@
             </div>
         </div>
 
+        {{-- 2.5 Founder & Leadership Section Card --}}
+        <div class="admin-card mb-4">
+            <div class="admin-card-header bg-warning-subtle">
+                <h5 class="text-dark"><i class="fa-solid fa-user-tie text-success me-2"></i> Founder &amp; Leadership Section</h5>
+            </div>
+            <div class="admin-card-body">
+                <div class="row g-3">
+                    {{-- Founder Photo & Overlay Labels --}}
+                    <div class="col-12">
+                        <h6 class="fw-bold text-success border-bottom pb-2 mb-3">Founder Portrait &amp; Floating Badges</h6>
+                    </div>
+                    
+                    <div class="col-md-5">
+                        <label class="form-label fw-bold">Founder Executive Portrait (Upload Image)</label>
+                        <input type="file" name="about_founder_img" class="form-control" accept="image/*">
+                        <small class="text-muted d-block mb-2">Recommended: High quality vertical portrait (JPG/PNG/WEBP).</small>
+                        <div class="img-preview-box p-2 bg-light rounded text-center">
+                            <span class="d-block small text-muted mb-1">Current Portrait:</span>
+                            <img src="{{ \App\Models\SiteSetting::getImageUrl('about_founder_img', 'images/owner.jpeg') }}" alt="Founder Portrait" style="max-height: 120px; width: auto; border-radius: 8px; object-fit: cover;">
+                        </div>
+                    </div>
+
+                    <div class="col-md-7">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Top Floating Badge Text</label>
+                            <input type="text" name="about_founder_badge" class="form-control" value="{{ $settings['about_founder_badge']->value ?? 'Founder & Visionary Leader' }}">
+                            <small class="text-muted">Appears at top left over founder portrait.</small>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Bottom Card Motto / Quote</label>
+                            <input type="text" name="about_founder_motto" class="form-control" value="{{ $settings['about_founder_motto']->value ?? '“Bigger. Brighter. Beyond.”' }}">
+                        </div>
+                        <div>
+                            <label class="form-label fw-bold">Bottom Card Sub-Motto / Company</label>
+                            <input type="text" name="about_founder_submotto" class="form-control" value="{{ $settings['about_founder_submotto']->value ?? 'Roy Infinity Edge Consulting' }}">
+                        </div>
+                    </div>
+
+                    {{-- Main Story & Headings --}}
+                    <div class="col-12 mt-4">
+                        <h6 class="fw-bold text-primary border-bottom pb-2 mb-3">Vision, Headings &amp; Story Content</h6>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label fw-bold">Section Tag / Pill</label>
+                        <input type="text" name="about_founder_tag" class="form-control" value="{{ $settings['about_founder_tag']->value ?? "Founder's Vision & Leadership" }}">
+                    </div>
+
+                    <div class="col-md-8">
+                        <label class="form-label fw-bold">Section Heading</label>
+                        <input type="text" name="about_founder_title" class="form-control" value="{{ $settings['about_founder_title']->value ?? 'Driven by Vision. Powered by Trust & Innovation.' }}">
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label fw-bold">Lead Highlight Quote</label>
+                        <textarea name="about_founder_lead_quote" rows="2" class="form-control">{{ $settings['about_founder_lead_quote']->value ?? '“Your Edge. Our Insight. Creating boundless opportunities for individuals, ambitious students, and growing enterprises across India.”' }}</textarea>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label fw-bold">Founder Narrative / Main Body Paragraph</label>
+                        <textarea name="about_founder_body" rows="4" class="form-control">{{ $settings['about_founder_body']->value ?? 'Founded on the belief that strategic consulting should never be fragmented or impersonal, Roy Infinity Edge Consulting bridges critical gaps across Finance & Taxation, Academic Admissions, and Healthcare Talent Acquisition. We bring focused expertise and transparent accountability to every single engagement—transforming complex challenges into enduring competitive advantages.' }}</textarea>
+                    </div>
+
+                    {{-- 3 Core Strategic Pillars --}}
+                    <div class="col-12 mt-4">
+                        <h6 class="fw-bold text-dark border-bottom pb-2 mb-3">3 Core Strategic Pillars</h6>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label fw-bold">Pillar 1 Title &amp; Description</label>
+                        <input type="text" name="about_founder_p1_title" class="form-control mb-1" value="{{ $settings['about_founder_p1_title']->value ?? 'Strategy & Enterprise Growth' }}">
+                        <textarea name="about_founder_p1_desc" rows="3" class="form-control">{{ $settings['about_founder_p1_desc']->value ?? 'Comprehensive corporate tax planning, audit readiness, and scalable financial frameworks tailored for modern businesses.' }}</textarea>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label fw-bold">Pillar 2 Title &amp; Description</label>
+                        <input type="text" name="about_founder_p2_title" class="form-control mb-1" value="{{ $settings['about_founder_p2_title']->value ?? 'Academic Mentorship & Admissions' }}">
+                        <textarea name="about_founder_p2_desc" rows="3" class="form-control">{{ $settings['about_founder_p2_desc']->value ?? 'Direct counseling for Nursing, Medical, and professional degree admissions with accredited INC & WBNC recognized institutions.' }}</textarea>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label fw-bold">Pillar 3 Title &amp; Description</label>
+                        <input type="text" name="about_founder_p3_title" class="form-control mb-1" value="{{ $settings['about_founder_p3_title']->value ?? 'Pan-India Healthcare Talent Placement' }}">
+                        <textarea name="about_founder_p3_desc" rows="3" class="form-control">{{ $settings['about_founder_p3_desc']->value ?? 'Connecting qualified doctors, nursing specialists, and corporate talent with leading hospitals and enterprise organizations nationwide.' }}</textarea>
+                    </div>
+
+                    {{-- Quote Banner & Sign-off --}}
+                    <div class="col-12 mt-4">
+                        <h6 class="fw-bold text-success border-bottom pb-2 mb-3">Dark Highlight Banner &amp; Executive Sign-off</h6>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label fw-bold">Dark Banner Headline</label>
+                        <input type="text" name="about_founder_quote_head" class="form-control" value="{{ $settings['about_founder_quote_head']->value ?? '"Ideas • People • Possibilities"' }}">
+                    </div>
+
+                    <div class="col-md-8">
+                        <label class="form-label fw-bold">Dark Banner Text</label>
+                        <input type="text" name="about_founder_quote_text" class="form-control" value="{{ $settings['about_founder_quote_text']->value ?? 'We don’t just offer advisory — we stand beside our clients as long-term growth partners, turning ambitious goals into measurable realities.' }}">
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label fw-bold">Sign-off Title / Name</label>
+                        <input type="text" name="about_founder_name" class="form-control" value="{{ $settings['about_founder_name']->value ?? 'Founder & Managing Director' }}">
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label fw-bold">Sign-off Subtitle / Role</label>
+                        <input type="text" name="about_founder_role" class="form-control" value="{{ $settings['about_founder_role']->value ?? 'Roy Infinity Edge Consulting' }}">
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label fw-bold">Button CTA Text</label>
+                        <input type="text" name="about_founder_btn_text" class="form-control" value="{{ $settings['about_founder_btn_text']->value ?? 'Get in Touch' }}">
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label fw-bold">Button CTA URL</label>
+                        <input type="text" name="about_founder_btn_url" class="form-control" value="{{ $settings['about_founder_btn_url']->value ?? route('contact') }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+
         {{-- 3. Mission, Vision & Promise Card --}}
         <div class="admin-card mb-4">
             <div class="admin-card-header">

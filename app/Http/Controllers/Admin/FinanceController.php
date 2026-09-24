@@ -34,6 +34,7 @@ class FinanceController extends Controller
             'finance_srv7_img',
             'finance_srv8_img',
             'finance_add_left_img',
+            'finance_edge_vriddhi_logo',
         ];
 
         // Ensure target folder exists

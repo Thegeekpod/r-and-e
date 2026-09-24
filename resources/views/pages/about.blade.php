@@ -3,6 +3,379 @@
 @section('title', 'About Us | Roy Infinity Edge Consulting')
 @section('main-class', 'education about-clean-page')
 
+@push('styles')
+<style>
+    /* ===================================================
+       Founder & Leadership Section Styles
+    =================================================== */
+    .ab-founder-area {
+        background: linear-gradient(180deg, #FFFFFF 0%, #F5F9F7 50%, #FFFFFF 100%);
+        padding: 80px 0;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .ab-founder-grid {
+        display: grid;
+        grid-template-columns: 440px 1fr;
+        gap: 50px;
+        align-items: stretch;
+    }
+
+    /* Founder Card Left */
+    .founder-card-wrapper {
+        position: relative;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .founder-image-box {
+        position: relative;
+        border-radius: 28px;
+        overflow: hidden;
+        background: #0C2924;
+        box-shadow: 0 25px 65px -12px rgba(9, 81, 69, 0.28), 0 0 0 1px rgba(9, 81, 69, 0.08);
+        border: 2px solid rgba(185, 255, 102, 0.25);
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s ease;
+        height: 100%;
+        min-height: 520px;
+    }
+
+    .founder-card-wrapper:hover .founder-image-box {
+        transform: translateY(-4px);
+        box-shadow: 0 35px 80px -15px rgba(9, 81, 69, 0.35);
+    }
+
+    .founder-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top center;
+        display: block;
+        transition: transform 0.5s ease;
+    }
+
+    .founder-card-wrapper:hover .founder-img {
+        transform: scale(1.02);
+    }
+
+    .founder-top-badge {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(9, 46, 39, 0.92);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        color: #B9FF66;
+        font-family: var(--font-plus-jakarta);
+        font-size: 12.5px;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+        padding: 7px 18px;
+        border-radius: 50px;
+        border: 1px solid rgba(185, 255, 102, 0.35);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+        z-index: 2;
+    }
+
+    .founder-badge-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #B9FF66;
+        display: inline-block;
+        box-shadow: 0 0 8px #B9FF66;
+    }
+
+    .founder-bottom-card {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-radius: 18px;
+        padding: 14px 20px;
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.16);
+        border: 1px solid rgba(255, 255, 255, 0.85);
+        z-index: 2;
+    }
+
+    .founder-motto {
+        font-family: var(--font-soliden);
+        font-size: 16px;
+        font-weight: 700;
+        color: #0C2924;
+        letter-spacing: 0.3px;
+        margin-bottom: 2px;
+    }
+
+    .founder-submotto {
+        font-family: var(--font-plus-jakarta);
+        font-size: 11px;
+        font-weight: 700;
+        color: #03594A;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* Founder Content Right */
+    .ab-founder-content-col {
+        padding-left: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .ab-founder-lead-quote {
+        font-family: var(--font-plus-jakarta);
+        font-size: 16px;
+        font-weight: 700;
+        color: #03594A;
+        line-height: 1.55;
+        background: #E8F5F1;
+        border-left: 4px solid #03594A;
+        padding: 14px 20px;
+        border-radius: 0 14px 14px 0;
+        margin: 16px 0 18px;
+    }
+
+    .ab-founder-body-text {
+        font-family: var(--font-plus-jakarta);
+        font-size: 15px;
+        color: #475569;
+        line-height: 1.7;
+        margin-bottom: 20px;
+    }
+
+    .founder-pillars-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin: 16px 0 18px;
+    }
+
+    .founder-pillar-card {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        background: #FFFFFF;
+        padding: 13px 18px;
+        border-radius: 16px;
+        border: 1.5px solid #E5E7EB;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        transition: all 0.25s ease;
+    }
+
+    .founder-pillar-card:hover {
+        border-color: #03594A;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(3, 89, 74, 0.07);
+    }
+
+    .founder-pillar-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        background: #E6F7F0;
+        color: #03594A;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 17px;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    .founder-pillar-text h5 {
+        font-family: var(--font-plus-jakarta);
+        font-size: 14.5px;
+        font-weight: 800;
+        color: #0F172A;
+        margin-bottom: 2px;
+    }
+
+    .founder-pillar-text p {
+        font-family: var(--font-plus-jakarta);
+        font-size: 12.5px;
+        color: #64748B;
+        line-height: 1.45;
+        margin: 0;
+    }
+
+    /* Founder Quote Highlight Banner */
+    .founder-quote-banner {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: linear-gradient(135deg, #0C2924 0%, #03594A 100%);
+        color: #FFFFFF;
+        padding: 13px 18px;
+        border-radius: 16px;
+        margin-bottom: 18px;
+        box-shadow: 0 8px 24px rgba(12, 41, 36, 0.15);
+    }
+
+    .quote-banner-icon {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: rgba(185, 255, 102, 0.2);
+        color: #B9FF66;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        flex-shrink: 0;
+    }
+
+    .quote-banner-text {
+        font-family: var(--font-plus-jakarta);
+        font-size: 12.5px;
+        line-height: 1.45;
+        color: rgba(255, 255, 255, 0.92);
+    }
+
+    .quote-banner-text strong {
+        color: #B9FF66;
+        display: block;
+        font-size: 13px;
+        font-family: var(--font-soliden);
+        letter-spacing: 0.3px;
+        margin-bottom: 1px;
+    }
+
+    /* Founder Metrics Row */
+    .founder-metrics-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #F8FAFC;
+        border: 1px solid #E2E8F0;
+        border-radius: 14px;
+        padding: 10px 18px;
+        margin-bottom: 18px;
+    }
+
+    .founder-metric-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .founder-metric-item strong {
+        font-family: var(--font-soliden);
+        font-size: 18px;
+        color: #03594A;
+        line-height: 1.1;
+    }
+
+    .founder-metric-item span {
+        font-family: var(--font-plus-jakarta);
+        font-size: 11px;
+        font-weight: 600;
+        color: #64748B;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+        margin-top: 2px;
+    }
+
+    .founder-metric-sep {
+        width: 1px;
+        height: 26px;
+        background: #CBD5E1;
+    }
+
+    .founder-action-strip {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 16px;
+        padding-top: 18px;
+        border-top: 1px solid #E2E8F0;
+    }
+
+    .founder-sign-name {
+        font-family: var(--font-soliden);
+        font-size: 17px;
+        font-weight: 700;
+        color: #0F172A;
+    }
+
+    .founder-sign-title {
+        font-family: var(--font-plus-jakarta);
+        font-size: 12.5px;
+        color: #64748B;
+        font-weight: 600;
+    }
+
+    /* Responsive */
+    @media (max-width: 991px) {
+        .ab-founder-grid {
+            grid-template-columns: 1fr;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .founder-image-box {
+            min-height: 480px;
+            max-height: 540px;
+        }
+
+        .ab-founder-content-col {
+            padding-left: 0;
+        }
+
+        .founder-pillars-row {
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .founder-image-box {
+            min-height: 400px;
+        }
+
+        .founder-top-badge {
+            top: 14px;
+            left: 14px;
+            font-size: 11.5px;
+            padding: 6px 14px;
+        }
+
+        .founder-bottom-card {
+            bottom: 14px;
+            left: 14px;
+            right: 14px;
+            padding: 12px 16px;
+        }
+
+        .founder-motto {
+            font-size: 15px;
+        }
+
+        .founder-action-strip {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+        .founder-action-strip .ab-btn-primary {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>
+@endpush
+
 @section('content')
 
 {{-- 1. Minimalist High-Impact Hero --}}
@@ -106,6 +479,103 @@
                             </div>
                         </li>
                     </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{-- 2.5 Founder & Leadership Section --}}
+<section class="ab-section ab-founder-area" id="about-founder" data-aos="fade-up">
+    <div class="container">
+        <div class="ab-founder-container">
+            <div class="ab-founder-grid">
+                {{-- Left: Founder Executive Portrait Card --}}
+                <div class="ab-founder-image-col" data-aos="fade-right">
+                    <div class="founder-card-wrapper">
+                        <div class="founder-image-box">
+                            <img src="{{ \App\Models\SiteSetting::getImageUrl('about_founder_img', 'images/owner.jpeg') }}" alt="{{ $settings['about_founder_name'] ?? 'Founder of Roy Infinity Edge Consulting' }}" class="founder-img">
+                            
+                            {{-- Top Floating Badge --}}
+                            <div class="founder-top-badge">
+                                <span class="founder-badge-dot"></span>
+                                <span>{{ $settings['about_founder_badge'] ?? 'Founder & Visionary Leader' }}</span>
+                            </div>
+
+                            {{-- Bottom Floating Card --}}
+                            <div class="founder-bottom-card">
+                                <div class="founder-motto">{{ $settings['about_founder_motto'] ?? '“Bigger. Brighter. Beyond.”' }}</div>
+                                <div class="founder-submotto">{{ $settings['about_founder_submotto'] ?? 'Roy Infinity Edge Consulting' }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Right: Message & Story (Rich Content Perfectly Filling Height) --}}
+                <div class="ab-founder-content-col" data-aos="fade-left">
+                    <div>
+                        <span class="ab-tag-pill"><i class="fa-solid fa-crown me-1 text-warning"></i> {{ $settings['about_founder_tag'] ?? "Founder's Vision & Leadership" }}</span>
+                    </div>
+                    
+                    <h2 class="ab-section-heading mb-2">
+                        {{ $settings['about_founder_title'] ?? 'Driven by Vision. Powered by Trust & Innovation.' }}
+                    </h2>
+
+                    <p class="ab-founder-lead-quote">
+                        {{ $settings['about_founder_lead_quote'] ?? '“Your Edge. Our Insight. Creating boundless opportunities for individuals, ambitious students, and growing enterprises across India.”' }}
+                    </p>
+
+                    <p class="ab-founder-body-text">
+                        {{ $settings['about_founder_body'] ?? 'Founded on the belief that strategic consulting should never be fragmented or impersonal, Roy Infinity Edge Consulting bridges critical gaps across Finance & Taxation, Academic Admissions, and Healthcare Talent Acquisition. We bring focused expertise and transparent accountability to every single engagement—transforming complex challenges into enduring competitive advantages.' }}
+                    </p>
+
+                    {{-- 3 Core Strategic Pillar Cards --}}
+                    <div class="founder-pillars-list">
+                        <div class="founder-pillar-card">
+                            <div class="founder-pillar-icon"><i class="fa-solid fa-chart-line"></i></div>
+                            <div class="founder-pillar-text">
+                                <h5>{{ $settings['about_founder_p1_title'] ?? 'Strategy & Enterprise Growth' }}</h5>
+                                <p>{{ $settings['about_founder_p1_desc'] ?? 'Comprehensive corporate tax planning, audit readiness, and scalable financial frameworks tailored for modern businesses.' }}</p>
+                            </div>
+                        </div>
+
+                        <div class="founder-pillar-card">
+                            <div class="founder-pillar-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                            <div class="founder-pillar-text">
+                                <h5>{{ $settings['about_founder_p2_title'] ?? 'Academic Mentorship & Admissions' }}</h5>
+                                <p>{{ $settings['about_founder_p2_desc'] ?? 'Direct counseling for Nursing, Medical, and professional degree admissions with accredited INC & WBNC recognized institutions.' }}</p>
+                            </div>
+                        </div>
+
+                        <div class="founder-pillar-card">
+                            <div class="founder-pillar-icon"><i class="fa-solid fa-user-doctor"></i></div>
+                            <div class="founder-pillar-text">
+                                <h5>{{ $settings['about_founder_p3_title'] ?? 'Pan-India Healthcare Talent Placement' }}</h5>
+                                <p>{{ $settings['about_founder_p3_desc'] ?? 'Connecting qualified doctors, nursing specialists, and corporate talent with leading hospitals and enterprise organizations nationwide.' }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- Founder Quote Banner --}}
+                    <div class="founder-quote-banner">
+                        <div class="quote-banner-icon"><i class="fa-solid fa-quote-left"></i></div>
+                        <div class="quote-banner-text">
+                            <strong>{{ $settings['about_founder_quote_head'] ?? '"Ideas • People • Possibilities"' }}</strong>
+                            <span>{{ $settings['about_founder_quote_text'] ?? 'We don’t just offer advisory — we stand beside our clients as long-term growth partners, turning ambitious goals into measurable realities.' }}</span>
+                        </div>
+                    </div>
+
+                    {{-- Executive Signature & Contact Action --}}
+                    <div class="founder-action-strip">
+                        <div class="founder-sign-info">
+                            <div class="founder-sign-name">{{ $settings['about_founder_name'] ?? 'Founder & Managing Director' }}</div>
+                            <div class="founder-sign-title">{{ $settings['about_founder_role'] ?? 'Roy Infinity Edge Consulting' }}</div>
+                        </div>
+                        <a href="{{ $settings['about_founder_btn_url'] ?? route('contact') }}" class="ab-btn-primary">
+                            <span>{{ $settings['about_founder_btn_text'] ?? 'Get in Touch' }}</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

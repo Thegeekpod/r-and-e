@@ -52,6 +52,26 @@ class AboutController extends Controller
             'about_value3_desc',
             'about_value4_title',
             'about_value4_desc',
+            // Founder & Leadership Section
+            'about_founder_badge',
+            'about_founder_motto',
+            'about_founder_submotto',
+            'about_founder_tag',
+            'about_founder_title',
+            'about_founder_lead_quote',
+            'about_founder_body',
+            'about_founder_p1_title',
+            'about_founder_p1_desc',
+            'about_founder_p2_title',
+            'about_founder_p2_desc',
+            'about_founder_p3_title',
+            'about_founder_p3_desc',
+            'about_founder_quote_head',
+            'about_founder_quote_text',
+            'about_founder_name',
+            'about_founder_role',
+            'about_founder_btn_text',
+            'about_founder_btn_url',
         ];
 
         foreach ($textFields as $field) {
@@ -64,7 +84,7 @@ class AboutController extends Controller
         }
 
         // Handle Optional Image Uploads if provided
-        $imageFields = ['about_hero_image', 'about_story_img'];
+        $imageFields = ['about_hero_image', 'about_story_img', 'about_founder_img'];
 
         foreach ($imageFields as $imgField) {
             if ($request->hasFile($imgField)) {
