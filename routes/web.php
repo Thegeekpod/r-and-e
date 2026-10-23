@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\JobCategoryController as AdminJobCategoryControll
 use App\Http\Controllers\Admin\JobPostingController as AdminJobPostingController;
 use App\Http\Controllers\Admin\PageStatusController as AdminPageStatusController;
 use App\Http\Controllers\Admin\PlacementController as AdminPlacementController;
+use App\Http\Controllers\Admin\QuickLeadController as AdminQuickLeadController;
 use App\Http\Controllers\Admin\SeoSettingController as AdminSeoSettingController;
 use App\Http\Controllers\Admin\SettingController as AdminSettingController;
 use App\Http\Controllers\Admin\TestimonialController as AdminTestimonialController;
@@ -45,6 +46,9 @@ Route::post('/contact', [PageController::class, 'storeContact'])->name('contact.
 
 // EDGE Accounts Network Form Submissions
 Route::post('/edge-network/submit', [PageController::class, 'submitEdgeNetwork'])->name('edge-network.submit');
+
+// Global Popup Quick Lead Submission
+Route::post('/quick-lead/submit', [PageController::class, 'submitQuickLead'])->name('quick-lead.submit');
 
 
 // Admin Authentication Routes
@@ -127,6 +131,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Site SEO Management
         Route::resource('seo', AdminSeoSettingController::class)->except(['show']);
+
+        // Quick Leads & Global Popup Leads Management
+        Route::get('/quick-leads', [AdminQuickLeadController::class, 'index'])->name('quick-leads.index');
+        Route::get('/quick-leads/{quickLead}', [AdminQuickLeadController::class, 'show'])->name('quick-leads.show');
+        Route::post('/quick-leads/{quickLead}/toggle-read', [AdminQuickLeadController::class, 'toggleRead'])->name('quick-leads.toggleRead');
+        Route::delete('/quick-leads/{quickLead}', [AdminQuickLeadController::class, 'destroy'])->name('quick-leads.destroy');
+        Route::post('/quick-leads/settings', [AdminQuickLeadController::class, 'updateSettings'])->name('quick-leads.settings');
 
         // General Site Settings
         Route::get('/settings', [AdminSettingController::class, 'index'])->name('settings.index');

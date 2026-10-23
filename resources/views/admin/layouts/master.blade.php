@@ -417,6 +417,16 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a href="{{ route('admin.quick-leads.index') }}" class="nav-link d-flex justify-content-between align-items-center {{ request()->routeIs('admin.quick-leads.*') ? 'active' : '' }}">
+                    <span><i class="fa-solid fa-bolt text-warning"></i> Quick Leads (Popup)</span>
+                    @php $unreadQuickLeadsCount = \App\Models\QuickLead::where('is_read', false)->count(); @endphp
+                    @if($unreadQuickLeadsCount > 0)
+                        <span class="badge bg-warning text-dark rounded-pill">{{ $unreadQuickLeadsCount }}</span>
+                    @endif
+                </a>
+            </li>
+
             <li class="nav-header">Site Configuration</li>
             <li class="nav-item">
                 <a href="{{ route('admin.pages.index') }}" class="nav-link {{ request()->routeIs('admin.pages.*') ? 'active' : '' }}">

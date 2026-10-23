@@ -5,14 +5,32 @@
 
 @section('content')
 <div class="row g-4 mb-4">
-    <!-- Stat 1: Inquiries -->
-    <div class="col-md-3 col-sm-6">
+    <!-- Stat 1: Quick Leads (Global Popup) -->
+    <div class="col-lg-3 col-md-6">
+        <div class="admin-card p-3 d-flex align-items-center gap-3 border-start border-4 border-warning">
+            <div class="rounded-4 p-3 bg-warning bg-opacity-10 text-warning fs-3">
+                <i class="fa-solid fa-bolt"></i>
+            </div>
+            <div>
+                <span class="text-muted small fw-semibold text-uppercase">Quick Leads</span>
+                <h3 class="fw-bold m-0 text-dark">
+                    {{ $stats['quick_leads_count'] }}
+                    @if($stats['unread_quick_leads'] > 0)
+                        <span class="badge bg-warning text-dark fs-6 rounded-pill align-middle ms-1">{{ $stats['unread_quick_leads'] }} new</span>
+                    @endif
+                </h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stat 2: Inquiries -->
+    <div class="col-lg-3 col-md-6">
         <div class="admin-card p-3 d-flex align-items-center gap-3">
             <div class="rounded-4 p-3 bg-danger bg-opacity-10 text-danger fs-3">
                 <i class="fa-solid fa-envelope-open-text"></i>
             </div>
             <div>
-                <span class="text-muted small fw-semibold text-uppercase">Inquiries</span>
+                <span class="text-muted small fw-semibold text-uppercase">Contact Messages</span>
                 <h3 class="fw-bold m-0 text-dark">
                     {{ $stats['inquiries_count'] }}
                     @if($stats['unread_inquiries'] > 0)
@@ -23,8 +41,8 @@
         </div>
     </div>
 
-    <!-- Stat 2: Job Openings -->
-    <div class="col-md-3 col-sm-6">
+    <!-- Stat 3: Job Openings -->
+    <div class="col-lg-3 col-md-6">
         <div class="admin-card p-3 d-flex align-items-center gap-3">
             <div class="rounded-4 p-3 bg-success bg-opacity-10 text-success fs-3">
                 <i class="fa-solid fa-briefcase"></i>
@@ -36,8 +54,8 @@
         </div>
     </div>
 
-    <!-- Stat 3: Job Candidates -->
-    <div class="col-md-3 col-sm-6">
+    <!-- Stat 4: Job Candidates -->
+    <div class="col-lg-3 col-md-6">
         <div class="admin-card p-3 d-flex align-items-center gap-3">
             <div class="rounded-4 p-3 bg-primary bg-opacity-10 text-primary fs-3">
                 <i class="fa-solid fa-user-graduate"></i>
@@ -76,6 +94,15 @@
     <div class="admin-card-body">
         <div class="row g-3">
             <div class="col-md-3">
+                <a href="{{ route('admin.quick-leads.index') }}" class="btn btn-outline-dark p-3 text-start w-100 rounded-3 d-flex align-items-center justify-content-between border-warning">
+                    <div>
+                        <div class="fw-bold"><i class="fa-solid fa-bolt text-warning me-2"></i> Quick Leads (Popup)</div>
+                        <small class="text-muted">Turn ON/OFF & view leads</small>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-muted"></i>
+                </a>
+            </div>
+            <div class="col-md-3">
                 <a href="{{ route('admin.contacts.index') }}" class="btn btn-outline-dark p-3 text-start w-100 rounded-3 d-flex align-items-center justify-content-between">
                     <div>
                         <div class="fw-bold"><i class="fa-solid fa-envelope-open-text text-danger me-2"></i> View Inquiries</div>
@@ -94,15 +121,6 @@
                 </a>
             </div>
             <div class="col-md-3">
-                <a href="{{ route('admin.testimonials.index') }}" class="btn btn-outline-dark p-3 text-start w-100 rounded-3 d-flex align-items-center justify-content-between">
-                    <div>
-                        <div class="fw-bold"><i class="fa-solid fa-plus-circle text-primary me-2"></i> Testimonials</div>
-                        <small class="text-muted">Add / edit client reviews</small>
-                    </div>
-                    <i class="fa-solid fa-chevron-right text-muted"></i>
-                </a>
-            </div>
-            <div class="col-md-3">
                 <a href="{{ route('admin.settings.index') }}" class="btn btn-outline-dark p-3 text-start w-100 rounded-3 d-flex align-items-center justify-content-between">
                     <div>
                         <div class="fw-bold"><i class="fa-solid fa-gear text-info me-2"></i> Site Settings</div>
@@ -111,6 +129,73 @@
                     <i class="fa-solid fa-chevron-right text-muted"></i>
                 </a>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Quick Leads (Global Popup) -->
+<div class="admin-card mb-4">
+    <div class="admin-card-header">
+        <h5><i class="fa-solid fa-bolt text-warning me-2"></i> Recent Quick Leads (Global Popup)</h5>
+        <a href="{{ route('admin.quick-leads.index') }}" class="btn btn-sm btn-outline-primary rounded-pill">Manage & View All</a>
+    </div>
+    <div class="admin-card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th class="ps-4">Status</th>
+                        <th>Lead Name</th>
+                        <th>Contact</th>
+                        <th>Service</th>
+                        <th>Captured From Page</th>
+                        <th>Date</th>
+                        <th class="text-end pe-4">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($recent_quick_leads as $lead)
+                        <tr class="{{ !$lead->is_read ? 'fw-bold table-warning bg-opacity-25' : '' }}">
+                            <td class="ps-4">
+                                @if(!$lead->is_read)
+                                    <span class="badge bg-danger">NEW</span>
+                                @else
+                                    <span class="badge bg-secondary-subtle text-secondary">Read</span>
+                                @endif
+                            </td>
+                            <td>
+                                <div class="text-dark">{{ $lead->name }}</div>
+                            </td>
+                            <td>
+                                <small class="text-dark d-block">{{ $lead->email }}</small>
+                                @if($lead->phone)
+                                    <small class="text-muted d-block">{{ $lead->phone }}</small>
+                                @endif
+                            </td>
+                            <td>
+                                <span class="badge bg-dark text-white">{{ $lead->service ?? 'General' }}</span>
+                            </td>
+                            <td>
+                                <span class="badge bg-info-subtle text-info border border-info-subtle">
+                                    <i class="fa-regular fa-file-lines me-1"></i> {{ $lead->source_page ?? 'Direct' }}
+                                </span>
+                            </td>
+                            <td>
+                                <small class="text-muted">{{ $lead->created_at->diffForHumans() }}</small>
+                            </td>
+                            <td class="text-end pe-4">
+                                <a href="{{ route('admin.quick-leads.show', $lead) }}" class="btn btn-sm btn-outline-primary">
+                                    View
+                                </a>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="7" class="text-center py-4 text-muted">No popup leads captured yet.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

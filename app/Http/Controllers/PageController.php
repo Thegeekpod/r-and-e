@@ -480,4 +480,62 @@ class PageController extends Controller
 
         return redirect()->back()->with('edge_success', $msg);
     }
+
+    public function submitQuickLead(Request $request)
+    {
+        // Check if global popup is enabled
+        if (\App\Models\SiteSetting::get('quick_lead_popup_enabled', '1') === '0') {
+            if ($request->ajax() || $request->wantsJson()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'The lead submission form is currently disabled.',
+                ], 403);
+            }
+            return redirect()->back()->with('error', 'The lead submission form is currently disabled.');
+        }
+
+        $validated = $request->validate([
+            'name'        => 'required|string|max:255',
+            'email'       => 'required|email|max:255',
+            'phone'       => 'nullable|string|max:50',
+            'service'     => 'nullable|string|max:150',
+            'message'     => 'nullable|string|max:3000',
+            'source_url'  => 'nullable|string|max:500',
+            'source_page' => 'nullable|string|max:255',
+        ]);
+
+        $sourceUrl = $validated['source_url'] ?? $request->header('referer') ?? url()->previous();
+        $sourcePage = $validated['source_page'] ?? null;
+
+        if (!$sourcePage && $sourceUrl) {
+            $parsedPath = parse_url($sourceUrl, PHP_URL_PATH);
+            $trimmed = trim($parsedPath ?? '', '/');
+            $sourcePage = empty($trimmed) ? 'Home Page' : ucwords(str_replace(['-', '_', '/'], ' ', $trimmed));
+        }
+
+        $lead = \App\Models\QuickLead::create([
+            'name'        => $validated['name'],
+            'email'       => $validated['email'],
+            'phone'       => $validated['phone'] ?? null,
+            'service'     => $validated['service'] ?? 'General Consultation',
+            'message'     => $validated['message'] ?? null,
+            'source_url'  => $sourceUrl,
+            'source_page' => $sourcePage ?? 'Direct / Unknown',
+            'ip_address'  => $request->ip(),
+            'is_read'     => false,
+        ]);
+
+        $successMsg = 'Thank you! Your request has been received. Our team will contact you shortly.';
+
+        if ($request->ajax() || $request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => $successMsg,
+                'lead_id' => $lead->id,
+            ]);
+        }
+
+        return redirect()->back()->with('quick_lead_success', $successMsg);
+    }
 }
+

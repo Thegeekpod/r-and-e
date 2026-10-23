@@ -56,6 +56,8 @@
 
     @include('partials.footer')
 
+    @include('partials.global-lead-modal')
+
     <!-- AOS Library -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
