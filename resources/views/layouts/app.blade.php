@@ -45,6 +45,13 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     @stack('styles')
+    <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-KWWZJKMD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+</script>
+<meta name="google-site-verification" content="Iz1tw9ZPuqAiaByQJgV1LFsJYyk_nwMWQk_zD8HVN6E" />
 </head>
 
 <body>
