@@ -18,7 +18,9 @@ class RedirectWwwToNonWww
         $host = $request->getHost();
 
         if (str_starts_with(strtolower($host), 'www.')) {
-            $newUrl = preg_replace('/^(https?:\/\/)www\./i', '$1', $request->fullUrl());
+            $nonWwwHost = substr($host, 4);
+            $scheme = ($request->isSecure() || app()->isProduction()) ? 'https://' : ($request->getScheme() . '://');
+            $newUrl = $scheme . $nonWwwHost . $request->getRequestUri();
 
             return redirect()->to($newUrl, 301);
         }
